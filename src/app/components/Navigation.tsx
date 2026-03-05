@@ -16,42 +16,42 @@ export function Navigation({ currentPage, onNavigate, user, onAuthClick, onSignO
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const menuItems = [
-    { id: 'naming', label: 'AI 브랜드 네이밍', icon: Type },
-    { id: 'logo', label: 'AI 브랜드 로고', icon: Sparkles },
-    { id: 'card-choice', label: 'AI 브랜드 명함', icon: CreditCard },
-    { id: 'digital', label: 'QR 디지털 명함', icon: Smartphone },
-    { id: 'box', label: '마이 브랜드 박스', icon: Archive },
+    { id: 'naming', label: 'AI 네이밍', icon: Type },
+    { id: 'logo', label: 'AI 로고', icon: Sparkles },
+    { id: 'card-choice', label: 'QR 명함', icon: CreditCard },
+    { id: 'digital', label: '디지털 명함', icon: Smartphone },
+    { id: 'box', label: '마이 박스', icon: Archive },
   ];
 
   // 사이트 채널 목록
   const siteChannels = [
-    { 
-      id: 'print', 
-      label: 'Print', 
+    {
+      id: 'print',
+      label: 'Print',
       url: 'print.brandfirst.ai',
       description: '명함 제작',
       active: true, // 현재 사이트
       internalPage: 'home'
     },
-    { 
-      id: 'qrcard', 
-      label: 'QR Card', 
+    {
+      id: 'qrcard',
+      label: 'QR Card',
       url: 'qrcard.brandfirst.ai',
       description: 'QR 디지털 명함',
       active: false,
       internalPage: 'qrcard-landing'
     },
-    { 
-      id: 'ops', 
-      label: 'Ops', 
+    {
+      id: 'ops',
+      label: 'Ops',
       url: 'ops.brandfirst.ai',
       description: '브랜드 운영',
       active: false,
       internalPage: 'home'
     },
-    { 
-      id: 'admin', 
-      label: 'Admin', 
+    {
+      id: 'admin',
+      label: 'Admin',
       url: 'admin.brandfirst.ai',
       description: '관리자',
       active: false,
@@ -70,11 +70,10 @@ export function Navigation({ currentPage, onNavigate, user, onAuthClick, onSignO
                 {index > 0 && <span className="text-gray-600 mx-2">|</span>}
                 <a
                   href={channel.active ? '#' : `https://${channel.url}`}
-                  className={`px-3 py-1 rounded transition-colors ${
-                    channel.active
-                      ? 'bg-blue-600 text-white font-semibold'
-                      : 'text-gray-300 hover:text-white hover:bg-gray-700'
-                  }`}
+                  className={`px-3 py-1 rounded transition-colors ${channel.active
+                    ? 'bg-blue-600 text-white font-semibold'
+                    : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                    }`}
                   onClick={(e) => {
                     e.preventDefault();
                     if (!channel.active) {
@@ -104,7 +103,7 @@ export function Navigation({ currentPage, onNavigate, user, onAuthClick, onSignO
             <span
               onClick={() => onNavigate('home')}
               className="text-2xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text cursor-pointer select-none"
-              style={{ 
+              style={{
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -121,7 +120,7 @@ export function Navigation({ currentPage, onNavigate, user, onAuthClick, onSignO
               <span className="md:hidden logo-brand">QR</span>
               <span className="md:hidden logo-first">C</span>
             </span>
-            
+
             <div className="hidden md:flex items-center gap-6">
               {user && menuItems.map((item) => {
                 const Icon = item.icon;
@@ -129,7 +128,7 @@ export function Navigation({ currentPage, onNavigate, user, onAuthClick, onSignO
                   <button
                     key={item.id}
                     onClick={() => onNavigate(item.id)}
-                    className={`flex items-center gap-2 text-sm transition-colors ${ currentPage === item.id ? 'text-purple-600 font-bold' : 'text-gray-600 hover:text-blue-600' } mx-[0px] mt-[5px] mb-[0px]`}
+                    className={`flex items-center gap-2 text-sm transition-colors ${currentPage === item.id ? 'text-purple-600 font-bold' : 'text-gray-600 hover:text-blue-600'} mx-[0px] mt-[5px] mb-[0px]`}
                   >
                     <Icon className="w-4 h-4" />
                     {item.label}
@@ -138,12 +137,12 @@ export function Navigation({ currentPage, onNavigate, user, onAuthClick, onSignO
               })}
             </div>
           </div>
-          
+
           {user ? (
             <div className="flex items-center gap-3">
               {/* 보유 크레딧 표시 - 모바일: 아이콘+숫자만, 데스크톱: 아이콘+숫자+텍스트 */}
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="gap-2 bg-gradient-to-r from-amber-50 to-yellow-50 border-amber-200 hover:border-amber-300"
                 onClick={() => onNavigate('pricing')}
               >
@@ -151,7 +150,7 @@ export function Navigation({ currentPage, onNavigate, user, onAuthClick, onSignO
                 <span className="font-semibold text-amber-700">{(userCredits || 0).toLocaleString()}</span>
                 <span className="hidden md:inline font-semibold text-amber-700">크레딧</span>
               </Button>
-              
+
               {/* 사용자 메뉴 드롭다운 */}
               <div className="relative">
                 <button
@@ -166,7 +165,7 @@ export function Navigation({ currentPage, onNavigate, user, onAuthClick, onSignO
 
                 {/* 드롭다운 메뉴 */}
                 {isDropdownOpen && (
-                  <div 
+                  <div
                     className="absolute right-0 top-full mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50"
                     onMouseLeave={() => setIsDropdownOpen(false)}
                   >
@@ -253,15 +252,15 @@ export function Navigation({ currentPage, onNavigate, user, onAuthClick, onSignO
           ) : (
             <div className="flex items-center gap-3">
               {/* 크레딧 버튼 */}
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="gap-2 bg-gradient-to-r from-amber-50 to-yellow-50 border-amber-200 hover:border-amber-300"
                 onClick={() => onNavigate('pricing')}
               >
                 <Coins className="w-4 h-4 text-amber-600" />
                 <span className="font-semibold text-amber-700">크레딧</span>
               </Button>
-              
+
               <Button variant="outline" className="gap-2" onClick={onAuthClick}>
                 <LogIn className="w-4 h-4" />
                 로그인

@@ -145,3 +145,12 @@
   - previous fatal error (`Missing entry-point ...`) is resolved,
   - dry-run upload path completes successfully.
 - Re-ran `npm run build` after config update; build succeeded.
+
+## Deployed Site Preview Check
+- Target URL: `https://brandfirst.spinus29.workers.dev/`.
+- Browser automation attempt via Playwright MCP failed in this environment (`chrome` binary missing at `/opt/google/chrome/chrome`).
+- HTTP-level availability checks passed:
+  - `GET /` -> `200`, HTML served with title `Brandfirst.ai #BETA`.
+  - `GET /assets/index-CHS9bmQz.js` -> `200`.
+  - `GET /assets/index-mR83XKj6.css` -> `200`.
+- Interpretation: deployment is reachable and core static assets are served/cached by Cloudflare; full interactive browser preview requires a runtime with installed browser binary.
