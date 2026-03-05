@@ -107,3 +107,10 @@
 - Added root `wrangler.jsonc` for Cloudflare Pages + GitHub deployment while preserving existing project structure.
 - Config uses Vite output directory `./dist` via `pages_build_output_dir` and sets `compatibility_date`.
 - Included commented templates for optional `compatibility_flags` and `vars` without changing current runtime behavior.
+
+## Cloudflare Build Failure Fix (npm ci lock mismatch)
+- Investigated Cloudflare log error: `npm clean-install` failed because `package.json` and `package-lock.json` were out of sync.
+- Confirmed lock inconsistency symptom: lock references `@csstools/css-parser-algorithms` / `@csstools/css-tokenizer` as dependency constraints but lock install graph was not CI-consistent.
+- Regenerated dependency graph locally with `npm install` to refresh lock metadata.
+- Re-verified CI path with `npm ci` (success).
+- Re-verified production bundling with `npm run build` (success, existing chunk-size warning unchanged).
