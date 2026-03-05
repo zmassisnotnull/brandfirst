@@ -1,0 +1,397 @@
+AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔐 로그인 시작: spinus29@gmail.com
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-d29808f44ba54368.min.js.br:362
+validate @ figma_app-d29808f44ba54368.min.js.br:418
+getFunctionLogs @ figma_app-d29808f44ba54368.min.js.br:362
+fetch @ figma_app-d29808f44ba54368.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-d29808f44ba54368.min.js.br:362
+validate @ figma_app-d29808f44ba54368.min.js.br:418
+getFunctionLogs @ figma_app-d29808f44ba54368.min.js.br:362
+fetch @ figma_app-d29808f44ba54368.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28  GET https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-98397747/health 404 (Not Found)
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+testEdgeFunction @ AuthModal.tsx:45
+(anonymous) @ AuthModal.tsx:65
+TN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T7 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T8 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T6 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T4 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+S1 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SQ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SJ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SZ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SO @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+pC @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 ❌ Edge Function error: 404 404 Not Found
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+r @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:69
+error @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+testEdgeFunction @ AuthModal.tsx:57
+await in testEdgeFunction
+(anonymous) @ AuthModal.tsx:65
+TN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T7 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T8 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T6 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T4 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+S1 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SQ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SJ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SZ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SO @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+pC @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89Understand this error
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-d29808f44ba54368.min.js.br:362
+validate @ figma_app-d29808f44ba54368.min.js.br:418
+getFunctionLogs @ figma_app-d29808f44ba54368.min.js.br:362
+fetch @ figma_app-d29808f44ba54368.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28  POST https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-98397747/api/auth/signin 404 (Not Found)
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+handleSignIn @ AuthModal.tsx:154
+y @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+i @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+iG @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+ij @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+iz @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+dP @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dM @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dk @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dG @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SR @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+iR @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+d$ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+lO @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+lN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+lv @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+i @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 ❌ 로그인 에러: SyntaxError: Unexpected non-whitespace character after JSON at position 4 (line 1 column 5)
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+r @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:69
+error @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+handleSignIn @ AuthModal.tsx:186
+await in handleSignIn
+y @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+i @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+iG @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+ij @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+iz @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+dP @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dM @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dk @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dG @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SR @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+iR @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+d$ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+lO @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+lN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+lv @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+i @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-d29808f44ba54368.min.js.br:362
+validate @ figma_app-d29808f44ba54368.min.js.br:418
+getFunctionLogs @ figma_app-d29808f44ba54368.min.js.br:362
+fetch @ figma_app-d29808f44ba54368.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error

@@ -1,0 +1,302 @@
+AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🏥 Testing Edge Function health: https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server/make-server-98397747/health
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔑 Using anon key: eyJhbGciOiJIUzI1NiIs...
+(index):1 Access to fetch at 'https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server/make-server-98397747/health' from origin 'https://dc6c54b9-caf0-4902-9b4e-38c951066efb-v2-figmaiframepreview.figma.site' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28  GET https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server/make-server-98397747/health net::ERR_FAILED
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+testEdgeFunction @ AuthModal.tsx:45
+(anonymous) @ AuthModal.tsx:70
+TN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T7 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T8 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T6 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T4 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+S1 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SQ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SJ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SZ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SO @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+pC @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 ❌ Edge Function not reachable: Failed to fetch
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+r @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:69
+error @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+testEdgeFunction @ AuthModal.tsx:64
+await in testEdgeFunction
+(anonymous) @ AuthModal.tsx:70
+TN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T7 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T8 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T6 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T4 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+S1 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SQ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SJ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SZ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SO @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+pC @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 ❌ Full error: TypeError: Failed to fetch
+    at code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28:9794
+    at testEdgeFunction (AuthModal.tsx:45:32)
+    at AuthModal.tsx:70:7
+    at TN (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:138396)
+    at T7 (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:151856)
+    at T8 (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:151634)
+    at T6 (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:151542)
+    at T4 (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:151420)
+    at S1 (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:163585)
+    at SQ (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:163247)
+    at SJ (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:163060)
+    at SZ (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:161662)
+    at SO (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:158427)
+    at pC (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:36290)
+    at code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:155938
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+r @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:69
+error @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+testEdgeFunction @ AuthModal.tsx:65
+await in testEdgeFunction
+(anonymous) @ AuthModal.tsx:70
+TN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T7 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T8 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T6 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T4 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+S1 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SQ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SJ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SZ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SO @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+pC @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-d29808f44ba54368.min.js.br:362
+validate @ figma_app-d29808f44ba54368.min.js.br:418
+getFunctionLogs @ figma_app-d29808f44ba54368.min.js.br:362
+fetch @ figma_app-d29808f44ba54368.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔐 로그인 시작: spinus29@gmail.com
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🌐 로그인 요청 URL: https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server/make-server-98397747/api/auth/signin
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+(index):1 Access to fetch at 'https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server/make-server-98397747/api/auth/signin' from origin 'https://dc6c54b9-caf0-4902-9b4e-38c951066efb-v2-figmaiframepreview.figma.site' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28  POST https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server/make-server-98397747/api/auth/signin net::ERR_FAILED
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+handleSignIn @ AuthModal.tsx:162
+y @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+i @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+iG @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+ij @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+iz @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+dP @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dM @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dk @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dG @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SR @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+iR @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+d$ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+lO @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+lN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+lv @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+i @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 ❌ 로그인 에러: TypeError: Failed to fetch
+    at code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28:9794
+    at handleSignIn (AuthModal.tsx:162:30)
+    at HTMLUnknownElement.y (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77:54006)
+    at HTMLUnknownElement.i (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28:4861)
+    at Object.iG (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77:54331)
+    at ij (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77:55284)
+    at iz (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77:55341)
+    at dP (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:10702)
+    at dM (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:11042)
+    at dk (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:11125)
+    at dG (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:11212)
+    at code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:12595
+    at SR (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:158583)
+    at iR (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77:51978)
+    at d$ (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:12574)
+    at lO (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77:72034)
+    at lN (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77:71970)
+    at lv (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77:71781)
+    at HTMLDivElement.i (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28:4861)
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+r @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:69
+error @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+handleSignIn @ AuthModal.tsx:195
+await in handleSignIn
+y @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+i @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+iG @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+ij @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+iz @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+dP @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dM @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dk @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dG @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SR @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+iR @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+d$ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+lO @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+lN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+lv @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+i @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-d29808f44ba54368.min.js.br:362
+validate @ figma_app-d29808f44ba54368.min.js.br:418
+getFunctionLogs @ figma_app-d29808f44ba54368.min.js.br:362
+fetch @ figma_app-d29808f44ba54368.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error

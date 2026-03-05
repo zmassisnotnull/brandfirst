@@ -1,0 +1,391 @@
+AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🏥 Testing Edge Function with Supabase client...
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-d29808f44ba54368.min.js.br:362
+validate @ figma_app-d29808f44ba54368.min.js.br:418
+getFunctionLogs @ figma_app-d29808f44ba54368.min.js.br:362
+fetch @ figma_app-d29808f44ba54368.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSubscribe @ vendor-dbdbf1041f2f9da9.min.js.br:296
+subscribe @ vendor-dbdbf1041f2f9da9.min.js.br:296
+subscribe @ 4016-48895b43bcb5d5a8.min.js.br:398
+_ @ vendor-core-ade2edecaf4781c7.min.js.br:68
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:68
+f @ vendor-core-ade2edecaf4781c7.min.js.br:68
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:68
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:68
+f @ vendor-core-ade2edecaf4781c7.min.js.br:68
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:68
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:398
+f @ vendor-core-ade2edecaf4781c7.min.js.br:68
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:68
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1328
+f @ vendor-core-ade2edecaf4781c7.min.js.br:68
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:68
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:398
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:398
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1328
+f @ vendor-core-ade2edecaf4781c7.min.js.br:68
+get @ vendor-core-ade2edecaf4781c7.min.js.br:68
+_ @ 9679-9c8c0cbc47b34654.min.js.br:50
+u @ 9679-9c8c0cbc47b34654.min.js.br:50
+m @ figma_app-d29808f44ba54368.min.js.br:418
+h @ 5582-7b20d64ed4bed2eb.min.js.br:147
+f @ 5582-7b20d64ed4bed2eb.min.js.br:147
+R @ 5582-7b20d64ed4bed2eb.min.js.br:26
+(anonymous) @ 5582-7b20d64ed4bed2eb.min.js.br:12
+rp @ vendor-core-ade2edecaf4781c7.min.js.br:11
+ap @ vendor-core-ade2edecaf4781c7.min.js.br:11
+as @ vendor-core-ade2edecaf4781c7.min.js.br:11
+u @ vendor-core-ade2edecaf4781c7.min.js.br:11
+oH @ vendor-core-ade2edecaf4781c7.min.js.br:11
+oI @ vendor-core-ade2edecaf4781c7.min.js.br:11
+oE @ vendor-core-ade2edecaf4781c7.min.js.br:11
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:54
+S @ vendor-core-ade2edecaf4781c7.min.js.br:54
+O @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28  GET https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server/make-server-98397747/health 404 (Not Found)
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+(anonymous) @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:23606
+(anonymous) @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:23612
+await in (anonymous)
+(anonymous) @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:14587
+(anonymous) @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:14665
+(anonymous) @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:14579
+VB @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:14561
+invoke @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:14652
+(anonymous) @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:72767
+(anonymous) @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:72774
+TN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T7 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T8 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T6 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T4 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+S1 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SQ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SJ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SZ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SO @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+pC @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 ❌ Edge Function error: FunctionsHttpError: Edge Function returned a non-2xx status code
+    at HB.<anonymous> (index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:14680:17)
+    at Generator.next (<anonymous>)
+    at o (index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:14564:13)
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+r @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:69
+error @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+(anonymous) @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:72770
+await in (anonymous)
+(anonymous) @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:72774
+TN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T7 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T8 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T6 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T4 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+S1 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SQ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SJ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SZ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SO @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+pC @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 App.tsx - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 App.tsx - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔐 Auth state changed: INITIAL_SESSION
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔐 로그인 시작: spinus29@gmail.com
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28  POST https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server/make-server-98397747/api/auth/signin 404 (Not Found)
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+(anonymous) @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:23606
+(anonymous) @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:23612
+await in (anonymous)
+(anonymous) @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:14587
+(anonymous) @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:14665
+(anonymous) @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:14579
+VB @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:14561
+invoke @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:14652
+b @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:72818
+y @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+i @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+iG @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+ij @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+iz @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+dP @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dM @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dk @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dG @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SR @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+iR @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+d$ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+lO @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+lN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+lv @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+i @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 ❌ 로그인 에러: FunctionsHttpError: Edge Function returned a non-2xx status code
+    at HB.<anonymous> (index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:14680:17)
+    at Generator.next (<anonymous>)
+    at o (index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:14564:13)
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+r @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:69
+error @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+b @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:72826
+await in b
+y @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+i @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+iG @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+ij @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+iz @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+dP @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dM @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dk @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dG @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SR @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+iR @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+d$ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+lO @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+lN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+lv @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+i @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 ❌ 로그인 에러: Error: Edge Function returned a non-2xx status code
+    at b (index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:72826:46)
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+r @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:69
+error @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+b @ index.js?Expires=1773619200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IhYG3yGVdRTtDo0BO3sylXWZuF~jIu07T3EbYvQBUzSpdHFbOHifJGJFzosD3ClwnIvARRf-PRrM6M4gzuBliIczgjX4swWl1mp6~Jqh7kCwgM~jlE68JzaNH28zbzYCFeZmTAS33VYQX3mrrLcFGuYzzEFE5YzscgmfR16XMrAxOXS271Z4AwLZy1uFjcQW5bD6B-C9BUgSbkmYvGKmwlRvDD-fO7Ygf81aV9EVQi61n8CP4BqeAh6GFvLBaleVJkm0vOxCPpa9xlaTh9svOEyXEdtZ2mWRlWzW6Y83f7ZLJjwYTGasZHBvvcoG-bfj8iqP9B7vv4CrFKK1Tx2fVg__:72831
+await in b
+y @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+i @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+iG @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+ij @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+iz @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+dP @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dM @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dk @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dG @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SR @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+iR @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+d$ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+lO @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+lN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+lv @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+i @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-d29808f44ba54368.min.js.br:362
+validate @ figma_app-d29808f44ba54368.min.js.br:418
+getFunctionLogs @ figma_app-d29808f44ba54368.min.js.br:362
+fetch @ figma_app-d29808f44ba54368.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-d29808f44ba54368.min.js.br:362
+validate @ figma_app-d29808f44ba54368.min.js.br:418
+getFunctionLogs @ figma_app-d29808f44ba54368.min.js.br:362
+fetch @ figma_app-d29808f44ba54368.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error

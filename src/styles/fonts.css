@@ -1,0 +1,32 @@
+/* Google Fonts - Noto Sans KR */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+
+/* Montserrat for logo - Black (900) for "Brand", Medium (500) for "first.ai" */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;900&display=swap');
+
+body {
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Logo specific fonts */
+.logo-brand {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+}
+
+.logo-first {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+/* Brand font rendering optimization (안정성 개선) */
+.brand-logo-text {
+  font-family: var(--brand-font-family), system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  font-kerning: normal;
+  /* 폰트 피처 설정 최소화로 크로스브라우저 일관성 확보 */
+  font-feature-settings: "kern" 1, "liga" 0;
+  /* 렌더링 안정성 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}

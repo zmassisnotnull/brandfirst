@@ -1,0 +1,44 @@
+로그인 요청 URL: https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/server/make-server-98397747/api/auth/signin
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+(index):1 Access to fetch at 'https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/server/make-server-98397747/api/auth/signin' from origin 'https://b3fe8cb9-de64-4782-9417-5a8926335069-v2-figmaiframepreview.figma.site' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28  POST https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/server/make-server-98397747/api/auth/signin net::ERR_FAILED
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+handleSignIn @ AuthModal.tsx:145
+y @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+i @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+iG @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+ij @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+iz @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+dP @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dM @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dk @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+dG @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SR @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+iR @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+d$ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+lO @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+lN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+lv @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77
+i @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 ❌ 로그인 에러: TypeError: Failed to fetch
+    at code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28:9794
+    at handleSignIn (AuthModal.tsx:145:30)
+    at HTMLUnknownElement.y (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77:54006)
+    at HTMLUnknownElement.i (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28:4861)
+    at Object.iG (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77:54331)
+    at ij (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77:55284)
+    at iz (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77:55341)
+    at dP (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:10702)
+    at dM (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:11042)
+    at dk (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:11125)
+    at dG (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:11212)
+    at code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:12595
+    at SR (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:158583)
+    at iR (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77:51978)
+    at d$ (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89:12574)
+    at lO (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77:72034)
+    at lN (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77:71970)
+    at lv (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:77:71781)
+    at HTMLDivElement.i (code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28:4861)

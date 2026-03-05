@@ -1,0 +1,641 @@
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+ 💰 API 응답 상태: 401 ERROR
+ ❌ 크레딧 조회 실패: 401 {"code":401,"message":"Invalid JWT"}
+(anonymous) @ code_components_prev…e5050f.min.js.br:28Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/deploy:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/rev/ruws4A3NrXIkEa2qXd9hu0/code_snapshot/8508ecac733dc0b19ddd9de7feda01edf9e7c1e089aa69d767640e314da664bf:1  Failed to load resource: the server responded with a status of 404 ()Understand this error
+installHook.js:1 Failed to fetch snapshot files: E: XHR for "/api/rev/ruws4A3NrXIkEa2qXd9hu0/code_snapshot/8508ecac733dc0b19ddd9de7feda01edf9e7c1e089aa69d767640e314da664bf" failed with status 404
+    at C (4016-48895b43bcb5d5a8.min.js.br:1140:13967)
+    at async Object.P [as get] (4016-48895b43bcb5d5a8.min.js.br:1140:14350)
+    at async 5582-7b20d64ed4bed2eb.min.js.br:3:29374
+    at async 5582-7b20d64ed4bed2eb.min.js.br:26:105079
+    at async 9679-9c8c0cbc47b34654.min.js.br:49:56207
+    at async _ (5582-7b20d64ed4bed2eb.min.js.br:26:104587)
+    at async 5582-7b20d64ed4bed2eb.min.js.br:26:23202
+overrideMethod @ installHook.js:1Understand this warning
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+ 🔐 Auth state changed: SIGNED_IN
+ 💰 fetchUserCredits 호출 - userId: b2990a47-6d48-4893-84cb-63c1430bb4c3
+ 🔍 App.tsx - currentPage: home
+ 🔍 App.tsx - isQRCardSite: false
+ 🔍 AuthModal - currentPage: home
+ 🔍 AuthModal - isQRCardSite: false
+ 💰 세션 확인: 세션 있음
+ 💰 Access Token: eyJhbGciOiJFUzI1NiIs...
+ 💰 API 호출: https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+ 💰 API 응답 상태: 401 ERROR
+ ❌ 크레딧 조회 실패: 401 {"code":401,"message":"Invalid JWT"}
+(anonymous) @ code_components_prev…e5050f.min.js.br:28Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/deploy:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+ 🔐 Auth state changed: SIGNED_IN
+ 💰 fetchUserCredits 호출 - userId: b2990a47-6d48-4893-84cb-63c1430bb4c3
+ 🔍 App.tsx - currentPage: home
+ 🔍 App.tsx - isQRCardSite: false
+ 🔍 AuthModal - currentPage: home
+ 🔍 AuthModal - isQRCardSite: false
+ 💰 세션 확인: 세션 있음
+ 💰 Access Token: eyJhbGciOiJFUzI1NiIs...
+ 💰 API 호출: https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+ 💰 API 응답 상태: 401 ERROR
+ ❌ 크레딧 조회 실패: 401 {"code":401,"message":"Invalid JWT"}
+(anonymous) @ code_components_prev…e5050f.min.js.br:28Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+ 🔐 Auth state changed: SIGNED_IN
+ 💰 fetchUserCredits 호출 - userId: b2990a47-6d48-4893-84cb-63c1430bb4c3
+ 💰 세션 확인: 세션 있음
+ 💰 Access Token: eyJhbGciOiJFUzI1NiIs...
+ 💰 API 호출: https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3
+ 🔍 App.tsx - currentPage: home
+ 🔍 App.tsx - isQRCardSite: false
+ 🔍 AuthModal - currentPage: home
+ 🔍 AuthModal - isQRCardSite: false
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+ 💰 API 응답 상태: 401 ERROR
+ ❌ 크레딧 조회 실패: 401 {"code":401,"message":"Invalid JWT"}
+(anonymous) @ code_components_prev…e5050f.min.js.br:28Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/deploy:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+ 🔐 Auth state changed: SIGNED_IN
+ 💰 fetchUserCredits 호출 - userId: b2990a47-6d48-4893-84cb-63c1430bb4c3
+ 🔍 App.tsx - currentPage: home
+ 🔍 App.tsx - isQRCardSite: false
+ 🔍 AuthModal - currentPage: home
+ 🔍 AuthModal - isQRCardSite: false
+ 💰 세션 확인: 세션 있음
+ 💰 Access Token: eyJhbGciOiJFUzI1NiIs...
+ 💰 API 호출: https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+ 💰 API 응답 상태: 401 ERROR
+ ❌ 크레딧 조회 실패: 401 {"code":401,"message":"Invalid JWT"}
+(anonymous) @ code_components_prev…e5050f.min.js.br:28Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+1374 log entries are not shown.Understand this warning
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+validate @ figma_app-1d6ad1ca44adbcaa.min.js.br:418
+getFunctionLogs @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+fetch @ figma_app-1d6ad1ca44adbcaa.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+validate @ figma_app-1d6ad1ca44adbcaa.min.js.br:418
+getFunctionLogs @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+fetch @ figma_app-1d6ad1ca44adbcaa.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+validate @ figma_app-1d6ad1ca44adbcaa.min.js.br:418
+getFunctionLogs @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+fetch @ figma_app-1d6ad1ca44adbcaa.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+validate @ figma_app-1d6ad1ca44adbcaa.min.js.br:418
+getFunctionLogs @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+fetch @ figma_app-1d6ad1ca44adbcaa.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+validate @ figma_app-1d6ad1ca44adbcaa.min.js.br:418
+getFunctionLogs @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+fetch @ figma_app-1d6ad1ca44adbcaa.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+validate @ figma_app-1d6ad1ca44adbcaa.min.js.br:418
+getFunctionLogs @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+fetch @ figma_app-1d6ad1ca44adbcaa.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+validate @ figma_app-1d6ad1ca44adbcaa.min.js.br:418
+getFunctionLogs @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+fetch @ figma_app-1d6ad1ca44adbcaa.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error
+vendor-core-ade2edecaf4781c7.min.js.br:63  POST https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/deploy 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+r @ 4016-48895b43bcb5d5a8.min.js.br:1140
+post @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+validate @ figma_app-1d6ad1ca44adbcaa.min.js.br:418
+deployEdgeFunction @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+(anonymous) @ 5582-7b20d64ed4bed2eb.min.js.br:147
+(anonymous) @ 5582-7b20d64ed4bed2eb.min.js.br:12
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1727
+aB @ vendor-core-ade2edecaf4781c7.min.js.br:11
+oD @ vendor-core-ade2edecaf4781c7.min.js.br:11
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:11
+oB @ vendor-core-ade2edecaf4781c7.min.js.br:11
+oL @ vendor-core-ade2edecaf4781c7.min.js.br:11
+f5 @ vendor-core-ade2edecaf4781c7.min.js.br:11
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:11
+XMLHttpRequest.send
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+r @ 4016-48895b43bcb5d5a8.min.js.br:1140
+post @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+validate @ figma_app-1d6ad1ca44adbcaa.min.js.br:418
+createThreadMessages @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+(anonymous) @ 5582-7b20d64ed4bed2eb.min.js.br:3
+_ @ figma_app-1d6ad1ca44adbcaa.min.js.br:418
+(anonymous) @ 5582-7b20d64ed4bed2eb.min.js.br:3
+measureDurationAsync @ 4016-48895b43bcb5d5a8.min.js.br:1431
+C @ 5582-7b20d64ed4bed2eb.min.js.br:3
+b @ 5582-7b20d64ed4bed2eb.min.js.br:3
+(anonymous) @ 5582-7b20d64ed4bed2eb.min.js.br:3
+commitMessagesToDatabase @ 5582-7b20d64ed4bed2eb.min.js.br:147
+commit @ 5582-7b20d64ed4bed2eb.min.js.br:147
+await in commit
+d @ figma_app-1d6ad1ca44adbcaa.min.js.br:546Understand this error
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+validate @ figma_app-1d6ad1ca44adbcaa.min.js.br:418
+getFunctionLogs @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+fetch @ figma_app-1d6ad1ca44adbcaa.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 App.tsx - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 App.tsx - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 App.tsx - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 App.tsx - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 App.tsx - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 App.tsx - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔐 Auth state changed: SIGNED_IN
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 💰 fetchUserCredits 호출 - userId: b2990a47-6d48-4893-84cb-63c1430bb4c3
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 App.tsx - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 App.tsx - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+ 🔐 Auth state changed: SIGNED_IN
+ 💰 fetchUserCredits 호출 - userId: b2990a47-6d48-4893-84cb-63c1430bb4c3
+ 🔍 App.tsx - currentPage: home
+ 🔍 App.tsx - isQRCardSite: false
+ 🔍 AuthModal - currentPage: home
+ 🔍 AuthModal - isQRCardSite: false
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 App.tsx - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 App.tsx - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 💰 fetchUserCredits 호출 - userId: b2990a47-6d48-4893-84cb-63c1430bb4c3
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 ✅ 세션 복원: {id: 'b2990a47-6d48-4893-84cb-63c1430bb4c3', aud: 'authenticated', role: 'authenticated', email: 'spinus29@gmail.com', email_confirmed_at: '2026-01-12T05:12:30.093926Z', …}
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 App.tsx - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 App.tsx - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - currentPage: qrcard-landing
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔍 AuthModal - isQRCardSite: true
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 🔐 Auth state changed: INITIAL_SESSION
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 💰 세션 확인: 세션 있음
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 💰 Access Token: eyJhbGciOiJFUzI1NiIs...
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 💰 API 호출: https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3
+ 💰 세션 확인: 세션 있음
+ 💰 Access Token: eyJhbGciOiJFUzI1NiIs...
+ 💰 API 호출: https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 💰 세션 확인: 세션 있음
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 💰 Access Token: eyJhbGciOiJFUzI1NiIs...
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 💰 API 호출: https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+validate @ figma_app-1d6ad1ca44adbcaa.min.js.br:418
+getFunctionLogs @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+fetch @ figma_app-1d6ad1ca44adbcaa.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28  GET https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3 401 (Unauthorized)
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+fetchUserCredits @ App.tsx:98
+await in fetchUserCredits
+checkSession @ App.tsx:159
+await in checkSession
+(anonymous) @ App.tsx:177
+TN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T7 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T8 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T6 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T4 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+S1 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SQ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:3
+V @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:113
+B @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:113
+eo @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:113Understand this error
+credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 💰 API 응답 상태: 401 ERROR
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 ❌ 크레딧 조회 실패: 401 {"code":401,"message":"Invalid JWT"}
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+r @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:69
+fetchUserCredits @ App.tsx:114
+await in fetchUserCredits
+checkSession @ App.tsx:159
+await in checkSession
+(anonymous) @ App.tsx:177
+TN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T7 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T8 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T6 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T4 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+S1 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SQ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:3
+V @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:113
+B @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:113
+eo @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:113Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28  GET https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3 401 (Unauthorized)
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+fetchUserCredits @ App.tsx:98
+await in fetchUserCredits
+(anonymous) @ App.tsx:196
+(anonymous) @ @supabase_supabase-js.js?v=6a3705e6:10517
+_notifyAllSubscribers @ @supabase_supabase-js.js?v=6a3705e6:10515
+_recoverAndRefresh @ @supabase_supabase-js.js?v=6a3705e6:10458
+await in _recoverAndRefresh
+_initialize @ @supabase_supabase-js.js?v=6a3705e6:8960
+await in _initialize
+(anonymous) @ @supabase_supabase-js.js?v=6a3705e6:8912
+(anonymous) @ @supabase_supabase-js.js?v=6a3705e6:9710
+(anonymous) @ @supabase_supabase-js.js?v=6a3705e6:7820Understand this error
+credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 💰 API 응답 상태: 401 ERROR
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28 ❌ 크레딧 조회 실패: 401 {"code":401,"message":"Invalid JWT"}
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+r @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:69
+fetchUserCredits @ App.tsx:114Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28  GET https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3 401 (Unauthorized)
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+fetchUserPackage @ App.tsx:132
+await in fetchUserPackage
+checkSession @ App.tsx:160
+await in checkSession
+(anonymous) @ App.tsx:177
+TN @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T7 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T8 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T6 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+T4 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+S1 @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+SQ @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:89
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:3
+V @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:113
+B @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:113
+eo @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:113Understand this error
+package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28  GET https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3 401 (Unauthorized)
+(anonymous) @ code_components_preview_iframe-7e022e10d2e5050f.min.js.br:28
+fetchUserPackage @ App.tsx:132
+await in fetchUserPackage
+(anonymous) @ App.tsx:197
+(anonymous) @ @supabase_supabase-js.js?v=6a3705e6:10517
+_notifyAllSubscribers @ @supabase_supabase-js.js?v=6a3705e6:10515
+_recoverAndRefresh @ @supabase_supabase-js.js?v=6a3705e6:10458
+await in _recoverAndRefresh
+_initialize @ @supabase_supabase-js.js?v=6a3705e6:8960
+await in _initialize
+(anonymous) @ @supabase_supabase-js.js?v=6a3705e6:8912
+(anonymous) @ @supabase_supabase-js.js?v=6a3705e6:9710
+(anonymous) @ @supabase_supabase-js.js?v=6a3705e6:7820Understand this error
+package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+  GET https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3 401 (Unauthorized)
+(anonymous) @ code_components_prev…e5050f.min.js.br:28
+fetchUserPackage @ App.tsx:132
+await in fetchUserPackage
+(anonymous) @ App.tsx:197
+(anonymous) @ @supabase_supabase-j…js?v=6a3705e6:10517
+_notifyAllSubscribers @ @supabase_supabase-j…js?v=6a3705e6:10515
+(anonymous) @ @supabase_supabase-js.js?v=6a3705e6:8863
+i @ code_components_prev…e5050f.min.js.br:28Understand this error
+package?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+  GET https://lqisdbrjwicwpngunzfn.supabase.co/functions/v1/make-server-45024be7/api/user/credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3 401 (Unauthorized)
+(anonymous) @ code_components_prev…e5050f.min.js.br:28
+fetchUserCredits @ App.tsx:98
+await in fetchUserCredits
+(anonymous) @ App.tsx:196
+(anonymous) @ @supabase_supabase-j…js?v=6a3705e6:10517
+_notifyAllSubscribers @ @supabase_supabase-j…js?v=6a3705e6:10515
+(anonymous) @ @supabase_supabase-js.js?v=6a3705e6:8863
+i @ code_components_prev…e5050f.min.js.br:28Understand this error
+credits?userId=b2990a47-6d48-4893-84cb-63c1430bb4c3:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+ 💰 API 응답 상태: 401 ERROR
+ ❌ 크레딧 조회 실패: 401 {"code":401,"message":"Invalid JWT"}
+(anonymous) @ code_components_prev…e5050f.min.js.br:28
+r @ code_components_prev…e5050f.min.js.br:69
+error @ code_components_prev…e5050f.min.js.br:28
+fetchUserCredits @ App.tsx:114Understand this error
+vendor-core-ade2edecaf4781c7.min.js.br:63  GET https://www.figma.com/api/integrations/supabase/ruws4A3NrXIkEa2qXd9hu0/edge_functions/make-server/logs 403 (Forbidden)
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+h @ vendor-dbdbf1041f2f9da9.min.js.br:3
+(anonymous) @ 4016-48895b43bcb5d5a8.min.js.br:1140
+T @ 4016-48895b43bcb5d5a8.min.js.br:1140
+await in T
+C @ 4016-48895b43bcb5d5a8.min.js.br:1140
+P @ 4016-48895b43bcb5d5a8.min.js.br:1140
+(anonymous) @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+validate @ figma_app-1d6ad1ca44adbcaa.min.js.br:418
+getFunctionLogs @ figma_app-1d6ad1ca44adbcaa.min.js.br:362
+fetch @ figma_app-1d6ad1ca44adbcaa.min.js.br:529
+h @ 4016-48895b43bcb5d5a8.min.js.br:398
+await in h
+d @ vendor-dbdbf1041f2f9da9.min.js.br:296
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54
+setInterval
+(anonymous) @ vendor-core-ade2edecaf4781c7.min.js.br:63
+updateRefetchInterval @ vendor-dbdbf1041f2f9da9.min.js.br:296
+updateTimers @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onQueryUpdate @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+batch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+dispatch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+setData @ vendor-dbdbf1041f2f9da9.min.js.br:296
+onSuccess @ vendor-dbdbf1041f2f9da9.min.js.br:296
+b @ vendor-dbdbf1041f2f9da9.min.js.br:296
+Promise.then
+x @ vendor-dbdbf1041f2f9da9.min.js.br:296
+h @ vendor-dbdbf1041f2f9da9.min.js.br:296
+fetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+executeFetch @ vendor-dbdbf1041f2f9da9.min.js.br:296
+(anonymous) @ vendor-dbdbf1041f2f9da9.min.js.br:296
+u @ vendor-core-ade2edecaf4781c7.min.js.br:54Understand this error
