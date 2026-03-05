@@ -114,3 +114,13 @@
 - Regenerated dependency graph locally with `npm install` to refresh lock metadata.
 - Re-verified CI path with `npm ci` (success).
 - Re-verified production bundling with `npm run build` (success, existing chunk-size warning unchanged).
+
+## Cloudflare Retry Investigation (Second Failure)
+- Reproduced and re-audited the same Cloudflare `npm clean-install` error after retry deployment.
+- Root cause confirmed again: `package-lock.json` had stale references to `@csstools/css-parser-algorithms@3.0.5` and `@csstools/css-tokenizer@3.0.4` without concrete lock nodes.
+- Performed full lock reset (`rm -rf node_modules package-lock.json && npm install`) to force clean lock graph generation.
+- Verified lockfile now contains required nodes:
+  - `node_modules/@csstools/css-parser-algorithms`
+  - `node_modules/@csstools/css-tokenizer`
+- Re-ran Cloudflare-equivalent sequence locally: `npm ci && npm run build` -> both succeeded.
+- Current repo delta includes updated `package-lock.json`; this must be pushed so Cloudflare picks up the fixed lockfile.
