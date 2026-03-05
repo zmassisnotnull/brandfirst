@@ -102,3 +102,8 @@
   - `GET /functions/v1/make-server-45024be7/api/user/credits?...` -> `200` and DB-shape payload `{ "credits": 237000, "package": "premium" }`.
 - Captured post-cutover snapshot via `capture_kv_migration_snapshot('after-450-proxy-cutover')`.
 - Snapshot comparison (baseline vs post-cutover) showed no growth in KV domain counts (still total_keys=22, credits=1, package=1), indicating no immediate new KV write regression from tested paths.
+
+## Cloudflare GitHub Deploy Config
+- Added root `wrangler.jsonc` for Cloudflare Pages + GitHub deployment while preserving existing project structure.
+- Config uses Vite output directory `./dist` via `pages_build_output_dir` and sets `compatibility_date`.
+- Included commented templates for optional `compatibility_flags` and `vars` without changing current runtime behavior.
