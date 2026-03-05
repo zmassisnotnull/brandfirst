@@ -1,4 +1,6 @@
 {
+  "$schema": "./node_modules/wrangler/config-schema.json",
+
   // Cloudflare Pages project name
   "name": "brandfirst",
 
@@ -10,6 +12,9 @@
 
   // Optional: enable Node.js compatibility if later needed
   // "compatibility_flags": ["nodejs_compat"],
+
+  // IMPORTANT: This is a Pages config.
+  // Use `wrangler pages deploy` (not `wrangler deploy`).
 
   // Optional environment variable template for frontend build/runtime
   // Move hardcoded values to Cloudflare dashboard vars if needed.

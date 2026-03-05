@@ -124,3 +124,13 @@
   - `node_modules/@csstools/css-tokenizer`
 - Re-ran Cloudflare-equivalent sequence locally: `npm ci && npm run build` -> both succeeded.
 - Current repo delta includes updated `package-lock.json`; this must be pushed so Cloudflare picks up the fixed lockfile.
+
+## Cloudflare Deploy Command Failure (Pages vs Workers)
+- Investigated latest failure after successful build; root cause is deploy command mismatch:
+  - Running `npx wrangler deploy` on a Pages project triggers warning and then fails with missing Worker entrypoint/assets.
+  - Project config (`wrangler.jsonc`) is Pages-oriented (`pages_build_output_dir`).
+- Added `$schema` to `wrangler.jsonc` and explicit note that this config must use `wrangler pages deploy`.
+- Added npm script in `package.json`:
+  - `deploy:pages`: `npx wrangler pages deploy ./dist --project-name=brandfirst`
+- Verified command wiring with `npm run deploy:pages -- --help` (Pages deploy help displayed successfully).
+- Re-verified build with `npm run build` (success, chunk-size warning unchanged).
