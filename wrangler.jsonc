@@ -1,0 +1,19 @@
+{
+  // Cloudflare Pages project name
+  "name": "brandfirst",
+
+  // Keep current structure: Vite build output stays in /dist
+  "pages_build_output_dir": "./dist",
+
+  // Runtime compatibility for Pages Functions / Workers behavior
+  "compatibility_date": "2026-03-05",
+
+  // Optional: enable Node.js compatibility if later needed
+  // "compatibility_flags": ["nodejs_compat"],
+
+  // Optional environment variable template for frontend build/runtime
+  // Move hardcoded values to Cloudflare dashboard vars if needed.
+  // "vars": {
+  //   "VITE_APP_ENV": "production"
+  // }
+}
