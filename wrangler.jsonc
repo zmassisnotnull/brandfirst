@@ -7,14 +7,21 @@
   // Keep current structure: Vite build output stays in /dist
   "pages_build_output_dir": "./dist",
 
+  // Fallback for environments that still run `wrangler deploy` (Workers mode)
+  // This prevents "Missing entry-point to Worker script or to assets directory".
+  "assets": {
+    "directory": "./dist"
+  },
+
   // Runtime compatibility for Pages Functions / Workers behavior
   "compatibility_date": "2026-03-05",
 
   // Optional: enable Node.js compatibility if later needed
   // "compatibility_flags": ["nodejs_compat"],
 
-  // IMPORTANT: This is a Pages config.
-  // Use `wrangler pages deploy` (not `wrangler deploy`).
+  // IMPORTANT:
+  // - Preferred command: `wrangler pages deploy`
+  // - If CI is fixed to `wrangler deploy`, `assets.directory` above keeps deploy from failing.
 
   // Optional environment variable template for frontend build/runtime
   // Move hardcoded values to Cloudflare dashboard vars if needed.

@@ -134,3 +134,14 @@
   - `deploy:pages`: `npx wrangler pages deploy ./dist --project-name=brandfirst`
 - Verified command wiring with `npm run deploy:pages -- --help` (Pages deploy help displayed successfully).
 - Re-verified build with `npm run build` (success, chunk-size warning unchanged).
+
+## Cloudflare Fallback Fix (Global `wrangler deploy` path)
+- Confirmed some deployment environments still execute `npx wrangler deploy` directly.
+- Updated `wrangler.jsonc` to include Workers-mode fallback assets config:
+  - `"assets": { "directory": "./dist" }`
+- Kept existing Pages configuration (`pages_build_output_dir`) unchanged to preserve project structure.
+- Verified fallback behavior with `npx wrangler deploy --dry-run`:
+  - warning about Pages vs Workers remains (expected),
+  - previous fatal error (`Missing entry-point ...`) is resolved,
+  - dry-run upload path completes successfully.
+- Re-ran `npm run build` after config update; build succeeded.
