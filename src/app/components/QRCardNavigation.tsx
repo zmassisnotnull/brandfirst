@@ -12,14 +12,14 @@ interface QRCardNavigationProps {
   onOpenProfileModal?: () => void;
 }
 
-export function QRCardNavigation({ 
-  currentPage, 
-  onNavigate, 
-  user, 
-  onAuthClick, 
-  onSignOut, 
-  userCredits, 
-  onOpenProfileModal 
+export function QRCardNavigation({
+  currentPage,
+  onNavigate,
+  user,
+  onAuthClick,
+  onSignOut,
+  userCredits,
+  onOpenProfileModal
 }: QRCardNavigationProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -31,33 +31,33 @@ export function QRCardNavigation({
 
   // 사이트 채널 목록
   const siteChannels = [
-    { 
-      id: 'print', 
-      label: 'Print', 
+    {
+      id: 'print',
+      label: 'Print',
       url: 'print.brandfirst.ai',
       description: '명함 제작',
       active: false,
       internalPage: 'home', // 내부 페이지로 이동
     },
-    { 
-      id: 'qrcard', 
-      label: 'QR Card', 
+    {
+      id: 'qrcard',
+      label: 'QR Card',
       url: 'qrcard.brandfirst.ai',
       description: 'QR 디지털 명함',
       active: true, // 현재 사이트
       internalPage: 'qrcard-landing',
     },
-    { 
-      id: 'ops', 
-      label: 'Ops', 
+    {
+      id: 'ops',
+      label: 'Ops',
       url: 'ops.brandfirst.ai',
       description: '브랜드 운영',
       active: false,
       internalPage: 'home', // 임시로 home으로
     },
-    { 
-      id: 'admin', 
-      label: 'Admin', 
+    {
+      id: 'admin',
+      label: 'Admin',
       url: 'admin.brandfirst.ai',
       description: '관리자',
       active: false,
@@ -76,11 +76,10 @@ export function QRCardNavigation({
                 {index > 0 && <span className="text-gray-600 mx-2">|</span>}
                 <a
                   href={channel.active ? '#' : `https://${channel.url}`}
-                  className={`px-3 py-1 rounded transition-colors ${
-                    channel.active
+                  className={`px-3 py-1 rounded transition-colors ${channel.active
                       ? 'bg-blue-600 text-white font-semibold'
                       : 'text-gray-300 hover:text-white hover:bg-gray-700'
-                  }`}
+                    }`}
                   onClick={(e) => {
                     e.preventDefault();
                     if (!channel.active) {
@@ -110,7 +109,7 @@ export function QRCardNavigation({
             <span
               onClick={() => onNavigate('qrcard-landing')}
               className="text-2xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text cursor-pointer select-none"
-              style={{ 
+              style={{
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -127,7 +126,7 @@ export function QRCardNavigation({
               <span className="md:hidden logo-brand">QR</span>
               <span className="md:hidden logo-first">C</span>
             </span>
-            
+
             <div className="hidden md:flex items-center gap-6">
               {user && menuItems.map((item) => {
                 const Icon = item.icon;
@@ -135,11 +134,10 @@ export function QRCardNavigation({
                   <button
                     key={item.id}
                     onClick={() => onNavigate(item.id)}
-                    className={`flex items-center gap-2 text-sm transition-colors ${
-                      currentPage === item.id 
-                        ? 'text-purple-600 font-bold' 
+                    className={`flex items-center gap-2 text-sm transition-colors ${currentPage === item.id
+                        ? 'text-purple-600 font-bold'
                         : 'text-gray-600 hover:text-blue-600'
-                    } mx-[0px] mt-[5px] mb-[0px]`}
+                      } mx-[0px] mt-[5px] mb-[0px]`}
                   >
                     <Icon className="w-4 h-4" />
                     {item.label}
@@ -148,12 +146,12 @@ export function QRCardNavigation({
               })}
             </div>
           </div>
-          
+
           {user ? (
             <div className="flex items-center gap-3">
               {/* 보유 크레딧 표시 - 모바일: 아이콘+숫자만, 데스크톱: 아이콘+숫자+텍스트 */}
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="gap-2 bg-gradient-to-r from-amber-50 to-yellow-50 border-amber-200 hover:border-amber-300"
                 onClick={() => onNavigate('qrcard-credit')}
               >
@@ -161,22 +159,27 @@ export function QRCardNavigation({
                 <span className="font-semibold text-amber-700">{(userCredits || 0).toLocaleString()}</span>
                 <span className="hidden md:inline font-semibold text-amber-700">크레딧</span>
               </Button>
-              
+
               {/* 사용자 메뉴 드롭다운 */}
               <div className="relative">
                 <button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   onMouseEnter={() => setIsDropdownOpen(true)}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex items-center gap-1.5 px-2 py-1.5 rounded-full hover:bg-gray-50 transition-colors"
                 >
-                  <User className="w-4 h-4 text-gray-600" />
-                  <span className="hidden md:inline text-sm text-gray-700">{user.user_metadata?.name || user.email}</span>
-                  <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                  {user.user_metadata?.avatar_url ? (
+                    <img src={user.user_metadata.avatar_url} alt="Profile" className="w-8 h-8 rounded-full object-cover border border-gray-200" />
+                  ) : (
+                    <div className="w-8 h-8 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center border border-gray-200">
+                      <User className="w-4 h-4 text-gray-500" />
+                    </div>
+                  )}
+                  <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
 
                 {/* 드롭다운 메뉴 */}
                 {isDropdownOpen && (
-                  <div 
+                  <div
                     className="absolute right-0 top-full mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50"
                     onMouseLeave={() => setIsDropdownOpen(false)}
                   >
@@ -209,7 +212,7 @@ export function QRCardNavigation({
                         <div className="text-xs text-gray-500">명함 관리 및 편집</div>
                       </div>
                     </button>
-                    
+
                     <button
                       onClick={() => {
                         setIsDropdownOpen(false);
@@ -245,15 +248,15 @@ export function QRCardNavigation({
           ) : (
             <div className="flex items-center gap-3">
               {/* 크레딧 버튼 */}
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="gap-2 bg-gradient-to-r from-amber-50 to-yellow-50 border-amber-200 hover:border-amber-300"
                 onClick={() => onNavigate('qrcard-credit')}
               >
                 <Coins className="w-4 h-4 text-amber-600" />
                 <span className="font-semibold text-amber-700">크레딧</span>
               </Button>
-              
+
               <Button variant="outline" className="gap-2" onClick={onAuthClick}>
                 <LogIn className="w-4 h-4" />
                 로그인
