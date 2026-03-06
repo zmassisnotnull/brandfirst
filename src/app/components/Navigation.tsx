@@ -156,11 +156,16 @@ export function Navigation({ currentPage, onNavigate, user, onAuthClick, onSignO
                 <button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   onMouseEnter={() => setIsDropdownOpen(true)}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex items-center gap-1.5 px-2 py-1.5 rounded-full hover:bg-gray-50 transition-colors"
                 >
-                  <User className="w-4 h-4 text-gray-600" />
-                  <span className="hidden md:inline text-sm text-gray-700">{user.user_metadata?.name || user.email}</span>
-                  <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                  {user.user_metadata?.avatar_url ? (
+                    <img src={user.user_metadata.avatar_url} alt="Profile" className="w-8 h-8 rounded-full object-cover border border-gray-200" />
+                  ) : (
+                    <div className="w-8 h-8 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center border border-gray-200">
+                      <User className="w-4 h-4 text-gray-500" />
+                    </div>
+                  )}
+                  <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
 
                 {/* 드롭다운 메뉴 */}
