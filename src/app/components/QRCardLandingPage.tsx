@@ -1,11 +1,11 @@
-import { 
-  QrCode, 
-  Smartphone, 
-  Share2, 
-  Eye, 
-  TrendingUp, 
-  Zap, 
-  Check, 
+import {
+  QrCode,
+  Smartphone,
+  Share2,
+  Eye,
+  TrendingUp,
+  Zap,
+  Check,
   ArrowRight,
   Users,
   Globe,
@@ -40,15 +40,13 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
     <div className="flex flex-col min-h-screen bg-white">
       {/* Hero Section - Modern Minimal */}
       <section className="relative pt-32 pb-24 px-6 overflow-hidden bg-gradient-to-b from-yellow-50 to-orange-50">
-        {/* Subtle Grid Background */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-        
+
         {/* Gradient Orbs */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-yellow-500/20 rounded-full blur-3xl" />
 
         <div className="container mx-auto max-w-6xl relative z-10">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -78,8 +76,8 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
             {/* CTA Buttons - Minimalist */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               {user ? (
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 text-base rounded-full shadow-lg hover:shadow-xl transition-all group !p-[30px]"
                   onClick={() => onNavigate('qrcard-digital')}
                 >
@@ -88,17 +86,17 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
                 </Button>
               ) : (
                 <>
-                  <Button 
-                    size="lg" 
+                  <Button
+                    size="lg"
                     className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-base rounded-full shadow-lg hover:shadow-xl transition-all group !p-[30px] font-bold"
                     onClick={() => onOpenAuthModal ? onOpenAuthModal() : onNavigate('auth')}
                   >
                     무료로 시작하기
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
+                  <Button
+                    size="lg"
+                    variant="outline"
                     className="border-2 border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-gray-50 text-base rounded-full px-[30px] py-[28px]"
                     onClick={() => {
                       const demoSection = document.getElementById('demo-section');
@@ -134,7 +132,7 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
       <section className="py-32 px-6 bg-white">
         <div className="container mx-auto max-w-7xl">
           {/* Section Header */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -167,10 +165,10 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
                   QR 코드 스캔
                 </h3>
                 <p className="text-lg text-gray-600 leading-relaxed mb-8">
-                  스마트폰 카메라로 QR 코드만 스캔하면 모든 정보가 즉시 전달됩니다. 
+                  스마트폰 카메라로 QR 코드만 스캔하면 모든 정보가 즉시 전달됩니다.
                   별도의 앱 설치나 복잡한 과정 없이 간편하게 연결하세요.
                 </p>
-                
+
                 {/* QR Code Visual */}
                 <div className="mt-8 flex items-center justify-center">
                   <div className="w-48 h-48 bg-white rounded-2xl shadow-xl border border-gray-100 flex items-center justify-center">
@@ -178,7 +176,7 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
                   </div>
                 </div>
               </div>
-              
+
               {/* Decorative Background */}
               <div className="absolute -bottom-12 -right-12 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl group-hover:scale-110 transition-transform" />
             </motion.div>
@@ -256,11 +254,11 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
                   모바일 최적화
                 </h3>
                 <p className="text-gray-600 leading-relaxed text-lg">
-                  모든 스마트폰에서 완벽하게 작동하는 반응형 디자인. 
+                  모든 스마트폰에서 완벽하게 작동하는 반응형 디자인.
                   연락처 자동 저장(VCard) 기능으로 상대방이 쉽게 저장할 수 있습니다.
                 </p>
               </div>
-              
+
               {/* Phone Mockup */}
               <div className="absolute -bottom-4 -right-8 opacity-20">
                 <Smartphone className="w-64 h-64 text-orange-500" />
@@ -274,10 +272,10 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
       <section id="demo-section" className="bg-gradient-to-b from-gray-50 to-white relative overflow-hidden px-[24px] pt-[128px] pb-[0px]">
         {/* Background Elements */}
         <div className="absolute top-1/4 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-        
+
 
         <div className="container mx-auto max-w-7xl relative z-10">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -294,7 +292,7 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* 스타터 플랜 */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -313,14 +311,14 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
               <div className="relative w-[350px] mx-auto">
                 {/* Glow Effect */}
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl blur-2xl opacity-20" />
-                
+
                 {/* Card - PublicProfile.tsx와 동일 */}
                 <div className="relative bg-white rounded-3xl overflow-hidden shadow-2xl">
                   {/* Cover Image / Gradient Header - 단일 칼라 */}
                   <div className="relative h-56 bg-blue-600">
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10" />
-                    
+
                     {/* Profile Section */}
                     <div className="relative h-full flex flex-col items-center justify-center px-6">
                       {/* Profile Image */}
@@ -406,7 +404,7 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
                         <Download className="w-4 h-4" />
                         VCF 포맷 저장
                       </button>
-                      
+
                       <p className="text-xs text-gray-500">
                         Powered by{' '}
                         <span className="inline-flex items-center text-sm bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -430,7 +428,7 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
             </motion.div>
 
             {/* 프로페셔널 플랜 - 직업용 */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -449,14 +447,14 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
               <div className="relative w-[350px] mx-auto">
                 {/* Glow Effect */}
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl blur-2xl opacity-30" />
-                
+
                 {/* Card */}
                 <div className="relative bg-white rounded-3xl overflow-hidden shadow-2xl ring-2 ring-purple-500/30">
                   {/* Cover Image / Gradient Header - 그라데이션 */}
                   <div className="relative h-56 bg-gradient-to-br from-blue-500 to-purple-600">
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10" />
-                    
+
                     {/* Profile Section */}
                     <div className="relative h-full flex flex-col items-center justify-center px-6">
                       {/* Profile Image */}
@@ -575,7 +573,7 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
                         <Download className="w-4 h-4" />
                         VCF 포맷 저장
                       </button>
-                      
+
                       <p className="text-xs text-gray-500">
                         Powered by{' '}
                         <span className="inline-flex items-center text-sm bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -599,7 +597,7 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
             </motion.div>
 
             {/* 프로페셔널 플랜 - 취미용 */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -618,14 +616,14 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
               <div className="relative w-[350px] mx-auto">
                 {/* Glow Effect */}
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl blur-2xl opacity-20" />
-                
+
                 {/* Card */}
                 <div className="relative bg-white rounded-3xl overflow-hidden shadow-2xl ring-2 ring-green-500/30">
                   {/* Cover Image / Gradient Header - 그라데이션 */}
                   <div className="relative h-56 bg-gradient-to-br from-green-500 to-blue-500">
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10" />
-                    
+
                     {/* Profile Section */}
                     <div className="relative h-full flex flex-col items-center justify-center px-6">
                       {/* Profile Image */}
@@ -750,7 +748,7 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
                         <Download className="w-4 h-4" />
                         VCF 포맷 저장
                       </button>
-                      
+
                       <p className="text-xs text-gray-500">
                         Powered by{' '}
                         <span className="inline-flex items-center text-sm bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
