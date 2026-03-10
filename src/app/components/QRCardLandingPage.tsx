@@ -39,7 +39,11 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* Hero Section - Modern Minimal */}
-      <section className="relative pt-32 pb-24 px-6 overflow-hidden bg-white">
+      <section className="relative pt-32 pb-24 px-6 overflow-hidden bg-gradient-to-b from-yellow-50 to-orange-50">
+
+        {/* Gradient Orbs */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-yellow-500/20 rounded-full blur-3xl" />
 
         <div className="container mx-auto max-w-6xl relative z-10">
           <motion.div
