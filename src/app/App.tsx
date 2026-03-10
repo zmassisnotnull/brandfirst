@@ -47,8 +47,24 @@ interface UsedService {
   timestamp: number;
 }
 
+const getInitialPage = () => {
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+
+    // 서브도메인별 초기 페이지 분기
+    if (hostname === 'print.brandfirst.ai') return 'home'; // Print 사이트
+    if (hostname === 'qrcard.brandfirst.ai') return 'qrcard-landing'; // QR Card 사이트
+    if (hostname === 'ops.brandfirst.ai') return 'ops-landing'; // Ops 사이트 (추후 컴포넌트 추가 필요)
+    if (hostname === 'admin.brandfirst.ai') return 'admin-landing'; // Admin 사이트 (추후 컴포넌트 추가 필요)
+
+    // 로컬 개발 환경(localhost) 또는 루트 도메인 기본값
+    return 'qrcard-landing';
+  }
+  return 'qrcard-landing';
+};
+
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('qrcard-landing'); // QR Card 랜딩 페이지를 기본으로
+  const [currentPage, setCurrentPage] = useState(getInitialPage()); // 접속 도메인에 따라 기본 페이지 다르게 설정
   const [profileId, setProfileId] = useState<string | null>(null); // 공개 프로필 ID
   const [user, setUser] = useState<any>(null);
   const [session, setSession] = useState<any>(null);
@@ -135,7 +151,7 @@ export default function App() {
     // Check for existing session using Supabase
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      
+
       if (session) {
         setUser(session.user);
         setSession(session);
@@ -144,26 +160,26 @@ export default function App() {
         console.log('✅ 세션 복원:', session.user);
       }
     };
-    
+
     // ✅ URL 파라미터 확인 (공개 프로필)
     const checkUrlParams = () => {
       const params = new URLSearchParams(window.location.search);
       const cardId = params.get('card');
-      
+
       if (cardId) {
         console.log('🔗 공개 프로필 URL 감지:', cardId);
         setProfileId(cardId);
         setCurrentPage('public-profile');
       }
     };
-    
+
     checkSession();
     checkUrlParams();
 
     // 세션 자동 갱신 리스너 추가
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       console.log('🔐 Auth state changed:', event);
-      
+
       if (event === 'TOKEN_REFRESHED') {
         console.log('✅ 토큰이 자동으 갱신되었습니다');
         // localStorage의 세션도 업데이트
@@ -195,18 +211,18 @@ export default function App() {
   const handleLogin = async (user: any) => {
     console.log('✅ 로그인 성공:', user);
     setUser(user);
-    
+
     // 세션 다시 가져오기
     const { data: { session } } = await supabase.auth.getSession();
     console.log('🔐 로그인 후 세션 확인:', session);
-    
+
     if (session) {
       setSession(session);
     }
-    
+
     fetchUserCredits(user.id);
     fetchUserPackage(user.id);
-    
+
     // QR Card 랜딩 페이지에서 로그인한 경우 디지털 명함으로 자동 이동
     if (currentPage === 'qrcard-landing') {
       setCurrentPage('qrcard-digital');
@@ -231,7 +247,7 @@ export default function App() {
       setIsAuthModalOpen(true);
       return;
     }
-    
+
     // 로고 페이지로 직접 이동하는 경우에만 브랜드명 초기화
     // (네비게이션 바에서 직접 클릭하는 경우)
     // 브랜드명이 설정되어 있는 상태에서는 초기화하지 않음
@@ -239,10 +255,10 @@ export default function App() {
       setSelectedBrandName(null);
       setLogoData(null);
     }
-    
+
     setPreviousPage(currentPage); // 이전 페이지 저장
     setCurrentPage(page);
-    
+
     // 페이지 전환 시 스크롤을 최상단으로 이동
     window.scrollTo(0, 0);
   };
@@ -314,18 +330,18 @@ export default function App() {
   const renderPage = () => {
     switch (currentPage) {
       case 'qrcard-landing':
-        return <QRCardLandingPage 
-          onNavigate={handleNavigate} 
-          user={user} 
+        return <QRCardLandingPage
+          onNavigate={handleNavigate}
+          user={user}
           onOpenAuthModal={() => {
             setAuthModalDefaultTab('signup');
             setIsAuthModalOpen(true);
           }}
-        />; 
+        />;
       case 'qrcard-plans':
-        return <QRCardPricingPage 
-          onNavigate={handleNavigate} 
-          user={user} 
+        return <QRCardPricingPage
+          onNavigate={handleNavigate}
+          user={user}
           onOpenAuthModal={() => setIsAuthModalOpen(true)}
           onCreditsUpdate={async (newCredits: number, newPlan: string) => {
             setUserCredits(newCredits);
@@ -340,11 +356,11 @@ export default function App() {
             }
             return session?.access_token || null;
           }}
-        />; 
+        />;
       case 'qrcard-pricing':
-        return <QRCardPricingPage 
-          onNavigate={handleNavigate} 
-          user={user} 
+        return <QRCardPricingPage
+          onNavigate={handleNavigate}
+          user={user}
           onOpenAuthModal={() => setIsAuthModalOpen(true)}
           onCreditsUpdate={async (newCredits: number, newPlan: string) => {
             setUserCredits(newCredits);
@@ -359,11 +375,11 @@ export default function App() {
             }
             return session?.access_token || null;
           }}
-        />; 
+        />;
       case 'qrcard-credit':
-        return <QRCardCreditPage 
-          onNavigate={handleNavigate} 
-          user={user} 
+        return <QRCardCreditPage
+          onNavigate={handleNavigate}
+          user={user}
           onOpenAuthModal={() => setIsAuthModalOpen(true)}
           onCreditsUpdate={async (newCredits: number, newPackage: string) => {
             setUserCredits(newCredits);
@@ -378,9 +394,9 @@ export default function App() {
             }
             return session?.access_token || null;
           }}
-        />; 
+        />;
       case 'home':
-        return <HomePage onNavigate={handleNavigate} />; 
+        return <HomePage onNavigate={handleNavigate} />;
       case 'logo-editor':
         return <LogoEditorPage />;
       case 'card-editor':
@@ -390,12 +406,12 @@ export default function App() {
       case 'logo':
         return (
           <>
-            <LogoCreationPage 
-              onNavigate={handleNavigate} 
-              user={user} 
+            <LogoCreationPage
+              onNavigate={handleNavigate}
+              user={user}
               userCredits={userCredits}
-              onOpenAuthModal={() => setIsAuthModalOpen(true)} 
-              onLogoCreated={handleLogoCreated} 
+              onOpenAuthModal={() => setIsAuthModalOpen(true)}
+              onLogoCreated={handleLogoCreated}
               selectedBrandName={selectedBrandName}
               serviceCategory={logoData?.serviceCategory}
               selectedKeywords={logoData?.keywords}
@@ -403,16 +419,16 @@ export default function App() {
             />
             <ServiceTracker services={usedServices} />
           </>
-        ); 
+        );
       case 'logo-starter':
         return (
           <>
-            <LogoCreationPage 
-              onNavigate={handleNavigate} 
-              user={user} 
+            <LogoCreationPage
+              onNavigate={handleNavigate}
+              user={user}
               userCredits={userCredits}
-              onOpenAuthModal={() => setIsAuthModalOpen(true)} 
-              onLogoCreated={handleLogoCreated} 
+              onOpenAuthModal={() => setIsAuthModalOpen(true)}
+              onLogoCreated={handleLogoCreated}
               selectedBrandName={selectedBrandName}
               serviceCategory={logoData?.serviceCategory}
               selectedKeywords={logoData?.keywords}
@@ -421,7 +437,7 @@ export default function App() {
             />
             <ServiceTracker services={usedServices} />
           </>
-        ); 
+        );
       case 'editor':
         return <EditorPage onNavigate={handleNavigate} />;
       case 'card-choice':
@@ -434,21 +450,21 @@ export default function App() {
             setSelectedContact(null);
           }
           handleNavigate(page);
-        }} onChoiceSelect={handleChoiceSelect} user={user} userCredits={userCredits} onOpenAuthModal={() => setIsAuthModalOpen(true)} onCreditsUpdate={() => user && fetchUserCredits(user.id)} />; 
+        }} onChoiceSelect={handleChoiceSelect} user={user} userCredits={userCredits} onOpenAuthModal={() => setIsAuthModalOpen(true)} onCreditsUpdate={() => user && fetchUserCredits(user.id)} />;
       case 'upgrader':
         return <CardUpgrader onNavigate={handleNavigate} user={user} onOpenAuthModal={() => setIsAuthModalOpen(true)} onDataExtracted={handleDataExtracted} />;
       case 'professional':
-        return <LogoUploader 
-          onNavigate={handleNavigate} 
-          onLogoAnalyzed={handleLogoAnalyzed} 
-          initialLogoUrl={currentLogo} 
+        return <LogoUploader
+          onNavigate={handleNavigate}
+          onLogoAnalyzed={handleLogoAnalyzed}
+          initialLogoUrl={currentLogo}
           initialLogoData={logoData}
           selectedContact={selectedContact}
           onContactBookOpen={() => {
             setContactSelectMode(true);
             handleNavigate('contact');
           }}
-        />; 
+        />;
       case 'card':
         return <CardMaker onNavigate={handleNavigate} user={user} onOpenAuthModal={() => setIsAuthModalOpen(true)} logoUrl={currentLogo} logoData={logoData} recommendedLayouts={recommendedLayouts} editingProfileId={editingProfileId} />;
       case 'digital':
@@ -456,15 +472,15 @@ export default function App() {
       case 'qrcard-digital':
         return <DigitalCard onNavigate={handleNavigate} />;
       case 'box':
-        return <MyBrandingBox onNavigate={handleNavigate} onEditProfile={handleEditProfile} onBrandNameSelect={handleBrandNameSelect} onLogoSelect={handleLogoSelect} />; 
+        return <MyBrandingBox onNavigate={handleNavigate} onEditProfile={handleEditProfile} onBrandNameSelect={handleBrandNameSelect} onLogoSelect={handleLogoSelect} />;
       case 'order':
         return <OrderPage onNavigate={handleNavigate} />;
       case 'contact':
-        return <ContactBook 
+        return <ContactBook
           onNavigate={(page) => {
             setContactSelectMode(false);
             handleNavigate(page);
-          }} 
+          }}
           onContactSelect={(contact) => {
             handleContactSelect(contact);
             setContactSelectMode(false);
@@ -477,17 +493,17 @@ export default function App() {
                 handleNavigate('card');
               }
             }
-          }} 
+          }}
           selectMode={contactSelectMode}
           previousPage={previousPage}
-        />; 
+        />;
       case 'naming':
         return (
           <>
-            <BrandNamingPage 
-              onNavigate={handleNavigate} 
-              user={user} 
-              onOpenAuthModal={() => setIsAuthModalOpen(true)} 
+            <BrandNamingPage
+              onNavigate={handleNavigate}
+              user={user}
+              onOpenAuthModal={() => setIsAuthModalOpen(true)}
               onBrandNameSelect={handleBrandNameSelect}
               userCredits={userCredits}
               userPackage={userPackage}
@@ -498,11 +514,11 @@ export default function App() {
             />
             <ServiceTracker services={usedServices} />
           </>
-        ); 
+        );
       case 'pricing':
-        return <PricingPage 
-          onNavigate={handleNavigate} 
-          user={user} 
+        return <PricingPage
+          onNavigate={handleNavigate}
+          user={user}
           onOpenAuthModal={() => setIsAuthModalOpen(true)}
           onCreditsUpdate={async (newCredits: number, newPackage: string) => {
             setUserCredits(newCredits);
@@ -517,17 +533,17 @@ export default function App() {
             }
             return session?.access_token || null;
           }}
-        />; 
+        />;
       case 'account':
-        return <AccountPage 
-          onNavigate={handleNavigate} 
-          user={user} 
+        return <AccountPage
+          onNavigate={handleNavigate}
+          user={user}
           userCredits={userCredits}
-        />; 
+        />;
       case 'style-showcase':
         return <StyleShowcasePage onNavigate={handleNavigate} />;
       case 'public-profile':
-        return profileId ? <PublicProfile profileId={profileId} /> : <HomePage onNavigate={handleNavigate} />; 
+        return profileId ? <PublicProfile profileId={profileId} /> : <HomePage onNavigate={handleNavigate} />;
       default:
         return <HomePage onNavigate={handleNavigate} />;
     }
@@ -546,7 +562,7 @@ export default function App() {
       {currentPage !== 'public-profile' && (
         isQRCardSite ? (
           <QRCardNavigation
-            currentPage={currentPage} 
+            currentPage={currentPage}
             onNavigate={handleNavigate}
             user={user}
             userCredits={userCredits}
@@ -555,8 +571,8 @@ export default function App() {
             onOpenProfileModal={() => setIsProfileModalOpen(true)}
           />
         ) : (
-          <Navigation 
-            currentPage={currentPage} 
+          <Navigation
+            currentPage={currentPage}
             onNavigate={handleNavigate}
             user={user}
             userCredits={userCredits}
