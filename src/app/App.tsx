@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { CardMaker } from './components/CardMaker';
 import LogoEditorPage from './pages/LogoEditorPage';
 import CardEditorPage from './pages/CardEditorPage';
@@ -92,7 +92,7 @@ export default function App() {
   const protectedPages = ['box', 'digital', 'qrcard-digital', 'order', 'upgrader', 'professional', 'card', 'logo-starter'];
 
   // 사용자 크레딧 조회 함수
-  const fetchUserCredits = async (userId: string) => {
+  const fetchUserCredits = useCallback(async (userId: string) => {
     console.log('💰 fetchUserCredits 호출 - userId:', userId);
     try {
       const apiUrl = `https://${projectId}.supabase.co/functions/v1/make-server-98397747/api/user/credits?userId=${userId}`;
@@ -121,10 +121,10 @@ export default function App() {
     } catch (error) {
       console.error('❌ fetchUserCredits 에러:', error);
     }
-  };
+  }, []);
 
   // 사용자 패키지 조회 함수
-  const fetchUserPackage = async (userId: string) => {
+  const fetchUserPackage = useCallback(async (userId: string) => {
     console.log('📦 fetchUserPackage 호출 - userId:', userId);
     try {
       const response = await fetch(
@@ -145,7 +145,7 @@ export default function App() {
     } catch (error) {
       console.error('Failed to fetch user package:', error);
     }
-  };
+  }, []);
 
   useEffect(() => {
     // Check for existing session using Supabase
@@ -158,6 +158,32 @@ export default function App() {
         fetchUserCredits(session.user.id);
         fetchUserPackage(session.user.id);
         console.log('✅ 세션 복원:', session.user);
+        return;
+      }
+
+      const storedSession = localStorage.getItem('mybrands_session');
+      const storedUser = localStorage.getItem('mybrands_user');
+
+      if (storedSession && storedUser) {
+        try {
+          const parsedSession = JSON.parse(storedSession);
+          const parsedUser = JSON.parse(storedUser);
+
+          if (parsedSession?.access_token && parsedSession?.refresh_token) {
+            await supabase.auth.setSession({
+              access_token: parsedSession.access_token,
+              refresh_token: parsedSession.refresh_token,
+            });
+          }
+
+          setUser(parsedUser);
+          setSession(parsedSession);
+          fetchUserCredits(parsedUser.id);
+          fetchUserPackage(parsedUser.id);
+          console.log('✅ localStorage 세션 복원:', parsedUser);
+        } catch (error) {
+          console.error('❌ localStorage 세션 복원 실패:', error);
+        }
       }
     };
 
@@ -206,7 +232,7 @@ export default function App() {
     return () => {
       subscription.unsubscribe();
     };
-  }, []);
+  }, [fetchUserCredits, fetchUserPackage, supabase]);
 
   const handleLogin = async (user: any) => {
     console.log('✅ 로그인 성공:', user);
