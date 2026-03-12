@@ -50,6 +50,8 @@ interface DraftResponse {
 }
 
 export function CardConceptPickerDouble(props: CardConceptPickerDoubleProps) {
+  const logoFontFamily = 'Inter';
+  const bodyFontFamily = 'Inter';
   const [step, setStep] = useState<Step>('select');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<DraftResponse | null>(null);
@@ -75,6 +77,8 @@ export function CardConceptPickerDouble(props: CardConceptPickerDoubleProps) {
         card_info: props.card_info,
         qr_enabled: props.qr_enabled,
         is_double_sided: props.is_double_sided,
+        logo_font_family: logoFontFamily,
+        body_font_family: bodyFontFamily,
       });
       
       setResult(response);
@@ -99,8 +103,17 @@ export function CardConceptPickerDouble(props: CardConceptPickerDoubleProps) {
     
     setLoading(true);
     try {
-      const payload: { front_card_doc_id: string; back_card_doc_id?: string } = {
+      const payload: {
+        front_card_doc_id: string;
+        back_card_doc_id?: string;
+        logo_font_family: string;
+        body_font_family: string;
+        card_name?: string;
+      } = {
         front_card_doc_id: selectedFront,
+        logo_font_family: logoFontFamily,
+        body_font_family: bodyFontFamily,
+        card_name: props.card_info.name,
       };
       
       if (isDouble && selectedBack) {

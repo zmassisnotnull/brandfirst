@@ -9,6 +9,8 @@ interface PreviewRendererProps {
   draft: CardDraft;
   logoSvgPath?: string;
   qrDataUrl?: string;
+  logoFontFamily?: string;
+  bodyFontFamily?: string;
   className?: string;
 }
 
@@ -22,6 +24,8 @@ export function PreviewRenderer({
   draft,
   logoSvgPath,
   qrDataUrl,
+  logoFontFamily = 'Inter',
+  bodyFontFamily = 'Inter',
   className = '',
 }: PreviewRendererProps) {
   const { layout, theme } = draft;
@@ -44,6 +48,7 @@ export function PreviewRenderer({
       className={className}
       style={{ backgroundColor: theme.colors.bg }}
     >
+      <title>Business card preview</title>
       {/* Bleed 영역 (연한 회색) */}
       <rect
         x={0}
@@ -91,6 +96,7 @@ export function PreviewRenderer({
             <g key={el.id}>
               <rect x={x} y={y} width={w} height={h} fill="none" stroke="#E5E5E5" strokeWidth={0.5} />
               <svg x={x} y={y} width={w} height={h} preserveAspectRatio="xMidYMid meet">
+                <title>Logo preview</title>
                 <path d={logoSvgPath} fill={el.style?.color ?? theme.colors.accent} />
               </svg>
             </g>
@@ -140,13 +146,13 @@ export function PreviewRenderer({
                 
                 return (
                   <text
-                    key={idx}
+                    key={`${el.id}-${line}-${textX}-${textY}`}
                     x={textX}
                     y={textY}
                     fontSize={fontSize}
                     fill={el.style?.color ?? theme.colors.text}
                     textAnchor={textAnchor}
-                    fontFamily={el.style?.font === 'logo' ? 'var(--font-logo)' : 'var(--font-body)'}
+                    fontFamily={el.style?.font === 'logo' ? `${logoFontFamily}, sans-serif` : `${bodyFontFamily}, sans-serif`}
                   >
                     {line}
                   </text>

@@ -9,18 +9,84 @@ import namingRouter from "./naming.tsx";
 import logoRouter from "./logo.tsx";
 import digitalCardRouter from "./digital-card.tsx";
 
-const createMockPdfDataUrl = async () => {
-  const { PDFDocument, StandardFonts, rgb } = await import('npm:pdf-lib@1.17.1');
-  const pdfDoc = await PDFDocument.create();
-  const page = pdfDoc.addPage([300, 180]);
-  const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+const draftMetaByDocId = new Map<string, { logoFontFamily: string; bodyFontFamily: string; cardName?: string }>();
 
-  page.drawText('MyBrands Print PDF', {
+const normalizeFamily = (family: string): string => family.trim().replace(/\s+/g, ' ');
+
+const resolveGoogleFontWoff2Url = async (family: string, weights: number[]): Promise<string | null> => {
+  const encodedFamily = normalizeFamily(family).replace(/ /g, '+');
+  const weightList = Array.from(new Set(weights)).sort((a, b) => a - b).join(';');
+  const cssUrl = `https://fonts.googleapis.com/css2?family=${encodedFamily}:wght@${weightList}&display=swap`;
+  const cssResponse = await fetch(cssUrl, {
+    headers: {
+      'user-agent': 'Mozilla/5.0',
+    },
+  });
+
+  if (!cssResponse.ok) {
+    return null;
+  }
+
+  const css = await cssResponse.text();
+  const matches = Array.from(css.matchAll(/url\((https:[^)]+\.woff2)\)/g));
+  if (matches.length === 0) {
+    return null;
+  }
+
+  return matches[matches.length - 1][1];
+};
+
+const createMockPdfDataUrl = async (options?: {
+  logoFontFamily?: string;
+  bodyFontFamily?: string;
+  cardName?: string;
+}) => {
+  const { PDFDocument, StandardFonts, rgb } = await import('npm:pdf-lib@1.17.1');
+  const fontkit = (await import('npm:@pdf-lib/fontkit@1.1.1')).default;
+  const pdfDoc = await PDFDocument.create();
+  pdfDoc.registerFontkit(fontkit);
+  const page = pdfDoc.addPage([300, 180]);
+
+  let logoFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+  let bodyFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+  const logoFamily = options?.logoFontFamily ?? 'Inter';
+  const bodyFamily = options?.bodyFontFamily ?? 'Inter';
+
+  try {
+    const logoFontUrl = await resolveGoogleFontWoff2Url(logoFamily, [600, 700]);
+    if (logoFontUrl) {
+      const bytes = await fetch(logoFontUrl).then((r) => r.arrayBuffer());
+      logoFont = await pdfDoc.embedFont(bytes);
+    }
+  } catch (error) {
+    console.error('mock pdf logo font load failed:', error);
+  }
+
+  try {
+    const bodyFontUrl = await resolveGoogleFontWoff2Url(bodyFamily, [400, 500]);
+    if (bodyFontUrl) {
+      const bytes = await fetch(bodyFontUrl).then((r) => r.arrayBuffer());
+      bodyFont = await pdfDoc.embedFont(bytes);
+    }
+  } catch (error) {
+    console.error('mock pdf body font load failed:', error);
+  }
+
+  page.drawText(options?.cardName || 'MyBrands Print PDF', {
     x: 48,
-    y: 94,
+    y: 112,
     size: 18,
-    font,
+    font: logoFont,
     color: rgb(0.1, 0.1, 0.1),
+  });
+
+  page.drawText(`${logoFamily} / ${bodyFamily}`, {
+    x: 48,
+    y: 82,
+    size: 10,
+    font: bodyFont,
+    color: rgb(0.35, 0.35, 0.35),
   });
 
   const bytes = await pdfDoc.save();
@@ -28,15 +94,27 @@ const createMockPdfDataUrl = async () => {
   return `data:application/pdf;base64,${base64}`;
 };
 
-const createDraftEntries = async () => {
-  const proofUrl = await createMockPdfDataUrl();
-  return ['A', 'B', 'C'].map((variant) => ({
+const createDraftEntries = async (options?: {
+  logoFontFamily?: string;
+  bodyFontFamily?: string;
+  cardName?: string;
+}) => {
+  const proofUrl = await createMockPdfDataUrl(options);
+  return ['A', 'B', 'C'].map((variant) => {
+    const cardDocId = crypto.randomUUID();
+    draftMetaByDocId.set(cardDocId, {
+      logoFontFamily: options?.logoFontFamily ?? 'Inter',
+      bodyFontFamily: options?.bodyFontFamily ?? 'Inter',
+      cardName: options?.cardName,
+    });
+    return {
     variant,
-    card_doc_id: crypto.randomUUID(),
+    card_doc_id: cardDocId,
     proof_signed_url: proofUrl,
     omitted_fields: [],
     preflight: { ok: true, errors: [] as string[] },
-  }));
+    };
+  });
 };
 
 const registerPrintEndpoints = (slug: string) => {
@@ -44,8 +122,14 @@ const registerPrintEndpoints = (slug: string) => {
     try {
       const body = await c.req.json();
       const isDoubleSided = Boolean(body?.is_double_sided ?? body?.is_double_sided_override);
-      const frontDrafts = await createDraftEntries();
-      const backDrafts = isDoubleSided ? await createDraftEntries() : undefined;
+      const logoFontFamily = body?.logo_font_family || 'Inter';
+      const bodyFontFamily = body?.body_font_family || 'Inter';
+      const cardName = body?.card_info?.name;
+
+      const frontDrafts = await createDraftEntries({ logoFontFamily, bodyFontFamily, cardName });
+      const backDrafts = isDoubleSided
+        ? await createDraftEntries({ logoFontFamily, bodyFontFamily, cardName })
+        : undefined;
 
       return c.json({
         draft_group_id: crypto.randomUUID(),
@@ -70,10 +154,16 @@ const registerPrintEndpoints = (slug: string) => {
         return c.json({ error: 'front_card_doc_id가 필요합니다.' }, 400);
       }
 
+      const draftMeta = draftMetaByDocId.get(frontCardDocId) || {
+        logoFontFamily: body?.logo_font_family || 'Inter',
+        bodyFontFamily: body?.body_font_family || 'Inter',
+        cardName: body?.card_name,
+      };
+
       return c.json({
         chosen_card_doc: { id: frontCardDocId },
         print_export: { id: crypto.randomUUID() },
-        signed_url: await createMockPdfDataUrl(),
+        signed_url: await createMockPdfDataUrl(draftMeta),
         deleted_drafts: [crypto.randomUUID(), crypto.randomUUID()],
       });
     } catch (error) {

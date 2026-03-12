@@ -1737,22 +1737,47 @@ export const combineSingleLogo = async (
   
   try {
     const cleanedSymbolBytes = await removeBackground(symbolUrl);
-    const symbolBase64 = encodeBase64(cleanedSymbolBytes);
-    const logotypeUrlEscaped = logotype.url.replace(/&/g, '&amp;');
+    const sharp = (await import('npm:sharp@0.33.2')).default;
+    const normalizedSymbolBuffer = await sharp(Buffer.from(cleanedSymbolBytes))
+      .ensureAlpha()
+      .trim({ threshold: 10 })
+      .resize(1024, 1024, {
+        fit: 'contain',
+        background: { r: 0, g: 0, b: 0, alpha: 0 },
+      })
+      .png()
+      .toBuffer();
+    const symbolBase64 = encodeBase64(new Uint8Array(normalizedSymbolBuffer));
+
+    const logotypePrefix = 'data:image/svg+xml;base64,';
+    if (!logotype.url.startsWith(logotypePrefix)) {
+      throw new Error('Invalid logotype format: expected svg data url');
+    }
+
+    const logotypeSvgRaw = new TextDecoder().decode(
+      decodeBase64(logotype.url.replace(logotypePrefix, ''))
+    );
+    const sanitizedLogotypeSvg = logotypeSvgRaw.replace(/<\?xml[^>]*\?>/g, '').trim();
     
     // 레이아웃별 SVG 생성
     let combinedSvg = '';
     if (layout === 'horizontal-left') {
-      // 좌우 배치: 심볼 왼쪽 + 텍스트 오른쪽
+      const embeddedLogotypeSvg = sanitizedLogotypeSvg.replace(
+        /<svg[^>]*>/,
+        '<svg x="700" y="170" width="1150" height="460" viewBox="0 0 1400 1024">'
+      );
       combinedSvg = `<svg width="2000" height="800" viewBox="0 0 2000 800" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <image x="120" y="140" width="520" height="520" href="data:image/png;base64,${symbolBase64}" xlink:href="data:image/png;base64,${symbolBase64}" preserveAspectRatio="xMidYMid meet"/>
-        <image x="700" y="170" width="1150" height="460" href="${logotypeUrlEscaped}" xlink:href="${logotypeUrlEscaped}" preserveAspectRatio="xMidYMid meet"/>
+        ${embeddedLogotypeSvg}
       </svg>`;
     } else {
-      // 상하 배치: 심볼 위 + 텍스트 아래
+      const embeddedLogotypeSvg = sanitizedLogotypeSvg.replace(
+        /<svg[^>]*>/,
+        '<svg x="140" y="780" width="920" height="460" viewBox="0 0 1400 1024">'
+      );
       combinedSvg = `<svg width="1200" height="1400" viewBox="0 0 1200 1400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <image x="300" y="100" width="600" height="600" href="data:image/png;base64,${symbolBase64}" xlink:href="data:image/png;base64,${symbolBase64}" preserveAspectRatio="xMidYMid meet"/>
-        <image x="140" y="780" width="920" height="460" href="${logotypeUrlEscaped}" xlink:href="${logotypeUrlEscaped}" preserveAspectRatio="xMidYMid meet"/>
+        ${embeddedLogotypeSvg}
       </svg>`;
     }
     

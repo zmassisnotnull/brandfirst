@@ -1497,7 +1497,7 @@ export function LogoCreationPage({
                       disabled={selectedLogotypeIndex === null}
                       className="px-12 h-14 text-lg bg-gradient-to-r from-purple-600 to-pink-600"
                     >
-                      가로/세로 조합 2개 보기
+                      가로/세로 조합 생성
                       <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
                   </div>
@@ -1566,11 +1566,18 @@ export function LogoCreationPage({
                       }}
                     >
                       {typeof logo === 'object' && logo.url ? (
-                        <img 
-                          src={logo.url} 
-                          alt={`Logo ${index + 1}`}
-                          className="max-w-full max-h-full object-contain p-4"
-                        />
+                        logo.url.startsWith('data:image/svg+xml;base64,') ? (
+                          <LogoSvgRenderer
+                            svgDataUrl={logo.url}
+                            className="w-full h-full flex items-center justify-center p-4"
+                          />
+                        ) : (
+                          <img
+                            src={logo.url}
+                            alt={`Logo ${index + 1}`}
+                            className="max-w-full max-h-full object-contain p-4"
+                          />
+                        )
                       ) : <div className="text-gray-400">로고 로딩 중...</div>}
                     </div>
 
@@ -1663,6 +1670,12 @@ export function LogoCreationPage({
                     duotone={generatedLogos[previewIndex].isDuotone || false}
                     secondaryColor={generatedLogos[previewIndex].secondaryColor}
                     letterSpacing={generatedLogos[previewIndex].spacing || '0'}
+                  />
+                ) : typeof generatedLogos[previewIndex] === 'object' &&
+                  generatedLogos[previewIndex].url?.startsWith('data:image/svg+xml;base64,') ? (
+                  <LogoSvgRenderer
+                    svgDataUrl={generatedLogos[previewIndex].url}
+                    className="w-full h-full flex items-center justify-center"
                   />
                 ) : null}
               </div>

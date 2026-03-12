@@ -21,6 +21,8 @@ export default function AutoCardMakerPage({ onNavigate }: AutoCardMakerPageProps
   const [loading, setLoading] = useState(false);
   const [drafts, setDrafts] = useState<CardDraft[]>([]);
   const [qrDataUrl, setQrDataUrl] = useState<string>('');
+  const logoFontFamily = 'Inter';
+  const bodyFontFamily = 'Inter';
   
   // Mock data - 실제로는 props나 context에서 받아옴
   const logoAspect = 2.8; // w/h ratio
@@ -41,16 +43,16 @@ export default function AutoCardMakerPage({ onNavigate }: AutoCardMakerPageProps
       }
       
       // 폰트 로드 대기
-      await ensureFontLoaded('Inter'); // Logo font
-      await ensureFontLoaded('Inter'); // Body font
+      await ensureFontLoaded(logoFontFamily);
+      await ensureFontLoaded(bodyFontFamily);
       
       // 자동 3시안 생성
       const generated = await autoGenerate3Drafts({
         cardInfo: info,
         qrEnabled,
         logoAspect,
-        logoFontFamily: 'Inter',
-        bodyFontFamily: 'Inter',
+        logoFontFamily,
+        bodyFontFamily,
       });
       
       console.log('Generated drafts:', generated);
@@ -166,6 +168,8 @@ export default function AutoCardMakerPage({ onNavigate }: AutoCardMakerPageProps
             drafts={drafts}
             logoSvgPath={logoSvgPath}
             qrDataUrl={qrDataUrl}
+            logoFontFamily={logoFontFamily}
+            bodyFontFamily={bodyFontFamily}
             onRegenerate={handleRegenerate}
             onComplete={handleComplete}
           />
@@ -181,6 +185,7 @@ export default function AutoCardMakerPage({ onNavigate }: AutoCardMakerPageProps
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
+                  <title>Completion check icon</title>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -199,6 +204,7 @@ export default function AutoCardMakerPage({ onNavigate }: AutoCardMakerPageProps
               
               <div className="flex gap-3 justify-center">
                 <button
+                  type="button"
                   onClick={() => onNavigate?.('box')}
                   className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                 >
@@ -206,6 +212,7 @@ export default function AutoCardMakerPage({ onNavigate }: AutoCardMakerPageProps
                 </button>
                 
                 <button
+                  type="button"
                   onClick={() => handleRegenerate()}
                   className="px-6 py-3 border rounded-lg hover:bg-muted"
                 >

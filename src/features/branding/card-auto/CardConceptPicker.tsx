@@ -15,11 +15,14 @@ import { PreviewRenderer } from './PreviewRenderer';
 import { selectAndLockCard, createFulfillmentJob } from './api';
 import { generatePrintPdf, pdfBytesToBlobUrl, downloadPdf } from './pdfGenerator';
 import { FulfillmentForm, type FulfillmentData } from './FulfillmentForm';
+import { resolveGoogleFontWoff2Url } from './fontResolver';
 
 interface CardConceptPickerProps {
   drafts: CardDraft[];
   logoSvgPath?: string;
   qrDataUrl?: string;
+  logoFontFamily?: string;
+  bodyFontFamily?: string;
   onRegenerate?: () => void;
   onComplete?: () => void;
 }
@@ -30,6 +33,8 @@ export function CardConceptPicker({
   drafts,
   logoSvgPath,
   qrDataUrl,
+  logoFontFamily = 'Inter',
+  bodyFontFamily = 'Inter',
   onRegenerate,
   onComplete,
 }: CardConceptPickerProps) {
@@ -79,11 +84,18 @@ export function CardConceptPicker({
     try {
       // 1) Print PDF 생성 (클라이언트에서)
       toast.info('인쇄용 PDF 생성 중...');
+
+      const [logoFontUrl, bodyFontUrl] = await Promise.all([
+        resolveGoogleFontWoff2Url(logoFontFamily, [500, 700]),
+        resolveGoogleFontWoff2Url(bodyFontFamily, [400, 500]),
+      ]);
       
       const pdfBytes = await generatePrintPdf({
         draft,
         logoSvgPath,
         qrDataUrl,
+        logoFontUrl,
+        bodyFontUrl,
       });
       
       const pdfUrl = pdfBytesToBlobUrl(pdfBytes);
@@ -268,6 +280,8 @@ export function CardConceptPicker({
                     draft={draft}
                     logoSvgPath={logoSvgPath}
                     qrDataUrl={qrDataUrl}
+                    logoFontFamily={logoFontFamily}
+                    bodyFontFamily={bodyFontFamily}
                     className="w-full h-full"
                   />
                 </div>
