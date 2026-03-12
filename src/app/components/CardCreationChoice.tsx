@@ -183,7 +183,11 @@ export function CardCreationChoice({
         onNavigate('professional');
       } else if (pendingChoice === 'starter') {
         onChoiceSelect('starter');
-        onNavigate('logo-starter');
+        if (selectedLogoUrl) {
+          onNavigate('professional');
+        } else {
+          onNavigate('logo-starter');
+        }
       }
     } catch (error) {
       console.error('Credit deduction error:', error);
