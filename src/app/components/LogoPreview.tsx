@@ -88,14 +88,18 @@ export function LogoPreview({
 
   const logoUrl = resolveLogoUrl(logo.logoUrl);
   const previewText = rawText ?? logo.brandName;
-  const hasFontPreview = Boolean(previewText && (logo.fontFamily || logo.font));
+  const rawFont = logo.fontFamily || logo.font || 'Inter';
+  // 호환성: 과거에 저장된 로고의 경우 font 필드에 'Noto Sans KR Bold' 처럼 weight가 포함되어 있어
+  // Google Fonts API 호출이 실패하는 문제를 방지하기 위해 weight 문자열 제거
+  const cleanFont = rawFont.replace(/\s+(Regular|SemiBold|Bold|ExtraBold|Black)$/i, '');
+  const hasFontPreview = Boolean(previewText && cleanFont);
   const isSvgDataUrl = logoUrl.startsWith('data:image/svg+xml;base64,');
 
   if (hasFontPreview && previewText) {
     return (
       <div className={className} style={{ backgroundColor }}>
         <FontPreview
-          font={logo.fontFamily || logo.font || 'Inter'}
+          font={cleanFont}
           text={rawText || transformText(previewText, logo.transform)}
           weight={logo.weight || '700'}
           color={logo.fontColor || logo.color || '#2563EB'}

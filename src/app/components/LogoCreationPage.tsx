@@ -121,7 +121,17 @@ export function LogoCreationPage({
   const initialStep = startDirectly ? 1 : 0;
   const [currentStep, setCurrentStep] = useState(initialStep);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [generatedLogos, setGeneratedLogos] = useState<Array<{ url: string; font: string }>>([]);
+  const [generatedLogos, setGeneratedLogos] = useState<Array<{ 
+    url: string; 
+    font: string;
+    fontFamily?: string;
+    color?: string;
+    weight?: string;
+    spacing?: string;
+    transform?: string;
+    isDuotone?: boolean;
+    secondaryColor?: string;
+  }>>([]);
   const [selectedLogo, setSelectedLogo] = useState(0);
 
   // User selections
@@ -146,7 +156,17 @@ export function LogoCreationPage({
 
   // Professional 플랜 전용 state
   const [symbolMarks, setSymbolMarks] = useState<string[]>([]);
-  const [logotypes, setLogotypes] = useState<Array<{ url: string; font: string }>>([]);
+  const [logotypes, setLogotypes] = useState<Array<{ 
+    url: string; 
+    font: string;
+    fontFamily?: string;
+    color?: string;
+    weight?: string;
+    spacing?: string;
+    transform?: string;
+    isDuotone?: boolean;
+    secondaryColor?: string;
+  }>>([]);
   const [selectedSymbolIndex, setSelectedSymbolIndex] = useState<number | null>(null);
   const [selectedLogotypeIndex, setSelectedLogotypeIndex] = useState<number | null>(null);
   const [subStep, setSubStep] = useState<6.1 | 6.2 | null>(null); // Step 6의 서브 단계
@@ -756,6 +776,7 @@ export function LogoCreationPage({
         brandName: customBusiness.trim(),
         logoType,
         font: typeof logo === 'object' ? logo.font : '',
+        fontFamily: typeof logo === 'object' ? logo.fontFamily : '',
         fontColor: typeof logo === 'object' ? logo.color : '',
         weight: typeof logo === 'object' ? logo.weight : '',
         spacing: typeof logo === 'object' ? logo.spacing : '',

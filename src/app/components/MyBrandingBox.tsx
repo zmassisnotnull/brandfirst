@@ -37,6 +37,7 @@ interface SavedLogo {
   color: string;
   style: string;
   font?: string; // 폰트 정보 추가
+  fontFamily?: string;
   fontColor?: string; // 실제 폰트 색상 hex 값
   weight?: string;
   spacing?: string;
