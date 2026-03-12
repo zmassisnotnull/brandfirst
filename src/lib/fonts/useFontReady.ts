@@ -24,11 +24,13 @@ export async function ensureFontReady(
         const link = document.createElement('link');
         link.id = fontId;
         link.rel = 'stylesheet';
-        // 100~900까지 주요 웨이트 요청
-        link.href = `https://fonts.googleapis.com/css2?family=${familyStr}:wght@300;400;500;600;700;800;900&display=swap`;
+        // Request basic 400 and 700 weights to avoid 400 errors for fonts that don't support thin/black weights
+        // Some fonts might only have 400, but requesting 400;700 is generally safe enough for most Google Fonts.
+        // For maximum safety, we just request without specific weights so Google serves the default:
+        link.href = `https://fonts.googleapis.com/css2?family=${familyStr}:wght@400;700&display=swap`;
         document.head.appendChild(link);
         
-        // 브라우저가 CSS를 다운로드하고 파싱할 시간을 약간 부여
+        // ब्र라우저가 CSS를 다운로드하고 파싱할 시간을 약간 부여
         await new Promise(resolve => setTimeout(resolve, 50));
       }
     }
