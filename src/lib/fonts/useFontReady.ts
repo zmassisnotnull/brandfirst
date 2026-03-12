@@ -25,9 +25,8 @@ export async function ensureFontReady(
         link.id = fontId;
         link.rel = 'stylesheet';
         // Request basic 400 and 700 weights to avoid 400 errors for fonts that don't support thin/black weights
-        // Some fonts might only have 400, but requesting 400;700 is generally safe enough for most Google Fonts.
         // For maximum safety, we just request without specific weights so Google serves the default:
-        link.href = `https://fonts.googleapis.com/css2?family=${familyStr}:wght@400;700&display=swap`;
+        link.href = `https://fonts.googleapis.com/css2?family=${familyStr}&display=swap`;
         document.head.appendChild(link);
         
         // ब्र라우저가 CSS를 다운로드하고 파싱할 시간을 약간 부여

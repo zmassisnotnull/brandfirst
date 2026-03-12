@@ -95,7 +95,7 @@ export function LogoPreview({
     return (
       <div className={className} style={{ backgroundColor }}>
         <FontPreview
-          font={logo.fontFamily || logo.font?.split(' ')[0] || 'Inter'}
+          font={logo.fontFamily || logo.font || 'Inter'}
           text={rawText || transformText(previewText, logo.transform)}
           weight={logo.weight || '700'}
           color={logo.fontColor || logo.color || '#2563EB'}
