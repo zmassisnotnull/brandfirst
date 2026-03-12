@@ -31,21 +31,41 @@ interface PDFGeneratorOptions {
  */
 function drawSimpleSvgPath(
   page: PDFPage,
-  pathData: string,
+  pathDataInput: string,
   x: number,
   y: number,
   width: number,
   height: number,
   color: { r: number; g: number; b: number }
 ) {
-  // 간단한 박스로 fallback (실제로는 SVG path parser 필요)
-  page.drawRectangle({
-    x,
-    y,
-    width,
-    height,
-    color: rgb(color.r, color.g, color.b),
-  });
+  const svgTagMatch = pathDataInput.match(/<path[^>]*d=["']([^"']+)["']/i);
+  const pathData = svgTagMatch?.[1] ?? pathDataInput;
+
+  try {
+    const baseSize = 100;
+    const scale = Math.max(0.01, Math.min(width, height) / baseSize);
+    const drawW = baseSize * scale;
+    const drawH = baseSize * scale;
+    const drawX = x + (width - drawW) / 2;
+    const drawY = y + (height - drawH) / 2;
+
+    page.drawSvgPath(pathData, {
+      x: drawX,
+      y: drawY,
+      scale,
+      color: rgb(color.r, color.g, color.b),
+      borderWidth: 0,
+    });
+  } catch (error) {
+    console.error('SVG path render error, using fallback rectangle:', error);
+    page.drawRectangle({
+      x,
+      y,
+      width,
+      height,
+      color: rgb(color.r, color.g, color.b),
+    });
+  }
 }
 
 /**
@@ -109,9 +129,26 @@ export async function generatePrintPdf(options: PDFGeneratorOptions): Promise<Ui
     color: rgb(bgColor.r, bgColor.g, bgColor.b),
   });
   
-  // 폰트 로드 (기본 폰트 사용, 실제로는 custom font URL에서 로드)
-  const logoFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-  const bodyFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  let logoFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+  let bodyFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+  if (options.logoFontUrl) {
+    try {
+      const logoFontBytes = await fetch(options.logoFontUrl).then((r) => r.arrayBuffer());
+      logoFont = await pdfDoc.embedFont(logoFontBytes);
+    } catch (error) {
+      console.error('Failed to load logo font URL, using fallback font:', error);
+    }
+  }
+
+  if (options.bodyFontUrl) {
+    try {
+      const bodyFontBytes = await fetch(options.bodyFontUrl).then((r) => r.arrayBuffer());
+      bodyFont = await pdfDoc.embedFont(bodyFontBytes);
+    } catch (error) {
+      console.error('Failed to load body font URL, using fallback font:', error);
+    }
+  }
   
   // QR 코드 생성 (필요시)
   let qrImage = null;

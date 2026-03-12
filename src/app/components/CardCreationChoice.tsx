@@ -4,6 +4,7 @@ import { Card } from './ui/card';
 import { Footer } from './Footer';
 import { CreditConfirmModal } from './CreditConfirmModal';
 import { CheckCircle2, Clock } from 'lucide-react';
+import { LogoPreview } from './LogoPreview';
 import { projectId, publicAnonKey } from '../../../utils/supabase/info';
 import { getSupabaseClient } from '../../../utils/supabase/client';
 import { useState } from 'react';
@@ -15,9 +16,20 @@ interface CardCreationChoiceProps {
   userCredits?: number;
   onOpenAuthModal?: () => void;
   onCreditsUpdate?: () => void; // 크레딧 갱신 콜백
+  selectedLogoUrl?: string | null;
+  selectedLogoData?: any;
 }
 
-export function CardCreationChoice({ onNavigate, onChoiceSelect, user, userCredits, onOpenAuthModal, onCreditsUpdate }: CardCreationChoiceProps) {
+export function CardCreationChoice({
+  onNavigate,
+  onChoiceSelect,
+  user,
+  userCredits,
+  onOpenAuthModal,
+  onCreditsUpdate,
+  selectedLogoUrl,
+  selectedLogoData,
+}: CardCreationChoiceProps) {
   const [showCreditModal, setShowCreditModal] = useState(false);
   const [pendingChoice, setPendingChoice] = useState<'starter' | 'professional' | 'upgrader' | null>(null);
 
@@ -194,6 +206,24 @@ export function CardCreationChoice({ onNavigate, onChoiceSelect, user, userCredi
             </p>
           </div>
 
+          {selectedLogoUrl && (
+            <Card className="p-5 mb-8 border-2 border-emerald-200 bg-emerald-50/40">
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 bg-white rounded-lg border flex items-center justify-center overflow-hidden shrink-0">
+                  <LogoPreview
+                    logo={{ ...selectedLogoData, logoUrl: selectedLogoUrl }}
+                    className="w-full h-full flex items-center justify-center"
+                    imageClassName="w-full h-full object-contain"
+                  />
+                </div>
+                <div className="text-left">
+                  <p className="text-sm font-semibold text-emerald-700">선택한 로고가 적용됩니다</p>
+                  <p className="text-base font-bold text-gray-900">{selectedLogoData?.brandName || '선택된 로고'}</p>
+                </div>
+              </div>
+            </Card>
+          )}
+
           {/* Choice Cards */}
           <div className="grid md:grid-cols-3 gap-6 mb-8">
             {choices.map((choice) => (
@@ -231,8 +261,8 @@ export function CardCreationChoice({ onNavigate, onChoiceSelect, user, userCredi
 
                   {/* Features List */}
                   <ul className="space-y-2 mb-6">
-                    {choice.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-sm text-gray-600">
+                    {choice.features.map((feature) => (
+                      <li key={`${choice.id}-${feature}`} className="flex items-start gap-2 text-sm text-gray-600">
                         <span className={`mt-0.5`}>•</span>
                         <span>{feature}</span>
                       </li>

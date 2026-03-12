@@ -121,6 +121,33 @@ export function CardConceptPickerDouble(props: CardConceptPickerDoubleProps) {
       setLoading(false);
     }
   };
+
+  const handleDownload = async () => {
+    if (!printPdfUrl) {
+      toast.error('다운로드할 PDF가 없습니다.');
+      return;
+    }
+
+    try {
+      const response = await fetch(printPdfUrl);
+      if (!response.ok) {
+        throw new Error('PDF 다운로드에 실패했습니다.');
+      }
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `MyBrands_Print_${isDouble ? 'Double' : 'Single'}.pdf`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      toast.success('PDF 다운로드 완료!');
+    } catch (error: any) {
+      console.error('Download error:', error);
+      toast.error(error.message || 'PDF 다운로드 중 오류가 발생했습니다.');
+    }
+  };
   
   // 출고 요청
   const handleFulfillmentSubmit = async (data: FulfillmentData) => {
@@ -343,13 +370,19 @@ export function CardConceptPickerDouble(props: CardConceptPickerDoubleProps) {
           {/* PDF 미리보기 */}
           <TabsContent value="preview" className="space-y-4 mt-4">
             <Card className="overflow-hidden">
-              <div className="aspect-[9/5] bg-muted flex items-center justify-center">
-                <FileText className="w-16 h-16 text-muted-foreground" />
+              <div className="aspect-[9/5] bg-muted">
+                {printPdfUrl ? (
+                  <iframe title="print-pdf" src={printPdfUrl} className="w-full h-full" />
+                ) : (
+                  <div className="h-full flex items-center justify-center">
+                    <FileText className="w-16 h-16 text-muted-foreground" />
+                  </div>
+                )}
               </div>
             </Card>
             
             <div className="flex gap-3 justify-center">
-              <Button size="lg">
+              <Button size="lg" onClick={handleDownload} disabled={!printPdfUrl}>
                 <Download className="w-4 h-4 mr-2" />
                 PDF 다운로드
               </Button>

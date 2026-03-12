@@ -154,3 +154,71 @@
   - `GET /assets/index-CHS9bmQz.js` -> `200`.
   - `GET /assets/index-mR83XKj6.css` -> `200`.
 - Interpretation: deployment is reachable and core static assets are served/cached by Cloudflare; full interactive browser preview requires a runtime with installed browser binary.
+
+## Print Feature Gap Analysis
+- `src/features/branding/card-auto/api.ts`: `MOCK_MODE = true` keeps print flows in mock mode; real Edge Function calls for auto-generate/select-and-lock/fulfillment are not active.
+- `supabase/functions/server/`: no handlers found for `/api/card/auto-generate`, `/api/card/select-and-lock`, or `/api/fulfillment/create` (docs mention these endpoints but server routes are missing).
+- `src/features/branding/card-auto/CardConceptPickerDouble.tsx`: print PDF preview tab shows a placeholder (icon) and download button has no handler; `printPdfUrl` is never rendered or downloaded.
+- `src/features/branding/card-auto/CardConceptPicker.tsx`: PDF is generated client-side and stored as a blob URL; `export_id` is mocked and PDF is not persisted to storage or linked to backend exports.
+- `src/features/branding/card-auto/pdfGenerator.ts`: SVG rendering uses `drawSimpleSvgPath` fallback (rectangle) and does not parse real SVG paths; `logoFontUrl`/`bodyFontUrl` options are unused and only standard fonts are embedded.
+- `src/app/pages/AutoCardMakerPageV2.tsx`: project/typography/logo IDs are random UUIDs; production flow will need real IDs from persisted entities.
+- `src/app/App.tsx`: `print.brandfirst.ai` routes to `home` with no dedicated print site page; print subdomain is effectively a placeholder.
+- `src/features/branding/card-auto/CardConceptPicker.tsx`: fulfillment flow persists selected card metadata to `localStorage` only; no server-side record for print jobs.
+
+## Print Remediation Progress
+- Added Edge Function routes for print flow on both slugs (`make-server-98397747`, `make-server-45024be7`):
+  - `POST /api/card/auto-generate`
+  - `POST /api/card/select-and-lock`
+  - `POST /api/fulfillment/create`
+- Updated frontend print API base wiring in `src/features/branding/card-auto/api.ts`:
+  - default base URL now resolves from Supabase `projectId`
+  - auth headers now include session token when available
+  - mock mode changed to explicit opt-in (`VITE_PRINT_MOCK_MODE=true` in dev only)
+- Fixed double-sided picker print UX in `src/features/branding/card-auto/CardConceptPickerDouble.tsx`:
+  - preview tab now renders real PDF in iframe when URL exists
+  - download button now fetches and saves PDF
+- Updated single-sided picker in `src/features/branding/card-auto/CardConceptPicker.tsx` to call `selectAndLockCard` and use returned `print_export.id`.
+- Improved PDF generator in `src/features/branding/card-auto/pdfGenerator.ts`:
+  - supports `<svg ...><path d="..."/></svg>` extraction and `drawSvgPath` rendering attempt
+  - loads custom font URLs (`logoFontUrl`, `bodyFontUrl`) with fallback handling
+- Updated print subdomain initial page routing (`src/app/App.tsx`) to `auto-card-v2` and added render case for `AutoCardMakerPageV2`.
+- Replaced volatile random IDs in `src/app/pages/AutoCardMakerPageV2.tsx` with stable placeholders to prevent per-render churn.
+- Verification run completed:
+  - LSP diagnostics: no issues on all modified files
+  - `npm run build`: success (existing chunk-size warning unchanged)
+
+## Unified Preview Operations (Logo Editor Integration)
+- Extended shared preview contract in `src/app/components/LogoPreview.tsx`:
+  - supports `renderResult` (`svgPathD`, `viewBox`, `color`) for server-rendered path previews
+  - supports `rawText`, `fontFeatureSettings`, `rotateDeg`, and `backgroundColor` for live editor compatibility
+  - adds inline SVG `<title>` for accessibility-safe rendered previews
+- Extended `src/app/components/FontPreview.tsx`:
+  - supports optional `fontFeatureSettings` and `rotateDeg`
+  - allows editor flow to preserve kerning/ligature and rotation behavior through shared renderer
+- Integrated logo editor preview path to shared renderer in `src/features/branding/logo-editor/LogoPreview.tsx`:
+  - live mode now routes through shared `LogoPreview` with mapped editor state/font values
+  - rendered mode now routes through shared `LogoPreview` using `renderResult`
+  - existing empty-font/empty-text guard states preserved
+- Hardened fallback/compatibility behavior:
+  - centralized fallback message path for non-renderable logo inputs
+  - removed divergent live/rendered branch code that previously operated separately in logo editor
+- Verification run completed:
+  - LSP diagnostics: no issues on all modified files
+  - `npm run build`: success (existing chunk-size warning unchanged)
+
+## Logo/Text Preview Consistency Remediation
+- Added shared preview renderer `src/app/components/LogoPreview.tsx` and centralized logo rendering priority:
+  - text-based font preview first when `brandName + font/fontFamily` exist
+  - SVG data URL preview next via `LogoSvgRenderer`
+  - image URL preview fallback via `<img>`
+  - explicit fallback message when no renderable logo source exists
+- Updated `src/app/components/MyBrandingBox.tsx` to use shared `LogoPreview` for:
+  - logo grid cards (My Logo list)
+  - logo detail modal preview
+  - this removes duplicated conditional rendering branches that previously diverged from other screens
+- Updated `src/app/components/HomePage.tsx` showcase logo cards to use shared `LogoPreview` and removed inline duplicate `transformText` + branch logic.
+- Updated `src/app/components/CardCreationChoice.tsx` selected-logo summary to use shared `LogoPreview` so text logos and SVG logos display consistently before plan selection.
+- Updated `src/app/components/LogoCreationPage.tsx` Step 6 result grid text rendering to apply `transformText(..., logo.transform)` consistently (matching modal preview behavior).
+- Verification run completed:
+  - LSP diagnostics: no issues on all modified files
+  - `npm run build`: success (existing chunk-size warning unchanged)

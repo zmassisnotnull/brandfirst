@@ -91,10 +91,10 @@ export function CardConceptPicker({
       setPrintPdfBytes(pdfBytes);
       setPrintPdfUrl(pdfUrl);
       
-      // 2) 백엔드에 선택 알림 (실제 환경에서는 여기서 서버에 저장)
-      // Mock: 바로 export_id 생성
-      const mockExportId = crypto.randomUUID();
-      setExportId(mockExportId);
+      const selection = await selectAndLockCard({
+        front_card_doc_id: crypto.randomUUID(),
+      });
+      setExportId(selection.print_export.id);
       
       toast.success('시안이 선택되고 인쇄용 PDF가 생성되었습니다!');
       setStep('finalized');

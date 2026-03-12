@@ -3,29 +3,9 @@ import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { Footer } from './Footer';
-import { LogoRenderer } from './LogoRenderer';
-import { LogoSvgRenderer } from './LogoSvgRenderer';
-import { FontPreview } from './FontPreview';
+import { LogoPreview } from './LogoPreview';
 import { useState, useEffect } from 'react';
 import { projectId, publicAnonKey } from '../../../utils/supabase/info';
-
-// ✅ 텍스트 변환 함수 (서버와 동일한 로직)
-const transformText = (text: string, transform?: string): string => {
-  if (transform === 'uppercase') return text.toUpperCase();
-  if (transform === 'titlecase') {
-    if (/[A-Z]/.test(text)) {
-      const words = text.replace(/([A-Z])/g, ' $1').trim().split(/\s+/);
-      return words.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join('');
-    }
-    const mid = Math.ceil(text.length / 2);
-    return text.substring(0, mid).charAt(0).toUpperCase() + text.substring(0, mid).slice(1).toLowerCase() +
-           text.substring(mid).charAt(0).toUpperCase() + text.substring(mid).slice(1).toLowerCase();
-  }
-  if (transform === 'sentencecase') {
-    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-  }
-  return text;
-};
 
 interface SavedCard {
   id: number;
@@ -487,32 +467,11 @@ export function MyBrandingBox({ onNavigate, onEditProfile, onBrandNameSelect, on
                       setPreviewLogo(logo);
                     }}
                   >
-                    {(() => {
-                      const isLogoUrlSvg = typeof logo.logoUrl === 'string' && logo.logoUrl.startsWith('data:image/svg+xml;base64,');
-                      const isLogoUrlString = typeof logo.logoUrl === 'string';
-                      const hasFont = !!logo.font;
-                      
-                      console.log('🎨 Rendering decision:', {
-                        isLogoUrlSvg,
-                        isLogoUrlString,
-                        hasFont,
-                        decision: isLogoUrlSvg ? 'LogoSvgRenderer' : isLogoUrlString ? 'img' : hasFont ? 'FontPreview' : 'error'
-                      });
-                      
-                      if (isLogoUrlSvg) {
-                        console.log('  → Using LogoSvgRenderer');
-                        return <LogoSvgRenderer svgDataUrl={logo.logoUrl} className="w-full h-full flex items-center justify-center" />;
-                      } else if (isLogoUrlString) {
-                        console.log('  → Using img tag');
-                        return <img src={logo.logoUrl} alt="Logo" className="w-full h-full object-contain" />;
-                      } else if (hasFont) {
-                        console.log('  → Using FontPreview');
-                        return <FontPreview font={logo.fontFamily || logo.font.split(' ')[0]} text={transformText(logo.brandName, logo.transform)} weight={logo.weight || '700'} color={logo.fontColor || '#2563EB'} duotone={logo.isDuotone || false} secondaryColor={logo.secondaryColor} letterSpacing={logo.spacing || '0'} />;
-                      } else {
-                        console.log('  → Error: No valid logo data');
-                        return <div className="text-gray-400 text-sm">로고를 불러올 수 없습니다</div>;
-                      }
-                    })()}
+                    <LogoPreview
+                      logo={logo}
+                      className="w-full h-full flex items-center justify-center"
+                      imageClassName="w-full h-full object-contain"
+                    />
                   </div>
 
                   <div className="flex gap-2">
@@ -777,20 +736,12 @@ export function MyBrandingBox({ onNavigate, onEditProfile, onBrandNameSelect, on
             {/* 로고 이미지 */}
             <div className="bg-white rounded-b-2xl p-12">
               <div className="aspect-square flex items-center justify-center bg-gray-50 rounded-xl">
-                {typeof previewLogo.logoUrl === 'string' && previewLogo.logoUrl.startsWith('data:image/svg+xml;base64,') ? (
-                  <LogoSvgRenderer 
-                    svgDataUrl={previewLogo.logoUrl}
-                    className="w-full h-full flex items-center justify-center"
-                  />
-                ) : typeof previewLogo.logoUrl === 'string' ? (
-                  <img 
-                    src={previewLogo.logoUrl} 
-                    alt={previewLogo.brandName} 
-                    className="max-w-full max-h-full object-contain p-8" 
-                  />
-                ) : (
-                  <div className="text-gray-400">로고를 불러올 수 없습니다</div>
-                )}
+                <LogoPreview
+                  logo={previewLogo}
+                  className="w-full h-full flex items-center justify-center"
+                  imageClassName="max-w-full max-h-full object-contain p-8"
+                  fallbackClassName="text-gray-400"
+                />
               </div>
             </div>
 

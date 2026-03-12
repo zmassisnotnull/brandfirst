@@ -3,6 +3,7 @@ import { CardMaker } from './components/CardMaker';
 import LogoEditorPage from './pages/LogoEditorPage';
 import CardEditorPage from './pages/CardEditorPage';
 import AutoCardMakerPage from './pages/AutoCardMakerPage';
+import AutoCardMakerPageV2 from './pages/AutoCardMakerPageV2';
 import { Navigation } from './components/Navigation';
 import { QRCardNavigation } from './components/QRCardNavigation';
 import { QRCardLandingPage } from './components/QRCardLandingPage';
@@ -52,7 +53,7 @@ const getInitialPage = () => {
     const hostname = window.location.hostname;
 
     // 서브도메인별 초기 페이지 분기
-    if (hostname === 'print.brandfirst.ai') return 'home'; // Print 사이트
+    if (hostname === 'print.brandfirst.ai') return 'auto-card-v2'; // Print 사이트
     if (hostname === 'qrcard.brandfirst.ai') return 'qrcard-landing'; // QR Card 사이트
     if (hostname === 'ops.brandfirst.ai') return 'ops-landing'; // Ops 사이트 (추후 컴포넌트 추가 필요)
     if (hostname === 'admin.brandfirst.ai') return 'admin-landing'; // Admin 사이트 (추후 컴포넌트 추가 필요)
@@ -337,7 +338,26 @@ export default function App() {
   const handleLogoSelect = (logoUrl: string, data: any) => {
     console.log('Logo selected:', logoUrl, data);
     setCurrentLogo(logoUrl);
-    setLogoData(data);
+    const normalizedKeywords = Array.isArray(data?.keywords)
+      ? data.keywords
+      : typeof data?.keywords === 'string'
+      ? data.keywords
+          .split(',')
+          .map((keyword: string) => keyword.trim())
+          .filter(Boolean)
+      : [];
+
+    const normalizedServiceCategory = data?.serviceCategory || data?.business || 'other';
+
+    setLogoData({
+      ...data,
+      serviceCategory: normalizedServiceCategory,
+      keywords: normalizedKeywords,
+    });
+
+    if (data?.brandName) {
+      setSelectedBrandName(data.brandName);
+    }
   };
 
   const handleServiceConfirm = (service: any) => {
@@ -429,6 +449,8 @@ export default function App() {
         return <CardEditorPage />;
       case 'auto-card':
         return <AutoCardMakerPage onNavigate={handleNavigate} />;
+      case 'auto-card-v2':
+        return <AutoCardMakerPageV2 onNavigate={handleNavigate} />;
       case 'logo':
         return (
           <>
@@ -476,7 +498,7 @@ export default function App() {
             setSelectedContact(null);
           }
           handleNavigate(page);
-        }} onChoiceSelect={handleChoiceSelect} user={user} userCredits={userCredits} onOpenAuthModal={() => setIsAuthModalOpen(true)} onCreditsUpdate={() => user && fetchUserCredits(user.id)} />;
+        }} onChoiceSelect={handleChoiceSelect} user={user} userCredits={userCredits} onOpenAuthModal={() => setIsAuthModalOpen(true)} onCreditsUpdate={() => user && fetchUserCredits(user.id)} selectedLogoUrl={currentLogo} selectedLogoData={logoData} />;
       case 'upgrader':
         return <CardUpgrader onNavigate={handleNavigate} user={user} onOpenAuthModal={() => setIsAuthModalOpen(true)} onDataExtracted={handleDataExtracted} />;
       case 'professional':

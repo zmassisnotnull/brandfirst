@@ -9,9 +9,21 @@ interface FontPreviewProps {
   duotone?: boolean;
   secondaryColor?: string;
   letterSpacing?: string;
+  fontFeatureSettings?: string;
+  rotateDeg?: number;
 }
 
-export function FontPreview({ font, text, weight, color, duotone, secondaryColor, letterSpacing = '0' }: FontPreviewProps) {
+export function FontPreview({
+  font,
+  text,
+  weight,
+  color,
+  duotone,
+  secondaryColor,
+  letterSpacing = '0',
+  fontFeatureSettings,
+  rotateDeg,
+}: FontPreviewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [fontSize, setFontSize] = useState(10);
   
@@ -136,6 +148,8 @@ export function FontPreview({ font, text, weight, color, duotone, secondaryColor
             color: duotone ? color : color,
             lineHeight: 1,
             letterSpacing: letterSpacing,
+            fontFeatureSettings,
+            transform: rotateDeg ? `rotate(${rotateDeg}deg)` : undefined,
             opacity: fontReady ? 1 : 0,
             transition: 'opacity 0.3s ease-in-out',
           }}

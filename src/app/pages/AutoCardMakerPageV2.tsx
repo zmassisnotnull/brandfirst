@@ -32,10 +32,9 @@ export default function AutoCardMakerPageV2({ onNavigate }: AutoCardMakerPageV2P
   const [cardInfo, setCardInfo] = useState<CardInfo>({});
   const [qrEnabled, setQrEnabled] = useState(true);
   
-  // Mock IDs (실제로는 props나 context에서 받아옴)
-  const project_id = crypto.randomUUID();
-  const typography_kit_id = crypto.randomUUID();
-  const logo_asset_id = crypto.randomUUID();
+  const project_id = 'auto-card-project';
+  const typography_kit_id = 'default-typography-kit';
+  const logo_asset_id = 'default-logo-asset';
   
   const handleModeSelect = (selectedMode: Mode) => {
     setMode(selectedMode);

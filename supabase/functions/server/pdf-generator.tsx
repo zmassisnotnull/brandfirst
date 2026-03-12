@@ -37,6 +37,9 @@ interface LogoPromptData {
   logoType?: 'mark' | 'logotype' | 'combination'; // 로고 타입 추가
 }
 
+const stripNonAscii = (value: string): string =>
+  Array.from(value).filter((char) => char.charCodeAt(0) <= 0x7f).join('');
+
 /**
  * Build optimized prompt for logo generation with Flux.2 / DALL-E
  * Following best practices: High-quality, professional, vector style
@@ -156,7 +159,7 @@ function buildLogoPrompt(data: LogoPromptData): string {
   // 🎨 로고 타입별 프롬프트 생성 (인쇄 최적화 + 5단계 프레임워크)
   if (logoType === 'logotype') {
     // CRITICAL: 한글 브랜드명은 영문으로 변환 필요
-    const latinBrandName = brandName.replace(/[^\x00-\x7F]/g, '').trim() || 'Brand';
+    const latinBrandName = stripNonAscii(brandName).trim() || 'Brand';
     
     // [출력 형태] + [브랜드 이름] + [핵심 오브젝트] + [디자인 스타일] + [제약 사항/배경]
     prompt = `Professional modern logotype design featuring the text '${latinBrandName}' in all capital letters. ` +
@@ -171,7 +174,7 @@ function buildLogoPrompt(data: LogoPromptData): string {
 
   } else if (logoType === 'combination') {
     const symbol = getIndustrySymbol(industry);
-    const latinBrandName = brandName.replace(/[^\x00-\x7F]/g, '').trim() || 'Brand';
+    const latinBrandName = stripNonAscii(brandName).trim() || 'Brand';
     
     // [출력 형태] + [브랜드 이름] + [핵심 오브젝트] + [디자인 스타일] + [제약 사항/배경]
     prompt = `Professional combination mark logo design. ` +
@@ -1002,7 +1005,7 @@ export const generateLogotypeHybrid = async (
   console.log('📥 Received params:', { brandName, mood, color, style });
   
   // 한글 제거, 영문만 (대소문자 원본 유지)
-  const latinBrandName = brandName.replace(/[^\x00-\x7F]/g, '').trim() || 'Brand';
+  const latinBrandName = stripNonAscii(brandName).trim() || 'Brand';
   
   // 각 스타일별 3개의 고정된 폰트 그룹 (각 그룹당 3개 폰트 - 서로 대비되는 스타일)
   const fontGroups: Record<string, string[][]> = {
@@ -1099,7 +1102,9 @@ export const generateLogotypeHybrid = async (
   
   const hslToRgb = (h: number, s: number, l: number): { r: number; g: number; b: number } => {
     h /= 360; s /= 100; l /= 100;
-    let r, g, b;
+    let r = 0;
+    let g = 0;
+    let b = 0;
     
     if (s === 0) {
       r = g = b = l;
@@ -1601,7 +1606,7 @@ export const combineSymbolAndLogotype = async (
       
       // 완전히 새로운 조합 SVG 생성 (깔끔한 레이아웃)
       const combinedSvg = tspans.length > 0 
-        ? `<svg width="2000" height="800" viewBox="0 0 2000 800" xmlns="http://www.w3.org/2000/svg">
+        ? `<svg width="2000" height="800" viewBox="0 0 2000 800" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <defs>
         <style>
           @import url('${fontImport}');
@@ -1615,6 +1620,7 @@ export const combineSymbolAndLogotype = async (
         width="500" 
         height="500" 
         href="data:image/png;base64,${symbolBase64}"
+        xlink:href="data:image/png;base64,${symbolBase64}"
         preserveAspectRatio="xMidYMid meet"
       />
       
@@ -1629,7 +1635,7 @@ export const combineSymbolAndLogotype = async (
         ${textElement}
       </text>
     </svg>`
-        : `<svg width="2000" height="800" viewBox="0 0 2000 800" xmlns="http://www.w3.org/2000/svg">
+        : `<svg width="2000" height="800" viewBox="0 0 2000 800" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <defs>
         <style>
           @import url('${fontImport}');
@@ -1643,6 +1649,7 @@ export const combineSymbolAndLogotype = async (
         width="500" 
         height="500" 
         href="data:image/png;base64,${symbolBase64}"
+        xlink:href="data:image/png;base64,${symbolBase64}"
         preserveAspectRatio="xMidYMid meet"
       />
       

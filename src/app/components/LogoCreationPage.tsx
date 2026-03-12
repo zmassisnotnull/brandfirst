@@ -206,7 +206,7 @@ export function LogoCreationPage({
   useEffect(() => {
     console.log('🔍 LogoCreationPage useEffect:', { selectedBrandName, serviceCategory, selectedKeywords });
     
-    if (selectedBrandName && serviceCategory) {
+    if (selectedBrandName) {
       console.log('✅ 네이밍에서 넘어옴 → 자동 설정 시작');
       const categoryMapping: { [key: string]: string } = {
         '테크': 'tech',
@@ -223,7 +223,7 @@ export function LogoCreationPage({
         '스포츠': 'health',
       };
       
-      const mappedCategory = categoryMapping[serviceCategory] || 'other';
+      const mappedCategory = serviceCategory ? (categoryMapping[serviceCategory] || 'other') : 'other';
       setSelectedBusiness(mappedCategory);
       setCustomBusiness(selectedBrandName);
       
@@ -234,7 +234,7 @@ export function LogoCreationPage({
       
       console.log('✅ 자동 설정 완료:', { mappedCategory, selectedBrandName, selectedKeywords });
     } else {
-      console.log('⚠️ selectedBrandName 또는 serviceCategory 없음');
+      console.log('⚠️ selectedBrandName 없음');
     }
   }, [selectedBrandName, serviceCategory, selectedKeywords]);
 
@@ -847,7 +847,7 @@ export function LogoCreationPage({
       if (onLogoCreated) {
         onLogoCreated(permanentLogoUrl, logoData);
       }
-      onNavigate('professional');
+      onNavigate('card-choice');
     } catch (error) {
       console.error('Logo save error:', error);
       alert(error instanceof Error ? error.message : '로고 저장 중 오류가 발생했습니다.');
@@ -1215,30 +1215,28 @@ export function LogoCreationPage({
           </div>
 
           {/* ========== THE STARTER FLOW (초록색) ========== */}
-          {pendingServiceType === 'starter' && (
-            <LogoCreationStarter
-              currentStep={currentStep}
-              setCurrentStep={setCurrentStep}
-              customBusiness={customBusiness}
-              setCustomBusiness={setCustomBusiness}
-              selectedColor={selectedColor}
-              setSelectedColor={setSelectedColor}
-              selectedStyle={selectedStyle}
-              handleStyleSelect={handleStyleSelect}
-              isGenerating={isGenerating}
-              generatedLogos={generatedLogos}
-              colors={colors}
-              styles={styles}
-              handleSaveLogo={handleSaveLogo}
-              handleSelectLogo={handleSelectLogo}
-              setPreviewIndex={setPreviewIndex}
-              setShowPreviewModal={setShowPreviewModal}
-              setGeneratedLogos={setGeneratedLogos}
-              setPendingServiceType={setPendingServiceType}
-              selectedLogo={selectedLogo}
-              setSelectedLogo={setSelectedLogo}
-            />
-          )}
+          <LogoCreationStarter
+            currentStep={currentStep}
+            setCurrentStep={setCurrentStep}
+            customBusiness={customBusiness}
+            setCustomBusiness={setCustomBusiness}
+            selectedColor={selectedColor}
+            setSelectedColor={setSelectedColor}
+            selectedStyle={selectedStyle}
+            handleStyleSelect={handleStyleSelect}
+            isGenerating={isGenerating}
+            generatedLogos={generatedLogos}
+            colors={colors}
+            styles={styles}
+            handleSaveLogo={handleSaveLogo}
+            handleSelectLogo={handleSelectLogo}
+            setPreviewIndex={setPreviewIndex}
+            setShowPreviewModal={setShowPreviewModal}
+            setGeneratedLogos={setGeneratedLogos}
+            setPendingServiceType={setPendingServiceType}
+            selectedLogo={selectedLogo}
+            setSelectedLogo={setSelectedLogo}
+          />
         </div>
       )}
 
@@ -1313,7 +1311,7 @@ export function LogoCreationPage({
                       {typeof logo === 'object' && (logo.fontFamily || logo.font) ? (
                         <FontPreview
                           font={logo.fontFamily || logo.font?.split(' ')[0] || 'Arial'}
-                          text={customBusiness.trim()}
+                          text={transformText(customBusiness.trim(), logo.transform)}
                           weight={logo.weight || '400'}
                           color={logo.color || colors.find(c => c.id === selectedColor)?.hex || '#2563EB'}
                           duotone={logo.isDuotone || false}

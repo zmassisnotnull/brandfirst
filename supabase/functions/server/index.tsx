@@ -9,7 +9,106 @@ import namingRouter from "./naming.tsx";
 import logoRouter from "./logo.tsx";
 import digitalCardRouter from "./digital-card.tsx";
 
+const createMockPdfDataUrl = async () => {
+  const { PDFDocument, StandardFonts, rgb } = await import('npm:pdf-lib@1.17.1');
+  const pdfDoc = await PDFDocument.create();
+  const page = pdfDoc.addPage([300, 180]);
+  const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+  page.drawText('MyBrands Print PDF', {
+    x: 48,
+    y: 94,
+    size: 18,
+    font,
+    color: rgb(0.1, 0.1, 0.1),
+  });
+
+  const bytes = await pdfDoc.save();
+  const base64 = btoa(String.fromCharCode(...bytes));
+  return `data:application/pdf;base64,${base64}`;
+};
+
+const createDraftEntries = async () => {
+  const proofUrl = await createMockPdfDataUrl();
+  return ['A', 'B', 'C'].map((variant) => ({
+    variant,
+    card_doc_id: crypto.randomUUID(),
+    proof_signed_url: proofUrl,
+    omitted_fields: [],
+    preflight: { ok: true, errors: [] as string[] },
+  }));
+};
+
+const registerPrintEndpoints = (slug: string) => {
+  app.post(`/${slug}/api/card/auto-generate`, async (c) => {
+    try {
+      const body = await c.req.json();
+      const isDoubleSided = Boolean(body?.is_double_sided ?? body?.is_double_sided_override);
+      const frontDrafts = await createDraftEntries();
+      const backDrafts = isDoubleSided ? await createDraftEntries() : undefined;
+
+      return c.json({
+        draft_group_id: crypto.randomUUID(),
+        mode: isDoubleSided ? 'professional' : 'starter',
+        sides: {
+          front: frontDrafts,
+          ...(backDrafts ? { back: backDrafts } : {}),
+        },
+      });
+    } catch (error) {
+      console.error('auto-generate route error:', error);
+      return c.json({ error: '자동 시안 생성 중 오류가 발생했습니다.' }, 500);
+    }
+  });
+
+  app.post(`/${slug}/api/card/select-and-lock`, async (c) => {
+    try {
+      const body = await c.req.json();
+      const frontCardDocId = body?.front_card_doc_id;
+
+      if (!frontCardDocId) {
+        return c.json({ error: 'front_card_doc_id가 필요합니다.' }, 400);
+      }
+
+      return c.json({
+        chosen_card_doc: { id: frontCardDocId },
+        print_export: { id: crypto.randomUUID() },
+        signed_url: await createMockPdfDataUrl(),
+        deleted_drafts: [crypto.randomUUID(), crypto.randomUUID()],
+      });
+    } catch (error) {
+      console.error('select-and-lock route error:', error);
+      return c.json({ error: '시안 확정 중 오류가 발생했습니다.' }, 500);
+    }
+  });
+
+  app.post(`/${slug}/api/fulfillment/create`, async (c) => {
+    try {
+      const body = await c.req.json();
+      const exportId = body?.export_id;
+
+      if (!exportId) {
+        return c.json({ error: 'export_id가 필요합니다.' }, 400);
+      }
+
+      return c.json({
+        job: {
+          id: crypto.randomUUID(),
+          status: 'PDF_LOCKED',
+          created_at: new Date().toISOString(),
+        },
+      });
+    } catch (error) {
+      console.error('fulfillment route error:', error);
+      return c.json({ error: '출고 요청 생성 중 오류가 발생했습니다.' }, 500);
+    }
+  });
+};
+
 const app = new Hono();
+
+registerPrintEndpoints('make-server-98397747');
+registerPrintEndpoints('make-server-45024be7');
 
 // ============================================
 // CORS Configuration (CRITICAL - MUST BE FIRST!)

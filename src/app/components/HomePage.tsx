@@ -2,8 +2,7 @@ import { ArrowRight, Sparkles, CreditCard, Smartphone, Printer, Type, Zap, Rocke
 import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Footer } from './Footer';
-import { LogoSvgRenderer } from './LogoSvgRenderer';
-import { FontPreview } from './FontPreview';
+import { LogoPreview } from './LogoPreview';
 import { useState, useEffect } from 'react';
 import { projectId, publicAnonKey } from '../../../utils/supabase/info';
 
@@ -468,62 +467,18 @@ export function HomePage({ onNavigate }: HomePageProps) {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {showcaseDesigns.map((design) => {
-                // 텍스트 변환 함수
-                const transformText = (text: string, transform?: string): string => {
-                  if (transform === 'uppercase') return text.toUpperCase();
-                  if (transform === 'titlecase') {
-                    if (/[A-Z]/.test(text)) {
-                      const words = text.replace(/([A-Z])/g, ' $1').trim().split(/\s+/);
-                      return words.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join('');
-                    }
-                    const mid = Math.ceil(text.length / 2);
-                    return text.substring(0, mid).charAt(0).toUpperCase() + text.substring(0, mid).slice(1).toLowerCase() +
-                           text.substring(mid).charAt(0).toUpperCase() + text.substring(mid).slice(1).toLowerCase();
-                  }
-                  if (transform === 'sentencecase') {
-                    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-                  }
-                  return text;
-                };
-                
-                return (
+              {showcaseDesigns.map((design) => (
                   <Card
                     key={design.id}
                     className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
                   >
                     {design.type === 'logo' ? (
-                      // 로고 렌더링 (MyBrandingBox와 동일한 로직)
                       <div className="w-full aspect-[1.6/1] overflow-hidden bg-white flex items-center justify-center">
-                        {(() => {
-                          const isLogoUrlSvg = typeof design.logoUrl === 'string' && design.logoUrl.startsWith('data:image/svg+xml;base64,');
-                          const isLogoUrlString = typeof design.logoUrl === 'string';
-                          const hasFont = !!design.font;
-
-                          if (isLogoUrlSvg) {
-                            return <LogoSvgRenderer svgDataUrl={design.logoUrl} className="w-full h-full flex items-center justify-center" />;
-                          } else if (isLogoUrlString && design.logoUrl) {
-                            return <img src={design.logoUrl} alt="Logo" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />;
-                          } else if (hasFont && design.brandName) {
-                            return (
-                              <FontPreview
-                                font={design.fontFamily || design.font.split(' ')[0]}
-                                text={transformText(design.brandName, design.transform)}
-                                weight={design.weight || '700'}
-                                color={design.fontColor || '#2563EB'}
-                                duotone={design.isDuotone || false}
-                                secondaryColor={design.secondaryColor}
-                                letterSpacing={design.spacing || '0'}
-                              />
-                            );
-                          } else {
-                            return (
-                              <div className={`w-full h-full bg-gradient-to-br ${design.color} flex items-center justify-center`}>
-                                <div className="text-white text-4xl font-bold">🎨</div>
-                              </div>
-                            );
-                          }
-                        })()}
+                        <LogoPreview
+                          logo={design}
+                          className="w-full h-full flex items-center justify-center"
+                          imageClassName="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                        />
                       </div>
                     ) : design.imageUrl ? (
                       // 명함 렌더링
@@ -552,8 +507,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                       </div>
                     </div>
                   </Card>
-                );
-              })}
+                ))}
             </div>
           )}
         </div>

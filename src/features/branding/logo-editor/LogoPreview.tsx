@@ -4,9 +4,10 @@
  * - 서버 렌더 결과 SVG Path 표시 (최종 확인)
  */
 
-import React, { useMemo } from 'react';
+import React from 'react';
 import type { LogoEditorState, FontFace, LogoRenderResult } from './logoEditor.types';
-import { buildFontFamily, trackingEmToCss } from './utils';
+import { buildFontFamily } from './utils';
+import { LogoPreview as SharedLogoPreview } from '../../../app/components/LogoPreview';
 
 interface LogoPreviewProps {
   state: LogoEditorState;
@@ -25,147 +26,69 @@ export function LogoPreview({
   backgroundColor = '#F5F5F5',
   className = '',
 }: LogoPreviewProps) {
-  
-  // Live 모드: 브라우저 폰트 렌더링
   if (mode === 'live') {
+    const textFeatureSettings = [
+      !state.kerning ? '"kern" 0' : '',
+      state.ligatures ? '"liga" 1' : '"liga" 0',
+    ]
+      .filter(Boolean)
+      .join(', ');
+
+    if (!font) {
+      return (
+        <div className={`flex items-center justify-center ${className}`} style={{ backgroundColor }}>
+          <p className="text-sm text-muted-foreground">폰트를 선택하세요.</p>
+        </div>
+      );
+    }
+
+    if (!state.text || state.text.trim().length === 0) {
+      return (
+        <div className={`flex items-center justify-center ${className}`} style={{ backgroundColor }}>
+          <p className="text-sm text-muted-foreground">텍스트를 입력하세요.</p>
+        </div>
+      );
+    }
+
     return (
-      <LivePreview
-        state={state}
-        font={font}
+      <SharedLogoPreview
+        logo={{
+          brandName: state.text,
+          fontFamily: buildFontFamily(font),
+          weight: String(font.weight || 700),
+          fontColor: state.primaryColor,
+          spacing: String(state.trackingEm),
+        }}
+        rawText={state.text}
+        fontFeatureSettings={textFeatureSettings || 'normal'}
+        rotateDeg={state.rotate_deg}
         backgroundColor={backgroundColor}
-        className={className}
+        className={`w-full h-full ${className}`}
       />
     );
   }
-  
-  // Rendered 모드: 서버에서 생성한 SVG Path
+
   if (mode === 'rendered' && renderResult) {
     return (
-      <RenderedPreview
-        result={renderResult}
-        color={state.primaryColor}
+      <SharedLogoPreview
+        logo={{}}
+        renderResult={{
+          svgPathD: renderResult.svg_path_d,
+          viewBox: renderResult.view_box,
+          color: state.primaryColor,
+        }}
         backgroundColor={backgroundColor}
-        className={className}
+        className={`w-full h-full ${className}`}
       />
     );
   }
-  
+
   return (
     <div
       className={`flex items-center justify-center ${className}`}
       style={{ backgroundColor }}
     >
       <p className="text-sm text-muted-foreground">미리보기를 표시할 수 없습니다.</p>
-    </div>
-  );
-}
-
-function LivePreview({
-  state,
-  font,
-  backgroundColor,
-  className,
-}: {
-  state: LogoEditorState;
-  font: FontFace | null;
-  backgroundColor: string;
-  className: string;
-}) {
-  
-  const fontStyle = useMemo(() => {
-    if (!font) return {};
-    
-    return {
-      fontFamily: buildFontFamily(font),
-      fontWeight: font.weight,
-      fontStyle: font.style,
-      fontSize: `${state.fontSizePx}px`,
-      letterSpacing: trackingEmToCss(state.trackingEm, state.fontSizePx),
-      color: state.primaryColor,
-      transform: `rotate(${state.rotate_deg}deg)`,
-    };
-  }, [font, state]);
-  
-  const textFeatureSettings = useMemo(() => {
-    const features: string[] = [];
-    
-    if (!state.kerning) {
-      features.push('"kern" 0');
-    }
-    
-    if (state.ligatures) {
-      features.push('"liga" 1');
-    } else {
-      features.push('"liga" 0');
-    }
-    
-    return features.length > 0 ? features.join(', ') : 'normal';
-  }, [state.kerning, state.ligatures]);
-  
-  if (!font) {
-    return (
-      <div
-        className={`flex items-center justify-center ${className}`}
-        style={{ backgroundColor }}
-      >
-        <p className="text-sm text-muted-foreground">폰트를 선택하세요.</p>
-      </div>
-    );
-  }
-  
-  if (!state.text || state.text.trim().length === 0) {
-    return (
-      <div
-        className={`flex items-center justify-center ${className}`}
-        style={{ backgroundColor }}
-      >
-        <p className="text-sm text-muted-foreground">텍스트를 입력하세요.</p>
-      </div>
-    );
-  }
-  
-  return (
-    <div
-      className={`flex items-center justify-center overflow-hidden ${className}`}
-      style={{ backgroundColor }}
-    >
-      <div
-        className="whitespace-nowrap select-none"
-        style={{
-          ...fontStyle,
-          fontFeatureSettings: textFeatureSettings,
-          lineHeight: 1,
-        }}
-      >
-        {state.text}
-      </div>
-    </div>
-  );
-}
-
-function RenderedPreview({
-  result,
-  color,
-  backgroundColor,
-  className,
-}: {
-  result: LogoRenderResult;
-  color: string;
-  backgroundColor: string;
-  className: string;
-}) {
-  return (
-    <div
-      className={`flex items-center justify-center ${className}`}
-      style={{ backgroundColor }}
-    >
-      <svg
-        viewBox={result.view_box}
-        className="w-full h-full"
-        style={{ maxWidth: '100%', maxHeight: '100%' }}
-      >
-        <path d={result.svg_path_d} fill={color} />
-      </svg>
     </div>
   );
 }
@@ -197,6 +120,7 @@ export function LogoColorVariants({
               className="w-full h-full"
               style={{ maxWidth: '100%', maxHeight: '100%' }}
             >
+              <title>{`Logo ${v.label}`}</title>
               <path d={result.svg_path_d} fill={v.color} />
             </svg>
           </div>
