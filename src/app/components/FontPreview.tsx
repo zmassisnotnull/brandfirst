@@ -111,6 +111,12 @@ export function FontPreview({
 
   return (
     <>
+      {fontReady && (
+        <link
+          href={`https://fonts.googleapis.com/css2?family=${font.replace(/ /g, '+')}&display=swap`}
+          rel="stylesheet"
+        />
+      )}
       <div 
         ref={containerRef}
         className="w-full aspect-square rounded-xl bg-gray-50 flex items-center justify-center border-2 border-gray-100 relative"
