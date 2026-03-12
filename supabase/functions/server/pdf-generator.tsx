@@ -584,12 +584,42 @@ export const generateLogoVariations = async (
  */
 export const removeBackground = async (imageUrl: string): Promise<Uint8Array> => {
   const hfApiKey = Deno.env.get('HUGGINGFACE_API_KEY');
+
+  const removeWhiteBackgroundFallback = async (sourceBytes: Uint8Array): Promise<Uint8Array> => {
+    const sharp = (await import('npm:sharp@0.33.2')).default;
+    const { data, info } = await sharp(Buffer.from(sourceBytes))
+      .ensureAlpha()
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+
+    for (let i = 0; i < data.length; i += info.channels) {
+      const r = data[i];
+      const g = data[i + 1];
+      const b = data[i + 2];
+      const isNearWhite = r >= 245 && g >= 245 && b >= 245;
+      if (isNearWhite) {
+        data[i + 3] = 0;
+      }
+    }
+
+    const pngBuffer = await sharp(data, {
+      raw: {
+        width: info.width,
+        height: info.height,
+        channels: info.channels,
+      },
+    })
+      .png()
+      .toBuffer();
+
+    return new Uint8Array(pngBuffer);
+  };
   
   if (!hfApiKey) {
     console.warn('⚠️ HUGGINGFACE_API_KEY not set, skipping background removal');
-    // Return original image if no API key
     const response = await fetch(imageUrl);
-    return new Uint8Array(await response.arrayBuffer());
+    const originalBytes = new Uint8Array(await response.arrayBuffer());
+    return await removeWhiteBackgroundFallback(originalBytes);
   }
 
   try {
@@ -652,10 +682,10 @@ export const removeBackground = async (imageUrl: string): Promise<Uint8Array> =>
     return new Uint8Array(resultBuffer);
   } catch (error) {
     console.error('❌ Error removing background:', error);
-    console.log('⚠️ Returning original image without background removal');
-    // Return original image on error
+    console.log('⚠️ Falling back to near-white background cleanup');
     const response = await fetch(imageUrl);
-    return new Uint8Array(await response.arrayBuffer());
+    const originalBytes = new Uint8Array(await response.arrayBuffer());
+    return await removeWhiteBackgroundFallback(originalBytes);
   }
 };
 
@@ -1706,43 +1736,23 @@ export const combineSingleLogo = async (
   console.log(`🎨 Combining logo with layout: ${layout}`);
   
   try {
-    // 심볼마크 다운로드
-    const response = await fetch(symbolUrl);
-    if (!response.ok) throw new Error(`Failed to download symbol: ${response.status}`);
-    const arrayBuffer = await response.arrayBuffer();
-    const symbolBase64 = encodeBase64(new Uint8Array(arrayBuffer));
-    
-    // 로고타입 SVG 디코딩
-    const logotypeData = logotype.url.replace('data:image/svg+xml;base64,', '');
-    const logotypeSvg = new TextDecoder().decode(decodeBase64(logotypeData));
-    
-    // SVG 정보 추출
-    const fontFamily = logotypeSvg.match(/font-family="([^"]+)"/)?.[1] || 'Arial';
-    const fontSize = logotypeSvg.match(/font-size="([^"]+)"/)?.[1] || '90';
-    const fontWeight = logotypeSvg.match(/font-weight="([^"]+)"/)?.[1] || '400';
-    const letterSpacing = logotypeSvg.match(/letter-spacing="([^"]+)"/)?.[1] || '0';
-    const fill = logotypeSvg.match(/fill="([^"]+)"/)?.[1] || '#000000';
-    const textContent = logotypeSvg.match(/<text[^>]*>([^<]*)<\/text>/)?.[1] || '';
-    const fontImport = logotypeSvg.match(/@import url\('([^']+)'\)/)?.[1] || 
-      `https://fonts.googleapis.com/css2?family=${fontFamily.replace(/ /g, '+')}:wght@400;700&display=swap`;
+    const cleanedSymbolBytes = await removeBackground(symbolUrl);
+    const symbolBase64 = encodeBase64(cleanedSymbolBytes);
+    const logotypeUrlEscaped = logotype.url.replace(/&/g, '&amp;');
     
     // 레이아웃별 SVG 생성
     let combinedSvg = '';
     if (layout === 'horizontal-left') {
       // 좌우 배치: 심볼 왼쪽 + 텍스트 오른쪽
-      combinedSvg = `<svg width="2000" height="800" viewBox="0 0 2000 800" xmlns="http://www.w3.org/2000/svg">
-        <defs><style>@import url('${fontImport}');</style></defs>
-        <rect width="2000" height="800" fill="white"/>
-        <image x="100" y="150" width="500" height="500" href="data:image/png;base64,${symbolBase64}" preserveAspectRatio="xMidYMid meet"/>
-        <text x="700" y="450" font-family="${fontFamily}" font-weight="${fontWeight}" font-size="${fontSize}" fill="${fill}" dominant-baseline="middle" letter-spacing="${letterSpacing}">${textContent}</text>
+      combinedSvg = `<svg width="2000" height="800" viewBox="0 0 2000 800" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <image x="120" y="140" width="520" height="520" href="data:image/png;base64,${symbolBase64}" xlink:href="data:image/png;base64,${symbolBase64}" preserveAspectRatio="xMidYMid meet"/>
+        <image x="700" y="170" width="1150" height="460" href="${logotypeUrlEscaped}" xlink:href="${logotypeUrlEscaped}" preserveAspectRatio="xMidYMid meet"/>
       </svg>`;
     } else {
       // 상하 배치: 심볼 위 + 텍스트 아래
-      combinedSvg = `<svg width="1000" height="1200" viewBox="0 0 1000 1200" xmlns="http://www.w3.org/2000/svg">
-        <defs><style>@import url('${fontImport}');</style></defs>
-        <rect width="1000" height="1200" fill="white"/>
-        <image x="250" y="100" width="500" height="500" href="data:image/png;base64,${symbolBase64}" preserveAspectRatio="xMidYMid meet"/>
-        <text x="500" y="850" font-family="${fontFamily}" font-weight="${fontWeight}" font-size="${fontSize}" fill="${fill}" text-anchor="middle" dominant-baseline="middle" letter-spacing="${letterSpacing}">${textContent}</text>
+      combinedSvg = `<svg width="1200" height="1400" viewBox="0 0 1200 1400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <image x="300" y="100" width="600" height="600" href="data:image/png;base64,${symbolBase64}" xlink:href="data:image/png;base64,${symbolBase64}" preserveAspectRatio="xMidYMid meet"/>
+        <image x="140" y="780" width="920" height="460" href="${logotypeUrlEscaped}" xlink:href="${logotypeUrlEscaped}" preserveAspectRatio="xMidYMid meet"/>
       </svg>`;
     }
     

@@ -149,8 +149,7 @@ export function LogoCreationPage({
   const [logotypes, setLogotypes] = useState<Array<{ url: string; font: string }>>([]);
   const [selectedSymbolIndex, setSelectedSymbolIndex] = useState<number | null>(null);
   const [selectedLogotypeIndex, setSelectedLogotypeIndex] = useState<number | null>(null);
-  const [selectedLayout, setSelectedLayout] = useState<'horizontal-left' | 'horizontal-right' | 'vertical-top' | 'vertical-bottom' | null>(null);
-  const [subStep, setSubStep] = useState<6.1 | 6.2 | 6.3 | null>(null); // Step 6의 서브 단계
+  const [subStep, setSubStep] = useState<6.1 | 6.2 | null>(null); // Step 6의 서브 단계
 
   // 추천 키워드 목록
   const SUGGESTED_KEYWORDS = [
@@ -436,7 +435,7 @@ export function LogoCreationPage({
 
   // Professional: 심볼마크 + 로고타입 조합
   const handleCombineLogos = async () => {
-    if (selectedSymbolIndex === null || selectedLogotypeIndex === null || !selectedLayout) {
+    if (selectedSymbolIndex === null || selectedLogotypeIndex === null) {
       alert('모든 선택을 완료해주세요.');
       return;
     }
@@ -457,81 +456,58 @@ export function LogoCreationPage({
 
       const symbolUrl = symbolMarks[selectedSymbolIndex];
       const logotype = logotypes[selectedLogotypeIndex];
+      const layouts: Array<'horizontal-left' | 'vertical-top'> = [
+        'horizontal-left',
+        'vertical-top'
+      ];
 
       console.log('🔨 조합 API 호출:', {
         hasSymbol: !!symbolUrl,
         hasLogotype: !!logotype,
-        layout: selectedLayout
+        layouts
       });
 
-      const response = await fetch(
-        `https://${projectId}.supabase.co/functions/v1/make-server-98397747/api/logo/combine-logo`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${publicAnonKey}`,
-            'x-access-token': session.access_token,
-          },
-          body: JSON.stringify({
-            symbolUrl,
-            logotype,
-            layout: selectedLayout,
-          }),
-        }
+      const combinedLogos = await Promise.all(
+        layouts.map(async (layout) => {
+          const res = await fetch(
+            `https://${projectId}.supabase.co/functions/v1/make-server-98397747/api/logo/combine-logo`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${publicAnonKey}`,
+                'x-access-token': session.access_token,
+              },
+              body: JSON.stringify({
+                symbolUrl,
+                logotype,
+                layout,
+              }),
+            }
+          );
+
+          if (!res.ok) {
+            const error = await res.json();
+            throw new Error(error.error || '로고 조합에 실패했습니다.');
+          }
+
+          const result = await res.json();
+          if (!result.success || !result.logo) {
+            throw new Error('로고 조합 응답이 올바르지 않습니다.');
+          }
+          return result.logo;
+        })
       );
 
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || '로고 조합에 실패했습니다.');
-      }
-
-      const data = await response.json();
-      console.log('✅ 조합 결과:', data);
-
-      if (data.success && data.logo) {
-        // 2가지 레이아웃으로 조합 생성 (좌우, 상하)
-        const layouts: Array<'horizontal-left' | 'vertical-top'> = [
-          'horizontal-left',
-          'vertical-top'
-        ];
-
-        // 2가지 조합 모두 생성
-        const combinedLogos = await Promise.all(
-          layouts.map(async (layout) => {
-            const res = await fetch(
-              `https://${projectId}.supabase.co/functions/v1/make-server-98397747/api/logo/combine-logo`,
-              {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${publicAnonKey}`,
-                  'x-access-token': session.access_token,
-                },
-                body: JSON.stringify({
-                  symbolUrl,
-                  logotype,
-                  layout,
-                }),
-              }
-            );
-            const result = await res.json();
-            return result.logo;
-          })
-        );
-
-        console.log(`✅ 2가지 조합 완료`);
-        setGeneratedLogos(combinedLogos);
-        setSelectedLogo(0);
-        setCurrentStep(7); // Step 7: 결과 확인
-      } else {
-        throw new Error('로고 조합에 실패했습니다.');
-      }
+      console.log('✅ 2가지 조합 완료');
+      setGeneratedLogos(combinedLogos);
+      setSelectedLogo(0);
+      setCurrentStep(7); // Step 7: 결과 확인
     } catch (error) {
       console.error('Logo combination error:', error);
       alert(error instanceof Error ? error.message : '로고 조합에 실패했습니다.');
       setCurrentStep(6);
-      setSubStep(6.3);
+      setSubStep(6.2);
     } finally {
       setIsGenerating(false);
     }
@@ -1517,82 +1493,12 @@ export function LogoCreationPage({
                       이전
                     </Button>
                     <Button
-                      onClick={() => {
-                        if (selectedLogotypeIndex === null) {
-                          alert('로고타입을 선택해주세요.');
-                          return;
-                        }
-                        setSubStep(6.3);
-                      }}
+                      onClick={handleCombineLogos}
                       disabled={selectedLogotypeIndex === null}
                       className="px-12 h-14 text-lg bg-gradient-to-r from-purple-600 to-pink-600"
                     >
-                      다음: 조합 방식 선택
+                      가로/세로 조합 2개 보기
                       <ArrowRight className="w-5 h-5 ml-2" />
-                    </Button>
-                  </div>
-                </div>
-              )}
-
-              {/* Step 6-3: 조합 방식 선택 */}
-              {subStep === 6.3 && (
-                <div>
-                  <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold mb-2">조합 방식을 선택하세요 🔄</h2>
-                    <p className="text-gray-600">심볼마크와 로고타입의 배치를 선택해주세요</p>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-8 mb-8 max-w-4xl mx-auto">
-                    {[
-                      { id: 'horizontal-left' as const, label: '좌우 배치', icon: '● ━━━', desc: '심볼마크 왼쪽 + 텍스트 오른쪽' },
-                      { id: 'vertical-top' as const, label: '상하 배치', icon: '●\n━━', desc: '심볼마크 위 + 텍스트 아래' },
-                    ].map((layout) => (
-                      <Card
-                        key={layout.id}
-                        className={`p-8 cursor-pointer transition-all ${
-                          selectedLayout === layout.id
-                            ? 'ring-4 ring-purple-500 shadow-2xl scale-105'
-                            : 'hover:shadow-lg'
-                        }`}
-                        onClick={() => setSelectedLayout(layout.id)}
-                      >
-                        <div className="text-center">
-                          <div className="text-5xl mb-4 whitespace-pre-line font-bold">{layout.icon}</div>
-                          <p className="font-bold text-xl mb-2">{layout.label}</p>
-                          <p className="text-sm text-gray-500">{layout.desc}</p>
-                          {selectedLayout === layout.id && (
-                            <p className="text-purple-600 font-semibold mt-4">✓ 선택됨</p>
-                          )}
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
-
-                  <div className="flex justify-center gap-4">
-                    <Button
-                      variant="outline"
-                      onClick={() => setSubStep(6.2)}
-                      className="px-8 h-12"
-                    >
-                      <ArrowLeft className="w-4 h-4 mr-2" />
-                      이전
-                    </Button>
-                    <Button
-                      onClick={handleCombineLogos}
-                      disabled={!selectedLayout || isGenerating}
-                      className="px-12 h-14 text-lg bg-gradient-to-r from-purple-600 to-pink-600"
-                    >
-                      {isGenerating ? (
-                        <>
-                          <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                          생성 중...
-                        </>
-                      ) : (
-                        <>
-                          <Sparkles className="w-5 h-5 mr-2" />
-                          로고 생성하기
-                        </>
-                      )}
                     </Button>
                   </div>
                 </div>
