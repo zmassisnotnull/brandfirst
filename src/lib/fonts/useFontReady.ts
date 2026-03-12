@@ -16,7 +16,24 @@ export async function ensureFontReady(
   sample = "HamburgefontsIV123가나다ABCabc"
 ): Promise<void> {
   try {
-    // 1) load 시도: 브라우저에게 해당 폰트를 실제로 필요하다고 알려줌
+    // 1) 동적 폰트 주입 (Google Fonts)
+    if (typeof window !== 'undefined') {
+      const familyStr = fontFamily.trim().replace(/\s+/g, '+');
+      const fontId = `google-font-${familyStr.toLowerCase()}`;
+      if (!document.getElementById(fontId)) {
+        const link = document.createElement('link');
+        link.id = fontId;
+        link.rel = 'stylesheet';
+        // 100~900까지 주요 웨이트 요청
+        link.href = `https://fonts.googleapis.com/css2?family=${familyStr}:wght@300;400;500;600;700;800;900&display=swap`;
+        document.head.appendChild(link);
+        
+        // 브라우저가 CSS를 다운로드하고 파싱할 시간을 약간 부여
+        await new Promise(resolve => setTimeout(resolve, 50));
+      }
+    }
+
+    // 2) load 시도: 브라우저에게 해당 폰트를 실제로 필요하다고 알려줌
     // size는 실제 사용 사이즈와 비슷하게 (예: 16px)
     await document.fonts.load(`16px "${fontFamily}"`, sample);
 

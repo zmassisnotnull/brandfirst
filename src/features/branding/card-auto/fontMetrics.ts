@@ -148,6 +148,21 @@ export async function ensureFontLoaded(fontFamily: string): Promise<void> {
   if (!document.fonts) return;
   
   try {
+    if (typeof window !== 'undefined') {
+      const familyStr = fontFamily.trim().replace(/\s+/g, '+');
+      const fontId = `google-font-${familyStr.toLowerCase()}`;
+      if (!document.getElementById(fontId)) {
+        const link = document.createElement('link');
+        link.id = fontId;
+        link.rel = 'stylesheet';
+        link.href = `https://fonts.googleapis.com/css2?family=${familyStr}:wght@300;400;500;600;700;800;900&display=swap`;
+        document.head.appendChild(link);
+        
+        // CSS 로딩 여유
+        await new Promise(resolve => setTimeout(resolve, 50));
+      }
+    }
+
     await document.fonts.load(`12px "${fontFamily}"`);
     await document.fonts.load(`16px "${fontFamily}"`);
     await document.fonts.ready;
