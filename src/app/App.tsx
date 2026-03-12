@@ -53,7 +53,7 @@ const getInitialPage = () => {
     const hostname = window.location.hostname;
 
     // 서브도메인별 초기 페이지 분기
-    if (hostname === 'print.brandfirst.ai') return 'auto-card-v2'; // Print 사이트
+    if (hostname === 'print.brandfirst.ai') return 'home'; // Print 사이트
     if (hostname === 'qrcard.brandfirst.ai') return 'qrcard-landing'; // QR Card 사이트
     if (hostname === 'ops.brandfirst.ai') return 'ops-landing'; // Ops 사이트 (추후 컴포넌트 추가 필요)
     if (hostname === 'admin.brandfirst.ai') return 'admin-landing'; // Admin 사이트 (추후 컴포넌트 추가 필요)

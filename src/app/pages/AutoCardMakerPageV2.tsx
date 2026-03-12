@@ -25,9 +25,9 @@ type Mode = 'starter' | 'professional' | 'refiner';
 type Step = 'mode' | 'input' | 'generate' | 'complete';
 
 export default function AutoCardMakerPageV2({ onNavigate }: AutoCardMakerPageV2Props) {
-  const [step, setStep] = useState<Step>('mode');
+  const [step, setStep] = useState<Step>('input');
   const [mode, setMode] = useState<Mode>('professional');
-  const [isDoubleSided, setIsDoubleSided] = useState(false);
+  const [isDoubleSided, setIsDoubleSided] = useState(true);
   
   const [cardInfo, setCardInfo] = useState<CardInfo>({});
   const [qrEnabled, setQrEnabled] = useState(true);
@@ -209,10 +209,10 @@ export default function AutoCardMakerPageV2({ onNavigate }: AutoCardMakerPageV2P
           <div className="mb-8">
             <Button
               variant="ghost"
-              onClick={() => setStep('mode')}
+              onClick={() => onNavigate?.('qrcard-plans')}
               className="mb-4"
             >
-              ← 모드 변경
+              ← 플랜으로 돌아가기
             </Button>
             
             <div className="flex items-center gap-3 mb-2">
@@ -318,7 +318,7 @@ export default function AutoCardMakerPageV2({ onNavigate }: AutoCardMakerPageV2P
                 size="lg"
                 variant="outline"
                 onClick={() => {
-                  setStep('mode');
+                  setStep('input');
                   setCardInfo({});
                 }}
               >
