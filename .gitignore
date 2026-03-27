@@ -1,1 +1,3 @@
 node_modules
+# MCP 설정 파일 제외
+mcp.json
