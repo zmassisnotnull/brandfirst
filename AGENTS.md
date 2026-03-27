@@ -6,6 +6,7 @@
 - Backend: Supabase Edge Functions (Deno) in `supabase/functions/`
 - Path alias: `@` -> `src` (see `vite.config.ts`)
 - Module system: ESM (`"type": "module"` in `package.json`)
+- Vite plugins: React + Tailwind are required (see `vite.config.ts`)
 
 # Build / Lint / Test Commands
 ## Install
@@ -17,18 +18,24 @@
 ## Production build
 - `npm run build`
 
+## Deploy
+- `npm run deploy:pages` (Cloudflare Pages via Wrangler)
+
 ## Lint
-- No lint script or ESLint config found.
+- No `lint`/`format` scripts detected in `package.json`.
+- No ESLint/Prettier/Stylelint/EditorConfig configs found in the repo.
 
 ## Tests
 - No test script or test runner found.
 - No single-test command available (add a test framework first).
+- `preview`/`typecheck` scripts are not present in `package.json`.
 
 # Code Style and Conventions
 ## General
 - Prefer small, focused components and utilities; split large files when practical.
 - Avoid unnecessary comments; add only for non-obvious behavior.
 - Keep UI responsive; prefer flex/grid over absolute positioning.
+- Keep files ESM-only; avoid CommonJS patterns.
 - Do not introduce non-ASCII unless the file already uses it.
 
 ## TypeScript / React
@@ -80,13 +87,13 @@
 - Use `createClient` from `@supabase/supabase-js` for DB/storage.
 
 ## API Conventions (Edge Functions)
-- Base path uses `make-server-98397747` in routes.
+- Base path uses `make-server-98397747` in routes (current value; verify if it changes).
 - JSON error responses include `error` and set HTTP status.
 - Log inputs and error context with `console.log`/`console.error`.
 - Keep request validation near the top of each handler.
 
 ## Supabase Storage
-- Asset bucket name is `make-45024be7-assets` (see server code).
+- Asset bucket name is `make-45024be7-assets` (current value; verify if it changes).
 - Prefer signed URLs for assets; do not make buckets public without need.
 - Store assets under userId-prefixed paths when possible.
 
@@ -96,7 +103,7 @@
 - Do not log secrets; redact tokens in logs when present.
 
 # Repository-Specific Notes
-- No Cursor rules or Copilot instructions are present.
+- No Cursor rules or Copilot instructions are present (checked `.cursorrules`, `.cursor/rules/`, `.github/copilot-instructions.md`).
 - `guidelines/Guidelines.md` is a template and currently unused.
 - `PROMPT_ENGINEERING_GUIDE.md` documents AI prompt contracts and workflows.
 - `README-AI-SETUP.md` documents Hugging Face vs Replicate setup.
