@@ -16,21 +16,4 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            // Group major libraries into separate chunks
-            if (id.includes('@mui')) return 'vendor-mui'
-            if (id.includes('@radix-ui')) return 'vendor-radix'
-            if (id.includes('fabric')) return 'vendor-fabric'
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) return 'vendor-react'
-            // Put the rest of node_modules in a generic catch-all
-            return 'vendor'
-          }
-        }
-      }
-    }
-  }
 })
