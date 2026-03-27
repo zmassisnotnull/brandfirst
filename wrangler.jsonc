@@ -9,12 +9,12 @@
 
   // Fallback for environments that still run `wrangler deploy` (Workers mode)
   // This prevents "Missing entry-point to Worker script or to assets directory".
-  "assets": {
-    "directory": "./dist"
-  },
+  // "assets": {
+  //   "directory": "./dist"
+  // },
 
   // Runtime compatibility for Pages Functions / Workers behavior
-  "compatibility_date": "2026-03-05",
+  "compatibility_date": "2026-03-05"
 
   // Optional: enable Node.js compatibility if later needed
   // "compatibility_flags": ["nodejs_compat"],
