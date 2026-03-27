@@ -1,0 +1,28 @@
+﻿
+> @figma/my-make-file@0.0.1 build
+> vite build
+
+[36mvite v6.3.5 [32mbuilding for production...[36m[39m
+transforming...
+[32m??[39m 2413 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mdist/[22m[32mindex.html                 [39m[1m[2m    0.43 kB[22m[1m[22m[2m ??gzip:   0.28 kB[22m
+[2mdist/[22m[35massets/index-ZvzajxwL.css  [39m[1m[2m  151.49 kB[22m[1m[22m[2m ??gzip:  22.02 kB[22m
+[2mdist/[22m[36massets/index-Q0qqJvWw.js   [39m[1m[33m2,553.51 kB[39m[22m[2m ??gzip: 895.73 kB[22m
+node.exe : [33m
+위치 C:\Program Files\nodejs\npm.ps1:29 문자:3
++   & $NODE_EXE $NPM_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([33m:String) [], Re 
+   moteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(!) Some chunks are larger than 500 kB after minification. Conside
+r:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking:
+ https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarn
+ingLimit.[39m
+[32m??built in 10.08s[39m
