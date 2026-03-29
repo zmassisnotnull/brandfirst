@@ -56,53 +56,53 @@ export function CameraCapture({ onCapture, onCancel, onGalleryClick }: CameraCap
   };
 
   const handleCapture = () => {
-    if (!videoRef.current || !canvasRef.current || !stream || !containerRef.current) return;
+    if (!videoRef.current || !canvasRef.current || !stream || !containerRef.current || !stream.getVideoTracks()[0]) return;
 
     const video = videoRef.current;
     const canvas = canvasRef.current;
+    const container = containerRef.current;
     
+    // 1. 실제 비디오 해상도
     const videoWidth = video.videoWidth;
     const videoHeight = video.videoHeight;
     
-    const containerWidth = containerRef.current.clientWidth;
-    const containerHeight = containerRef.current.clientHeight;
+    // 2. 화면상의 컨테이너 및 가이드 프레임 위치 계산 (getBoundingClientRect로 정밀도 확보)
+    const containerRect = container.getBoundingClientRect();
+    // 가이드 프레임 요소를 직접 찾기 위해 ref를 사용하거나 querySelector 활용
+    const frameElement = container.querySelector('.border-blue-500');
+    if (!frameElement) return;
+    const frameRect = frameElement.getBoundingClientRect();
     
-    // 가이드 프레임 계산 (CSS와 동일한 로직)
-    const padding = 30;
-    let frameWidth = containerWidth - padding * 2;
-    let frameHeight = frameWidth / ASPECT_RATIO;
-    
-    if (frameHeight > containerHeight - padding * 2) {
-      frameHeight = containerHeight - padding * 2;
-      frameWidth = frameHeight * ASPECT_RATIO;
-    }
-    
-    // 비디오 해상도 대비 가이드 프레임의 비율 계산
-    // 비디오가 object-cover이므로 화면에 꽉 차게 렌더링됨
+    // 3. 비디오가 object-cover로 렌더링될 때의 실제 표시 영역 계산
     const videoAspectRatio = videoWidth / videoHeight;
-    const containerAspectRatio = containerWidth / containerHeight;
+    const containerAspectRatio = containerRect.width / containerRect.height;
     
     let renderWidth, renderHeight, offsetX = 0, offsetY = 0;
     
     if (videoAspectRatio > containerAspectRatio) {
-      renderHeight = containerHeight;
-      renderWidth = containerHeight * videoAspectRatio;
-      offsetX = (renderWidth - containerWidth) / 2;
+      renderHeight = containerRect.height;
+      renderWidth = containerRect.height * videoAspectRatio;
+      offsetX = (renderWidth - containerRect.width) / 2;
     } else {
-      renderWidth = containerWidth;
-      renderHeight = containerWidth / videoAspectRatio;
-      offsetY = (renderHeight - containerHeight) / 2;
+      renderWidth = containerRect.width;
+      renderHeight = containerRect.width / videoAspectRatio;
+      offsetY = (renderHeight - containerRect.height) / 2;
     }
 
     const scale = videoWidth / renderWidth;
     
-    const frameLeft = (containerWidth - frameWidth) / 2;
-    const frameTop = (containerHeight - frameHeight) / 2;
+    // 4. 프레임 '안쪽'을 기준으로 자르기 위해 테두리 두께(2px)만큼 보정
+    const borderWidth = 2;
+    const relativeX = frameRect.left - containerRect.left + borderWidth;
+    const relativeY = frameRect.top - containerRect.top + borderWidth;
+    const innerWidth = frameRect.width - (borderWidth * 2);
+    const innerHeight = frameRect.height - (borderWidth * 2);
 
-    const cropX = (frameLeft + offsetX) * scale;
-    const cropY = (frameTop + offsetY) * scale;
-    const cropWidth = frameWidth * scale;
-    const cropHeight = frameHeight * scale;
+    // 5. 비디오 좌표계로 변환 (정수형으로 반올림하여 서브픽셀 누수 방지)
+    const cropX = Math.round((relativeX + offsetX) * scale);
+    const cropY = Math.round((relativeY + offsetY) * scale);
+    const cropWidth = Math.round(innerWidth * scale);
+    const cropHeight = Math.round(innerHeight * scale);
 
     canvas.width = cropWidth;
     canvas.height = cropHeight;
@@ -110,6 +110,7 @@ export function CameraCapture({ onCapture, onCancel, onGalleryClick }: CameraCap
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // 보정된 좌표로 비디오 프레임 추출
     ctx.drawImage(
       video,
       cropX, cropY, cropWidth, cropHeight,

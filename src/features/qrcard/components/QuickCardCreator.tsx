@@ -109,14 +109,20 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
 
   // 카메라 촬영 완료 핸들러 (프레임에 맞춰서 찍었으므로 크롭 단계 건너뜀)
   const handleCameraCapture = async (file: File) => {
+    const currentSide = uploadSide;
     setShowCamera(false);
     setUploadSide(null);
 
     const previewUrl = URL.createObjectURL(file);
-    setFrontImage(file);
-    setFrontPreview(previewUrl);
-
-    await processAnalysis(file);
+    
+    if (currentSide === 'back') {
+      setBackImage(file);
+      setBackPreview(previewUrl);
+    } else {
+      setFrontImage(file);
+      setFrontPreview(previewUrl);
+      await processAnalysis(file);
+    }
   };
 
   // 공통 분석 프로세스 (코드 중복 방지)
@@ -353,7 +359,11 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
             className={`border-dashed border-2 transition-colors cursor-pointer ${backPreview ? 'border-purple-500 bg-purple-50/30' : 'bg-gray-50/50 hover:bg-gray-50'}`} 
             onClick={() => {
               setUploadSide('back');
-              fileInputRef.current?.click();
+              if (isMobile) {
+                setShowCamera(true);
+              } else {
+                fileInputRef.current?.click();
+              }
             }}
           >
             <CardContent className="flex flex-col items-center justify-center py-8 space-y-3">
@@ -447,7 +457,11 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
                     className="w-full h-full flex flex-col items-center justify-center space-y-2 cursor-pointer hover:bg-gray-100/80 transition-colors"
                     onClick={() => {
                       setUploadSide('back');
-                      fileInputRef.current?.click();
+                      if (isMobile) {
+                        setShowCamera(true);
+                      } else {
+                        fileInputRef.current?.click();
+                      }
                     }}
                   >
                     <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
@@ -566,8 +580,9 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
             setUploadSide(null);
           }}
           onGalleryClick={() => {
+            const currentSide = uploadSide;
             setShowCamera(false);
-            setUploadSide('front');
+            setUploadSide(currentSide);
             setTimeout(() => {
               fileInputRef.current?.click();
             }, 100);
