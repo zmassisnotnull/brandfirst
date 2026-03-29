@@ -19,6 +19,7 @@ import { useIsMobile } from '@/app/components/ui/use-mobile';
 import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/app/components/ui/card';
+import { ImageCropper } from './ImageCropper';
 import { digitalCardApi } from '@/app/services/digitalCardApi';
 import { getDeviceId } from '@/app/utils/deviceId';
 import { getSupabaseClient } from '../../../../utils/supabase/client';
@@ -53,105 +54,125 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
   });
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showCropper, setShowCropper] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // 이미지 선택 핸들러
-  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  // 이미지 선택 핸들러 (크롭 전 단계)
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !uploadSide) return;
 
-    const previewUrl = URL.createObjectURL(file);
-    
+    // 앞면인 경우 크롭 단계 진행
     if (uploadSide === 'front') {
-      setFrontImage(file);
-      setFrontPreview(previewUrl);
+      setSelectedImage(file);
+      setShowCropper(true);
     } else {
+      // 뒷면은 크롭 없이 바로 업로드
+      const previewUrl = URL.createObjectURL(file);
       setBackImage(file);
       setBackPreview(previewUrl);
     }
+    
+    // input 초기화 (같은 파일 다시 선택 가능하도록)
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
 
-    // 앞면인 경우에만 AI 분석 실행
-    if (uploadSide === 'front') {
-      setStep('analyzing');
-      setError(null);
+  // 크롭 완료 핸들러 (기존 handleImageChange의 로직을 이어받음)
+  const handleCropComplete = async (croppedFile: File) => {
+    setShowCropper(false);
+    setSelectedImage(null);
+    setUploadSide(null);
 
-      try {
-        const reader = new FileReader();
-        reader.onerror = () => {
-          throw new Error('파일을 읽는 중 오류가 발생했습니다.');
-        };
-        
-        reader.onload = async () => {
-          try {
-            const base64 = reader.result as string;
+    const previewUrl = URL.createObjectURL(croppedFile);
+    setFrontImage(croppedFile);
+    setFrontPreview(previewUrl);
+
+    setStep('analyzing');
+    setError(null);
+
+    try {
+      const reader = new FileReader();
+      reader.onerror = () => {
+        throw new Error('파일을 읽는 중 오류가 발생했습니다.');
+      };
+      
+      reader.onload = async () => {
+        try {
+          const base64 = reader.result as string;
+          
+          const response = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-98397747/api/analyze-card`, {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json',
+              'apikey': publicAnonKey,
+              'Authorization': `Bearer ${publicAnonKey}`
+            },
+            body: JSON.stringify({ 
+              image: base64, 
+              imageBase64: base64
+            })
+          });
+
+          if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.error || '명함 분석에 실패했습니다.');
+          }
+
+          const result = await response.json();
+          const extracted = result.data || result;
+
+          // 휴대폰 번호(010) 또는 일반 전화번호를 찾는 더 강력한 로직
+          const findPhoneNumber = (obj: any) => {
+            if (!obj) return '';
             
-            const response = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-98397747/api/analyze-card`, {
-              method: 'POST',
-              headers: { 
-                'Content-Type': 'application/json',
-                'apikey': publicAnonKey,
-                'Authorization': `Bearer ${publicAnonKey}`
-              },
-              body: JSON.stringify({ 
-                image: base64, 
-                imageBase64: base64
-              })
-            });
-
-            if (!response.ok) {
-              const errorData = await response.json().catch(() => ({}));
-              throw new Error(errorData.error || '명함 분석에 실패했습니다.');
+            // 1. 명시적인 휴대폰(010) 우선 확인
+            const mobileKeys = ['mobile', 'cell', 'phone'];
+            for (const key of mobileKeys) {
+              const val = String(obj[key] || '');
+              const digits = val.replace(/[^\d]/g, '');
+              if (digits.startsWith('010') && digits.length >= 10) return val;
             }
 
-            const result = await response.json();
-            const extracted = result.data || result;
+            // 2. 모든 필드에서 010 번호 찾기
+            for (const key in obj) {
+              const val = String(obj[key] || '');
+              const digits = val.replace(/[^\d]/g, '');
+              if (digits.startsWith('010') && digits.length >= 10) return val;
+            }
 
-            // 휴대폰 번호(010)를 찾는 더 강력한 로직
-            const findMobileNumber = (obj: any) => {
-              if (!obj) return '';
-              
-              // 1. 명시적인 휴대폰 관련 키 우선 확인
-              const priorityKeys = ['mobile', 'cell', 'phone', 'landline'];
-              for (const key of priorityKeys) {
-                const val = String(obj[key] || '');
-                const digits = val.replace(/[^\d]/g, '');
-                if (digits.startsWith('010') && digits.length >= 10) return val;
-              }
+            // 3. 010 번호가 없다면, 일반 전화번호(landline/office/tel) 확인
+            const phoneKeys = ['phone', 'tel', 'landline', 'office', 'call', 'mobile'];
+            for (const key of phoneKeys) {
+              const val = String(obj[key] || '');
+              const digits = val.replace(/[^\d]/g, '');
+              if (digits.length >= 7) return val;
+            }
 
-              // 2. 모든 필드를 순회하며 010으로 시작하는 번호 찾기
-              for (const key in obj) {
-                const val = String(obj[key] || '');
-                const digits = val.replace(/[^\d]/g, '');
-                if (digits.startsWith('010') && digits.length >= 10) return val;
-              }
+            // 4. 마지막 수단: 값이 있는 첫 번째 번호 관련 필드
+            return obj.mobile || obj.phone || obj.tel || '';
+          };
 
-              // 3. 010 번호를 못 찾았다면 mobile 필드 값 그대로 사용 (fallback)
-              return obj.mobile || '';
-            };
+          const phoneVal = findPhoneNumber(extracted);
 
-            const phoneVal = findMobileNumber(extracted);
-
-            setData({
-              name: extracted.name || '',
-              phone: formatKRPhoneNumber(phoneVal),
-              email: extracted.email || ''
-            });
-            setStep('confirm');
-          } catch (innerErr: any) {
-            console.error('Inner Analysis error:', innerErr);
-            setError('AI 분석 중 오류가 발생했습니다. 직접 입력해 주세요.');
-            setStep('confirm');
-          }
-        };
-        reader.readAsDataURL(file);
-      } catch (err: any) {
-        console.error('Outer Analysis error:', err);
-        setError('이미지 처리 중 오류가 발생했습니다.');
-        setStep('confirm');
-      }
+          setData({
+            name: extracted.name || '',
+            phone: formatKRPhoneNumber(phoneVal),
+            email: extracted.email || ''
+          });
+          setStep('confirm');
+        } catch (innerErr: any) {
+          console.error('Inner Analysis error:', innerErr);
+          setError('AI 분석 중 오류가 발생했습니다. 직접 입력해 주세요.');
+          setStep('confirm');
+        }
+      };
+      reader.readAsDataURL(croppedFile);
+    } catch (err: any) {
+      console.error('Outer Analysis error:', err);
+      setError('이미지 처리 중 오류가 발생했습니다.');
+      setStep('confirm');
     }
-    
-    setUploadSide(null); // 사용 완료 후 초기화
   };
 
   // 최종 저장 핸들러
@@ -459,6 +480,18 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
         capture={isMobile ? "environment" : undefined}
         onChange={handleImageChange} 
       />
+
+      {showCropper && selectedImage && (
+        <ImageCropper 
+          image={selectedImage}
+          onCrop={handleCropComplete}
+          onCancel={() => {
+            setShowCropper(false);
+            setSelectedImage(null);
+            setUploadSide(null);
+          }}
+        />
+      )}
     </div>
   );
 }
