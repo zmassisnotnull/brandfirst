@@ -17,6 +17,7 @@ interface ProfileData {
   location?: string;
   profile_image?: string;
   cover_image?: string;
+  back_image?: string;
   theme_color?: string;
   is_public?: boolean;
   socialLinks?: Array<{
@@ -103,7 +104,7 @@ export const digitalCardApi = {
       }
 
       const data: ApiResponse<any> = await response.json();
-      return data.profile;
+      return data;
     } catch (error) {
       console.error('Get profile error:', error);
       throw error;
@@ -111,7 +112,7 @@ export const digitalCardApi = {
   },
 
   /**
-   * 프로필 생성/업데이트
+   * 프로필 저장/업데이트 (인증 필요)
    */
   async saveProfile(profileData: ProfileData): Promise<{ success: boolean; id: string; message: string }> {
     try {
@@ -119,8 +120,6 @@ export const digitalCardApi = {
       if (!token) {
         throw new Error('인증이 필요합니다.');
       }
-
-      console.log('💾 Saving profile:', profileData);
 
       const response = await fetch(`${API_BASE_URL}/profiles`, {
         method: 'POST',
@@ -144,6 +143,40 @@ export const digitalCardApi = {
       };
     } catch (error) {
       console.error('Save profile error:', error);
+      throw error;
+    }
+  },
+
+  /**
+   * 익명 프로필 생성 (No-Login flow)
+   */
+  async saveAnonymousProfile(profileData: any, anonymousId?: string): Promise<{ success: boolean; id: string; message: string }> {
+    try {
+      console.log('👣 Saving anonymous profile:', { ...profileData, anonymous_id: anonymousId });
+      const response = await fetch(`${API_BASE_URL}/profiles/anonymous`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...profileData,
+          anonymous_id: anonymousId
+        }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || '익명 프로필 저장에 실패했습니다.');
+      }
+
+      const data: ApiResponse<any> = await response.json();
+      return {
+        success: data.success || false,
+        id: data.id || '',
+        message: data.message || '저장되었습니다.',
+      };
+    } catch (error) {
+      console.error('Save anonymous profile error:', error);
       throw error;
     }
   },
@@ -176,50 +209,47 @@ export const digitalCardApi = {
   },
 
   /**
-   * 조회수 증가
+   * 익명 프로필 소유권 이전
    */
-  async incrementView(id: string, viewerInfo?: {
-    viewer_ip?: string;
-    user_agent?: string;
-    referrer?: string;
-  }): Promise<void> {
+  async claimProfiles(profileIds: string[]): Promise<any> {
     try {
-      await fetch(`${API_BASE_URL}/profiles/${id}/view`, {
+      const token = await getAuthToken();
+      if (!token) throw new Error('인증이 필요합니다.');
+
+      const response = await fetch(`${API_BASE_URL}/profiles/claim`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ profileIds }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || '소유권 이전에 실패했습니다.');
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Claim profiles error:', error);
+      throw error;
+    }
+  },
+
+  /**
+   * 조회수 로그 기록
+   */
+  async logView(profileId: string): Promise<void> {
+    try {
+      await fetch(`${API_BASE_URL}/profiles/${profileId}/view`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(viewerInfo || {}),
       });
     } catch (error) {
-      console.error('Increment view error:', error);
-      // 조회수 증가 실패는 무시
-    }
-  },
-
-  /**
-   * 공유 수 증가
-   */
-  async incrementShare(id: string): Promise<void> {
-    try {
-      await fetch(`${API_BASE_URL}/profiles/${id}/share`, {
-        method: 'POST',
-      });
-    } catch (error) {
-      console.error('Increment share error:', error);
-    }
-  },
-
-  /**
-   * 저장 수 증가
-   */
-  async incrementSave(id: string): Promise<void> {
-    try {
-      await fetch(`${API_BASE_URL}/profiles/${id}/save`, {
-        method: 'POST',
-      });
-    } catch (error) {
-      console.error('Increment save error:', error);
+      console.error('Log view error:', error);
     }
   },
 

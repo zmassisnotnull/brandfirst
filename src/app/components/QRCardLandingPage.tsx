@@ -14,6 +14,7 @@ import {
   Star,
   Sparkles,
   Scan,
+  Camera,
   Link2,
   BarChart3,
   Phone,
@@ -61,16 +62,14 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
             {/* Headline - Extra Large */}
             <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-[1.1] tracking-tight">
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                <span className="logo-brand">QR 코드</span>로 연결하는
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                나만의 <span className="logo-brand">디지털 명함</span>
+                명함 사진 찍고 <br />
+                <span className="logo-brand text-orange-500">10초</span> 만에 완성
               </span>
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
-              스캔 한 번으로 모든 정보를 전달하는 스마트한 명함을 만나보세요.
+              AI가 명함 정보를 즉시 분석하여 디지털 명함으로 만들어 드립니다. <br />
+              <span className="font-medium text-blue-600">로그인 없이 지금 바로 시작하세요.</span>
             </p>
 
             {/* CTA Buttons - Minimalist */}
@@ -88,11 +87,11 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
                 <>
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-base rounded-full shadow-lg hover:shadow-xl transition-all group !p-[30px] font-bold"
-                    onClick={() => onOpenAuthModal ? onOpenAuthModal() : onNavigate('auth')}
+                    className="bg-orange-500 hover:bg-orange-600 text-white text-lg rounded-full shadow-[0_10px_40px_rgba(249,115,22,0.3)] hover:shadow-[0_15px_50px_rgba(249,115,22,0.4)] transition-all group !px-10 !py-8 font-extrabold"
+                    onClick={() => onNavigate('qrcard-create')}
                   >
-                    무료로 시작하기
-                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                    10초 만에 만들기
+                    <Zap className="w-6 h-6 ml-3 fill-current animate-pulse" />
                   </Button>
                   <Button
                     size="lg"
@@ -125,6 +124,57 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
               </div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* 3-Step Process - Quick & Easy */}
+      <section className="py-24 bg-white border-y border-gray-100">
+        <div className="container mx-auto max-w-6xl px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">세상에서 가장 빠른 명함 디지털화</h2>
+            <p className="text-gray-500">복잡한 입력 없이 사진 한 장이면 충분합니다.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-12">
+            {[
+              {
+                step: "01",
+                icon: <Camera className="w-8 h-8 text-blue-600" />,
+                title: "사진 찍기",
+                desc: "가지고 계신 종이 명함을 스마트폰으로 선명하게 촬영하세요."
+              },
+              {
+                step: "02",
+                icon: <Sparkles className="w-8 h-8 text-purple-600" />,
+                title: "AI 분석",
+                desc: "AI가 이름, 연락처, 이메일 등의 정보를 1초 만에 정확히 추출합니다."
+              },
+              {
+                step: "03",
+                icon: <Smartphone className="w-8 h-8 text-orange-600" />,
+                title: "즉시 연결",
+                desc: "생성된 QR 코드를 공유하거나 연락처를 주소록에 바로 저장하세요."
+              }
+            ].map((item, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.2 }}
+                className="relative p-8 rounded-3xl bg-gray-50/50 hover:bg-white hover:shadow-xl transition-all border border-transparent hover:border-gray-100 group text-center"
+              >
+                <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center font-bold text-gray-300">
+                  {item.step}
+                </div>
+                <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

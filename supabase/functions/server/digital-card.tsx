@@ -132,7 +132,44 @@ digitalCardRouter.get('/profiles/:id', async (c) => {
 });
 
 // ============================================
-// 3. POST /profiles - 프로필 생성/업데이트
+// 3. POST /profiles/anonymous - 익명 프로필 생성 (90일 보관)
+// ============================================
+digitalCardRouter.post('/profiles/anonymous', async (c) => {
+  try {
+    console.log('=== POST /profiles/anonymous ===');
+    const profileData = await c.req.json();
+    const supabase = getSupabaseClient();
+
+    const { data: newProfile, error } = await supabase
+      .from('digital_card_profiles')
+      .insert({
+        name: profileData.name,
+        title: profileData.title,
+        company: profileData.company,
+        phone: profileData.phone,
+        email: profileData.email,
+        profile_image: profileData.profile_image,
+        back_image: profileData.back_image, // 뒷면 이미지 추가
+        is_public: true,
+        user_id: null,
+      })
+      .select()
+      .single();
+
+    if (error) return c.json({ error: '익명 프로필 저장 실패' }, 500);
+
+    return c.json({ 
+      success: true, 
+      id: newProfile.id,
+      message: '90일 동안 보관됩니다.' 
+    });
+  } catch (error) {
+    return c.json({ error: '서버 오류' }, 500);
+  }
+});
+
+// ============================================
+// 4. POST /profiles - 프로필 생성/업데이트
 // ============================================
 digitalCardRouter.post('/profiles', async (c) => {
   try {
@@ -166,6 +203,7 @@ digitalCardRouter.post('/profiles', async (c) => {
       location,
       profile_image,
       cover_image,
+      back_image,
       theme_color,
       is_public,
       socialLinks,
@@ -210,6 +248,7 @@ digitalCardRouter.post('/profiles', async (c) => {
           location,
           profile_image,
           cover_image,
+          back_image,
           theme_color,
           is_public: is_public !== undefined ? is_public : true,
         })
@@ -290,6 +329,7 @@ digitalCardRouter.post('/profiles', async (c) => {
           location,
           profile_image,
           cover_image,
+          back_image,
           theme_color: theme_color || 'from-blue-500 to-blue-600',
           is_public: is_public !== undefined ? is_public : true,
         })
@@ -541,6 +581,56 @@ digitalCardRouter.post('/profiles/:id/save', async (c) => {
   } catch (error: any) {
     console.error('POST /profiles/:id/save error:', error);
     return c.json({ success: true });
+  }
+});
+
+// ============================================
+// 9. POST /profiles/claim - 익명 프로필 소유권 이전
+// ============================================
+digitalCardRouter.post('/profiles/claim', async (c) => {
+  try {
+    console.log('=== POST /profiles/claim ===');
+    
+    const accessToken = c.req.header('Authorization')?.split(' ')[1];
+    if (!accessToken) {
+      return c.json({ error: '인증이 필요합니다.' }, 401);
+    }
+
+    const { user, error: authError } = await authenticateUser(accessToken);
+    if (authError || !user) {
+      return c.json({ error: '인증에 실패했습니다.' }, 401);
+    }
+
+    const { profileIds } = await c.req.json();
+    if (!profileIds || !Array.isArray(profileIds)) {
+      return c.json({ error: '유효하지 않은 요청입니다.' }, 400);
+    }
+
+    const supabase = getSupabaseClient();
+
+    // user_id가 NULL인 프로필들만 현재 사용자의 ID로 업데이트
+    const { data: updated, error } = await supabase
+      .from('digital_card_profiles')
+      .update({ user_id: user.id })
+      .in('id', profileIds)
+      .is('user_id', null)
+      .select();
+
+    if (error) {
+      console.error('Claim error:', error);
+      return c.json({ error: '소유권 이전에 실패했습니다.' }, 500);
+    }
+
+    console.log(`Claimed ${updated?.length || 0} profiles for user ${user.id}`);
+
+    return c.json({ 
+      success: true, 
+      count: updated?.length || 0,
+      message: '모든 익명 명함이 계정에 연결되었습니다.' 
+    });
+  } catch (error: any) {
+    console.error('POST /profiles/claim error:', error);
+    return c.json({ error: '서버 오류가 발생했습니다.' }, 500);
   }
 });
 

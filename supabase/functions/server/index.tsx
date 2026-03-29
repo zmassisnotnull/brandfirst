@@ -118,6 +118,21 @@ const createDraftEntries = async (options?: {
 };
 
 const registerPrintEndpoints = (slug: string) => {
+  app.post(`/${slug}/api/analyze-card`, async (c) => {
+    try {
+      const body = await c.req.json();
+      const image = body.image || body.imageBase64;
+      
+      if (!image) return c.json({ error: '이미지 데이터가 없습니다.' }, 400);
+
+      const data = await aiGen.analyzeBusinessCard(image);
+      return c.json({ success: true, data });
+    } catch (error: any) {
+      console.error('analyze-card route error:', error);
+      return c.json({ error: '명함 분석 중 오류가 발생했습니다.' }, 500);
+    }
+  });
+
   app.post(`/${slug}/api/card/auto-generate`, async (c) => {
     try {
       const body = await c.req.json();
@@ -748,135 +763,14 @@ app.post("/make-server-98397747/api/deduct-credits", async (c) => {
   }
 });
 
+
 // ============================================
-// PDF Generation & Analysis
+// PDF Generation Utilities
 // ============================================
 
-/**
- * Analyze existing business card using OpenAI Vision
- */
-app.post("/make-server-98397747/api/analyze-card", async (c) => {
-  try {
-    console.log('=== Card Analysis Request ===');
-    const { imageBase64 } = await c.req.json();
-
-    if (!imageBase64) {
-      return c.json({ error: '이미지 데이터가 필요합니다.' }, 400);
-    }
-
-    console.log('Image data received, length:', imageBase64.length);
-    console.log('Calling OpenAI Vision API...');
-    
-    // OpenAI Vision API 호출
-    const openaiApiKey = Deno.env.get('OPENAI_API_KEY');
-    if (!openaiApiKey) {
-      console.error('OPENAI_API_KEY not found in environment variables');
-      return c.json({ 
-        error: 'API 설정이 필요합니다.',
-        fallbackMode: true 
-      }, 503);
-    }
-
-    console.log('OpenAI API key found, making request...');
-
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${openaiApiKey}`,
-      },
-      body: JSON.stringify({
-        model: 'gpt-4o',
-        messages: [
-          {
-            role: 'user',
-            content: [
-              {
-                type: 'text',
-                text: `이 명함 이미지를 분석하여 다음 정보를 JSON 형식으로 추출해주세요:
-- name: 이름
-- title: 직함/직책
-- company: 회사명
-- phone: 전화번호
-- email: 이메일
-
-정보가 없으면 null을 반환하세요. 오직 JSON만 반환하세요.`,
-              },
-              {
-                type: 'image_url',
-                image_url: {
-                  url: imageBase64,
-                },
-              },
-            ],
-          },
-        ],
-        max_tokens: 500,
-      }),
-    });
-
-    console.log('OpenAI API response status:', response.status);
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('OpenAI API error status:', response.status);
-      console.error('OpenAI API error response:', errorText);
-      
-      // Check if it's a quota error
-      if (response.status === 429 || errorText.includes('insufficient_quota')) {
-        return c.json({
-          error: 'AI 분석 서비스 일시적으로 사용 제한에 도달했습니다.',
-          errorType: 'quota_exceeded',
-          fallbackMode: true,
-          suggestion: '수동으로 정보를 입력하거나, 잠시 후 다시 시도해주세요.'
-        }, 429);
-      }
-      
-      throw new Error(`OpenAI Vision API 호출 실패: ${response.status} - ${errorText}`);
-    }
-
-    const data = await response.json();
-    console.log('OpenAI API response data:', JSON.stringify(data, null, 2));
-    
-    const content = data.choices[0]?.message?.content;
-    
-    if (!content) {
-      console.error('No content in OpenAI response:', data);
-      throw new Error('OpenAI 응답이 비어있습니다.');
-    }
-
-    console.log('OpenAI response content:', content);
-
-    // JSON 파싱
-    let extractedData: Record<string, unknown>;
-    try {
-      // Extract JSON from markdown code blocks if present
-      const jsonMatch = content.match(/```json\s*([\s\S]*?)\s*```/) || content.match(/\{[\s\S]*\}/);
-      const jsonStr = jsonMatch ? (jsonMatch[1] || jsonMatch[0]) : content;
-      extractedData = JSON.parse(jsonStr);
-    } catch (parseError) {
-      console.error('JSON parsing error:', parseError);
-      console.error('Content to parse:', content);
-      throw new Error('OpenAI 응답을 파싱할 수 없습니다.');
-    }
-
-    console.log('Extracted data:', extractedData);
-    console.log('=== Card Analysis Success ===');
-
-    return c.json({
-      ...extractedData,
-      logoUrl: null, // 로고 추출은 추후 구현
-    });
-  } catch (error: any) {
-    console.error('=== Card Analysis Error ===');
-    console.error('Error message:', error.message);
-    console.error('Error stack:', error.stack);
-    return c.json({
-      error: error.message || '명함 분석 중 오류가 발생했습니다.',
-      fallbackMode: true
-    }, 500);
-  }
-});
+const createFulfillmentRequest = async (exportId: string) => {
+  return { success: true, exportId };
+};
 
 /**
  * Upload user's own logo image

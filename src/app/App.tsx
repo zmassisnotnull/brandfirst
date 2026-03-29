@@ -9,6 +9,8 @@ import { QRCardNavigation } from './components/QRCardNavigation';
 import { QRCardLandingPage } from './components/QRCardLandingPage';
 import { QRCardPricingPage } from './components/QRCardPricingPage';
 import { QRCardCreditPage } from './components/QRCardCreditPage';
+import { QuickCardCreator } from '@/features/qrcard/components/QuickCardCreator';
+import { CardViewer } from '@/features/qrcard/components/CardViewer';
 import { AuthModal } from './components/AuthModal';
 import { ServiceTracker } from './components/ServiceTracker';
 import { StyleShowcasePage } from './components/StyleShowcasePage';
@@ -29,6 +31,8 @@ import { PricingPage } from './components/PricingPage';
 import { AccountPage } from './components/AccountPage';
 import { getSupabaseClient } from '../../utils/supabase/client';
 import { projectId, publicAnonKey } from '../../utils/supabase/info';
+import { digitalCardApi } from './services/digitalCardApi';
+import { getDeviceId } from './utils/deviceId';
 
 interface ContactWithCompany {
   id: number;
@@ -149,6 +153,10 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    // Generate/retrieve device ID
+    const deviceId = getDeviceId();
+    console.log('📱 Device ID initialized:', deviceId);
+
     // Check for existing session using Supabase
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
@@ -250,6 +258,22 @@ export default function App() {
     fetchUserCredits(user.id);
     fetchUserPackage(user.id);
 
+    // 🔗 익명 생성된 명함이 있다면 현재 계정으로 연결 (Claim)
+    try {
+      const storedAnonymousCards = localStorage.getItem('anonymous_cards');
+      if (storedAnonymousCards) {
+        const profileIds = JSON.parse(storedAnonymousCards);
+        if (Array.isArray(profileIds) && profileIds.length > 0) {
+          console.log('🔗 익명 명함 소유권 이전 시작:', profileIds);
+          const claimResult = await digitalCardApi.claimProfiles(profileIds);
+          console.log('✅ 소유권 이전 완료:', claimResult);
+          localStorage.removeItem('anonymous_cards');
+        }
+      }
+    } catch (error) {
+      console.error('❌ 소유권 이전 중 오류:', error);
+    }
+
     // QR Card 랜딩 페이지에서 로그인한 경우 디지털 명함으로 자동 이동
     if (currentPage === 'qrcard-landing') {
       setCurrentPage('qrcard-digital');
@@ -267,7 +291,7 @@ export default function App() {
   };
 
   // 페이지 이동 시 인증 체크
-  const handleNavigate = (page: string) => {
+  const handleNavigate = (page: string, params?: { id?: string; profileId?: string }) => {
     // 보호된 페이지인지 확인
     if (protectedPages.includes(page) && !user) {
       console.log('⚠️ 로그인 필요:', page);
@@ -285,6 +309,11 @@ export default function App() {
 
     setPreviousPage(currentPage); // 이전 페이지 저장
     setCurrentPage(page);
+    
+    // 파라미터가 있으면 상태 업데이트
+    if (params?.id || params?.profileId) {
+      setProfileId(params.id || params.profileId || '');
+    }
 
     // 페이지 전환 시 스크롤을 최상단으로 이동
     window.scrollTo(0, 0);
@@ -590,6 +619,10 @@ export default function App() {
         />;
       case 'style-showcase':
         return <StyleShowcasePage onNavigate={handleNavigate} />;
+      case 'qrcard-create':
+        return <QuickCardCreator onNavigate={handleNavigate} />;
+      case 'qrcard-view':
+        return <CardViewer profileId={profileId} onNavigate={handleNavigate} />;
       case 'public-profile':
         return profileId ? <PublicProfile profileId={profileId} /> : <HomePage onNavigate={handleNavigate} />;
       default:
@@ -598,7 +631,7 @@ export default function App() {
   };
 
   // QR Card 사이트 페이지인지 확인 (QR Card 전용 Navigation 사용)
-  const isQRCardSite = ['qrcard-landing', 'qrcard-digital', 'qrcard-pricing', 'qrcard-plans', 'qrcard-credit'].includes(currentPage);
+  const isQRCardSite = ['qrcard-landing', 'qrcard-digital', 'qrcard-pricing', 'qrcard-plans', 'qrcard-credit', 'qrcard-create', 'qrcard-view'].includes(currentPage);
 
   // 디버깅용 로그
   console.log('🔍 App.tsx - currentPage:', currentPage);

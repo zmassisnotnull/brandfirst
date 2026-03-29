@@ -26,6 +26,75 @@ interface CardContent {
 }
 
 /**
+ * OpenAI Vision API를 사용하여 명함 이미지 분석 및 텍스트 추출
+ */
+export async function analyzeBusinessCard(base64Image: string): Promise<Partial<CardContent>> {
+  const apiKey = Deno.env.get('OPENAI_API_KEY');
+  
+  if (!apiKey) {
+    console.warn('OPENAI_API_KEY not set, returning mock data');
+    return {
+      name: '홍길동',
+      title: '대표이사',
+      company: '(주)브랜드퍼스트',
+      phone: '010-1234-5678',
+      email: 'ceo@brandfirst.ai'
+    };
+  }
+
+  try {
+    // base64에서 데이터 헤더(data:image/jpeg;base64,) 제거
+    const imageUrl = base64Image.includes('base64,') 
+      ? base64Image 
+      : `data:image/jpeg;base64,${base64Image}`;
+
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        messages: [
+          {
+            role: 'system',
+            content: '당신은 명함 정보를 정확하게 추출하는 AI 전문가입니다. 특히 한국 명함의 특징인 휴대전화(Mobile, M, 010)와 일반전화(Tel, T, Office, 02, 031 등)를 구분하여 추출하는 데 능숙합니다. 항상 JSON 형식으로만 응답해주세요.'
+          },
+          {
+            role: 'user',
+            content: [
+              {
+                type: 'text',
+                text: '이 명함 이미지에서 다음 정보를 추출해주세요: name, title, company, mobile, landline, email. **중요: 010으로 시작하는 번호는 무조건 mobile 필드에, 그 외의 지역번호(02, 031 등)로 시작하는 번호는 landline 필드에 넣어주세요.** 한국어 정보가 있으면 한국어로 우선 추출해주세요. JSON으로만 답변하세요.'
+              },
+              {
+                type: 'image_url',
+                image_url: { url: imageUrl }
+              }
+            ]
+          }
+        ],
+        max_tokens: 500,
+        response_format: { type: 'json_object' }
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`OpenAI Vision Error: ${response.status} ${errorText}`);
+    }
+
+    const data = await response.json();
+    const result = JSON.parse(data.choices[0].message.content);
+    return result;
+  } catch (error) {
+    console.error('Error analyzing business card:', error);
+    throw error;
+  }
+}
+
+/**
  * 로고 이미지 분석
  * - 비율 계산
  * - 추천 레이아웃 결정
