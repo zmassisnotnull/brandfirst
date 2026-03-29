@@ -527,6 +527,10 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
             setShowCamera(false);
             setUploadSide(null);
           }}
+          onGalleryClick={() => {
+            setShowCamera(false);
+            fileInputRef.current?.click();
+          }}
         />
       )}
     </div>

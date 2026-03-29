@@ -1,16 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Camera as CameraIcon, X, Zap, ZapOff, RefreshCw } from 'lucide-react';
+import { Camera as CameraIcon, X, Zap, ZapOff, RefreshCw, Image as ImageIcon } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
 
 interface CameraCaptureProps {
   onCapture: (file: File) => void;
   onCancel: () => void;
+  onGalleryClick: () => void;
 }
 
 const ASPECT_RATIO = 1.8; // 90mm x 50mm
 
-export function CameraCapture({ onCapture, onCancel }: CameraCaptureProps) {
+export function CameraCapture({ onCapture, onCancel, onGalleryClick }: CameraCaptureProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -54,21 +56,18 @@ export function CameraCapture({ onCapture, onCancel }: CameraCaptureProps) {
   };
 
   const handleCapture = () => {
-    if (!videoRef.current || !canvasRef.current || !stream) return;
+    if (!videoRef.current || !canvasRef.current || !stream || !containerRef.current) return;
 
     const video = videoRef.current;
     const canvas = canvasRef.current;
     
-    // 비디오 실제 해상도 기반으로 캔버스 설정
     const videoWidth = video.videoWidth;
     const videoHeight = video.videoHeight;
     
-    // 화면상의 가이드 프레임 위치 및 크기 계산 (비율 기반)
-    // 화면 중앙에 위치한 가이드 프레임의 상대적 좌표를 비디오 해상도에 매핑
-    const containerWidth = video.clientWidth;
-    const containerHeight = video.clientHeight;
+    const containerWidth = containerRef.current.clientWidth;
+    const containerHeight = containerRef.current.clientHeight;
     
-    // 가이드 프레임 (CSS와 동일한 로직)
+    // 가이드 프레임 계산 (CSS와 동일한 로직)
     const padding = 30;
     let frameWidth = containerWidth - padding * 2;
     let frameHeight = frameWidth / ASPECT_RATIO;
@@ -78,33 +77,45 @@ export function CameraCapture({ onCapture, onCancel }: CameraCaptureProps) {
       frameWidth = frameHeight * ASPECT_RATIO;
     }
     
+    // 비디오 해상도 대비 가이드 프레임의 비율 계산
+    // 비디오가 object-cover이므로 화면에 꽉 차게 렌더링됨
+    const videoAspectRatio = videoWidth / videoHeight;
+    const containerAspectRatio = containerWidth / containerHeight;
+    
+    let renderWidth, renderHeight, offsetX = 0, offsetY = 0;
+    
+    if (videoAspectRatio > containerAspectRatio) {
+      renderHeight = containerHeight;
+      renderWidth = containerHeight * videoAspectRatio;
+      offsetX = (renderWidth - containerWidth) / 2;
+    } else {
+      renderWidth = containerWidth;
+      renderHeight = containerWidth / videoAspectRatio;
+      offsetY = (renderHeight - containerHeight) / 2;
+    }
+
+    const scale = videoWidth / renderWidth;
+    
     const frameLeft = (containerWidth - frameWidth) / 2;
     const frameTop = (containerHeight - frameHeight) / 2;
 
-    // 비디오 해상도 대비 가이드 프레임의 비율 계산
-    const scaleX = videoWidth / containerWidth;
-    const scaleY = videoHeight / containerHeight;
+    const cropX = (frameLeft + offsetX) * scale;
+    const cropY = (frameTop + offsetY) * scale;
+    const cropWidth = frameWidth * scale;
+    const cropHeight = frameHeight * scale;
 
-    const cropX = frameLeft * scaleX;
-    const cropY = frameTop * scaleY;
-    const cropWidth = frameWidth * scaleX;
-    const cropHeight = frameHeight * scaleY;
-
-    // 캔버스 크기를 자를 영역만큼 설정
     canvas.width = cropWidth;
     canvas.height = cropHeight;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // 비디오에서 프레임 영역만 추출하여 캔버스에 그림
     ctx.drawImage(
       video,
-      cropX, cropY, cropWidth, cropHeight, // 소스 영역 (비디오 해상도 기준)
-      0, 0, cropWidth, cropHeight          // 대상 영역 (캔버스 기준)
+      cropX, cropY, cropWidth, cropHeight,
+      0, 0, cropWidth, cropHeight
     );
 
-    // 이미지 파일로 변환
     canvas.toBlob((blob) => {
       if (blob) {
         const file = new File([blob], `capture-${Date.now()}.jpg`, { type: 'image/jpeg' });
@@ -150,7 +161,10 @@ export function CameraCapture({ onCapture, onCancel }: CameraCaptureProps) {
       </div>
 
       {/* 비디오 화면 및 오버레이 */}
-      <div className="flex-1 relative overflow-hidden bg-black flex items-center justify-center">
+      <div 
+        ref={containerRef}
+        className="flex-1 relative overflow-hidden bg-black flex items-center justify-center"
+      >
         {error ? (
           <div className="p-8 text-center space-y-4">
             <p className="text-white/80">{error}</p>
@@ -168,36 +182,15 @@ export function CameraCapture({ onCapture, onCancel }: CameraCaptureProps) {
               className="w-full h-full object-cover"
             />
             
-            {/* 가이드 가이드 프레임 (SVG Overlay) */}
-            <div className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center">
-              <svg className="w-full h-full">
-                <defs>
-                  <mask id="hole">
-                    <rect width="100%" height="100%" fill="white" />
-                    <rect 
-                      x="30" 
-                      y="15%" 
-                      width="calc(100% - 60px)" 
-                      height="calc((100% - 60px) / 1.8)" 
-                      fill="black" 
-                      rx="12"
-                    />
-                  </mask>
-                </defs>
-                <rect width="100%" height="100%" fill="rgba(0,0,0,0.6)" mask="url(#hole)" />
-                {/* 파란색 테두리 */}
-                <rect 
-                  x="30" 
-                  y="15%" 
-                  width="calc(100% - 60px)" 
-                  height="calc((100% - 60px) / 1.8)" 
-                  fill="none" 
-                  stroke="#3b82f6" 
-                  strokeWidth="2" 
-                  rx="12"
-                  className="animate-pulse"
-                />
-              </svg>
+            {/* 가이드 프레임 (SVG Overlay) */}
+            <div className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center p-[30px]">
+              <div className="relative w-full max-h-full aspect-[9/5] border-2 border-blue-500 rounded-xl shadow-[0_0_0_100vmax_rgba(0,0,0,0.6)] animate-pulse">
+                {/* 모서리 표시 (선선택사항) */}
+                <div className="absolute -top-1 -left-1 w-6 h-6 border-t-4 border-l-4 border-blue-500 rounded-tl-lg" />
+                <div className="absolute -top-1 -right-1 w-6 h-6 border-t-4 border-r-4 border-blue-500 rounded-tr-lg" />
+                <div className="absolute -bottom-1 -left-1 w-6 h-6 border-b-4 border-l-4 border-blue-500 rounded-bl-lg" />
+                <div className="absolute -bottom-1 -right-1 w-6 h-6 border-b-4 border-r-4 border-blue-500 rounded-br-lg" />
+              </div>
             </div>
 
             {/* 안내 텍스트 */}
@@ -212,13 +205,15 @@ export function CameraCapture({ onCapture, onCancel }: CameraCaptureProps) {
       </div>
 
       {/* 하단 컨트롤러 */}
-      <div className="p-8 bg-black shrink-0 flex items-center justify-center space-x-12">
+      <div className="p-8 bg-black shrink-0 flex items-center justify-between px-12">
         <button 
-          onClick={startCamera}
-          className="p-3 text-white/50 hover:text-white transition-colors"
-          disabled={isInitializing}
+          onClick={onGalleryClick}
+          className="flex flex-col items-center gap-1 text-white/70 hover:text-white transition-colors"
         >
-          <RefreshCw className={`w-6 h-6 ${isInitializing ? 'animate-spin text-blue-400' : ''}`} />
+          <div className="p-3 bg-white/10 rounded-full">
+            <ImageIcon className="w-6 h-6" />
+          </div>
+          <span className="text-[10px]">앨범</span>
         </button>
 
         <button 
@@ -234,7 +229,16 @@ export function CameraCapture({ onCapture, onCancel }: CameraCaptureProps) {
           <div className="absolute -inset-2 rounded-full border-2 border-blue-500 opacity-0 group-hover:opacity-100 transition-opacity animate-pulse"></div>
         </button>
 
-        <div className="w-12" /> {/* 간격 맞추기용 더미 */}
+        <button 
+          onClick={startCamera}
+          className="flex flex-col items-center gap-1 text-white/50 hover:text-white transition-colors"
+          disabled={isInitializing}
+        >
+          <div className="p-3 bg-white/5 rounded-full">
+            <RefreshCw className={`w-6 h-6 ${isInitializing ? 'animate-spin text-blue-400' : ''}`} />
+          </div>
+          <span className="text-[10px]">재설정</span>
+        </button>
       </div>
 
       <canvas ref={canvasRef} className="hidden" />
