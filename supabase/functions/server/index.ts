@@ -118,7 +118,13 @@ const createDraftEntries = async (options?: {
 };
 
 const registerPrintEndpoints = (slug: string) => {
-  app.post(`/${slug}/api/analyze-card`, async (c) => {
+  // Register both with and without slug prefix just in case of Hono's basePath behavior
+  const registerRoute = (path: string, handler: any) => {
+    app.post(path, handler);
+    app.post(`/${slug}${path}`, handler);
+  };
+
+  registerRoute('/api/analyze-card', async (c) => {
     try {
       const body = await c.req.json();
       const image = body.image || body.imageBase64;
@@ -133,7 +139,7 @@ const registerPrintEndpoints = (slug: string) => {
     }
   });
 
-  app.post(`/${slug}/api/upload-image`, async (c) => {
+  registerRoute('/api/upload-image', async (c) => {
     try {
       const { image, fileName, bucket = 'make-45024be7-assets' } = await c.req.json();
       if (!image) return c.json({ error: '이미지 데이터가 없습니다.' }, 400);
