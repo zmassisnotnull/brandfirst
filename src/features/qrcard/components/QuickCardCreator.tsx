@@ -20,7 +20,7 @@ import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/app/components/ui/card';
 import { digitalCardApi } from '@/app/services/digitalCardApi';
-import { getDeviceId } from '../../../../app/utils/deviceId';
+import { getDeviceId } from '@/app/utils/deviceId';
 import { getSupabaseClient } from '../../../../utils/supabase/client';
 import { projectId, publicAnonKey } from '../../../../utils/supabase/info';
 
