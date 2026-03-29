@@ -236,36 +236,16 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
     setError(null);
 
     try {
-      const supabase = getSupabaseClient();
+      // 1. 앞면 이미지 업로드 (서버 사이드 프록시 이용)
+      const frontUrl = await digitalCardApi.uploadQrCardImage(frontImage);
       
-      // 1. 앞면 이미지 업로드
-      const frontFileName = `${Date.now()}-front-${frontImage.name}`;
-      const { data: frontUploadData, error: frontUploadError } = await supabase.storage
-        .from('make-45024be7-assets')
-        .upload(`qrcards/${frontFileName}`, frontImage);
-
-      if (frontUploadError) {
-        console.error('Front Image Upload Error:', frontUploadError);
-        throw new Error(`앞면 이미지 업로드 실패: ${frontUploadError.message}`);
-      }
-
-      const { data: { publicUrl: frontUrl } } = supabase.storage
-        .from('make-45024be7-assets')
-        .getPublicUrl(`qrcards/${frontUploadData.path}`);
-
       // 2. 뒷면 이미지 업로드 (있는 경우)
       let backUrl = null;
       if (backImage) {
-        const backFileName = `${Date.now()}-back-${backImage.name}`;
-        const { data: backUploadData, error: backUploadError } = await supabase.storage
-          .from('make-45024be7-assets')
-          .upload(`qrcards/${backFileName}`, backImage);
-
-        if (!backUploadError) {
-          const { data: { publicUrl } } = supabase.storage
-            .from('make-45024be7-assets')
-            .getPublicUrl(`qrcards/${backUploadData.path}`);
-          backUrl = publicUrl;
+        try {
+          backUrl = await digitalCardApi.uploadQrCardImage(backImage);
+        } catch (backErr) {
+          console.error('Back image upload failed, proceeding without it:', backErr);
         }
       }
 

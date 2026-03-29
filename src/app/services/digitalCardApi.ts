@@ -281,4 +281,43 @@ export const digitalCardApi = {
       throw error;
     }
   },
+
+  /**
+   * 명함 이미지 업로드 (서버 사이드 프록시 이용)
+   */
+  async uploadQrCardImage(file: File): Promise<string> {
+    try {
+      const reader = new FileReader();
+      const base64Promise = new Promise<string>((resolve, reject) => {
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+
+      const base64 = await base64Promise;
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}.jpg`;
+
+      const response = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-98397747/api/upload-image`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          image: base64,
+          fileName
+        }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({ error: '업로드 중 서버 오류가 발생했습니다.' }));
+        throw new Error(error.error || '이미지 업로드에 실패했습니다.');
+      }
+
+      const data = await response.json();
+      return data.url;
+    } catch (error) {
+      console.error('Upload QR card image error:', error);
+      throw error;
+    }
+  },
 };

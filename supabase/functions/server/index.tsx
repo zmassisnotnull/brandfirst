@@ -133,6 +133,44 @@ const registerPrintEndpoints = (slug: string) => {
     }
   });
 
+  app.post(`/${slug}/api/upload-image`, async (c) => {
+    try {
+      const { image, fileName, bucket = 'make-45024be7-assets' } = await c.req.json();
+      if (!image) return c.json({ error: '이미지 데이터가 없습니다.' }, 400);
+
+      const supabase = createClient(
+        Deno.env.get('SUPABASE_URL')!,
+        Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+      );
+
+      // base64 -> buffer conversion
+      const base64Data = image.replace(/^data:image\/\w+;base64,/, "");
+      const binaryString = atob(base64Data);
+      const bytes = new Uint8Array(binaryString.length);
+      for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+
+      const { data, error } = await supabase.storage
+        .from(bucket)
+        .upload(`qrcards/${fileName}`, bytes, {
+          contentType: 'image/jpeg',
+          upsert: true
+        });
+
+      if (error) throw error;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from(bucket)
+        .getPublicUrl(data.path);
+
+      return c.json({ success: true, url: publicUrl });
+    } catch (error: any) {
+      console.error('upload-image error:', error);
+      return c.json({ error: error.message || '이미지 업로드에 실패했습니다.' }, 500);
+    }
+  });
+
   app.post(`/${slug}/api/card/auto-generate`, async (c) => {
     try {
       const body = await c.req.json();
