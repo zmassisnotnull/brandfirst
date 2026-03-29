@@ -1,5 +1,5 @@
 import { getSupabaseClient } from '../../../utils/supabase/client';
-import { projectId } from '../../../utils/supabase/info';
+import { projectId, publicAnonKey } from '../../../utils/supabase/info';
 
 const API_BASE_URL = `https://${projectId}.supabase.co/functions/v1/make-server-98397747/api/digital-card`;
 
@@ -301,6 +301,8 @@ export const digitalCardApi = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'apikey': publicAnonKey,
+          'Authorization': `Bearer ${publicAnonKey}`
         },
         body: JSON.stringify({
           image: base64,

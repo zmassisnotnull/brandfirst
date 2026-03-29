@@ -2,5 +2,5 @@ name = "brandfirst"
 pages_build_output_dir = "./dist"
 compatibility_date = "2026-03-05"
 
-[assets]
-directory = "./dist"
+# [assets]
+# directory = "./dist"
