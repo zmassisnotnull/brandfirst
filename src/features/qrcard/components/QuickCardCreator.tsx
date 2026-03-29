@@ -27,10 +27,35 @@ import { getSupabaseClient } from '../../../../utils/supabase/client';
 import { projectId, publicAnonKey } from '../../../../utils/supabase/info';
 
 const formatKRPhoneNumber = (val: string) => {
-  const digits = val.replace(/[^\d]/g, '');
-  if (digits.length <= 3) return digits;
-  if (digits.length <= 7) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
-  return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7, 11)}`;
+  let digits = val.replace(/[^\d]/g, '');
+  
+  // 국가번호 +82 처리 (82로 시작하고 10자 이상인 경우 82를 0으로 변환)
+  if (digits.startsWith('82') && digits.length >= 10) {
+    digits = '0' + digits.slice(2);
+  }
+  
+  // 서울 지역번호 (02) 처리
+  if (digits.startsWith('02')) {
+    if (digits.length <= 2) return digits;
+    if (digits.length <= 5) return `${digits.slice(0, 2)}-${digits.slice(2)}`;
+    if (digits.length <= 9) return `${digits.slice(0, 2)}-${digits.slice(2, 5)}-${digits.slice(5)}`;
+    return `${digits.slice(0, 2)}-${digits.slice(2, 6)}-${digits.slice(6, 10)}`;
+  }
+  
+  // 기타 지역번호 및 휴대폰 (010, 031, 070 등)
+  if (digits.startsWith('0')) {
+    if (digits.length <= 3) return digits;
+    if (digits.length <= 6) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+    if (digits.length <= 10) return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
+    return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7, 11)}`;
+  }
+
+  // 대표번호 (1588, 1544 등)
+  if (digits.length === 8) {
+    return `${digits.slice(0, 4)}-${digits.slice(4)}`;
+  }
+  
+  return digits;
 };
 
 interface ExtractedData {
@@ -131,16 +156,27 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
           const findPhoneNumber = (obj: any) => {
             if (!obj) return '';
             const mobileKeys = ['mobile', 'cell', 'phone'];
+            
+            // 010 또는 8210으로 시작하는 번호 우선 검색
             for (const key of mobileKeys) {
               const val = String(obj[key] || '');
               const digits = val.replace(/[^\d]/g, '');
-              if (digits.startsWith('010') && digits.length >= 10) return val;
+              if ((digits.startsWith('010') && digits.length >= 10) || 
+                  (digits.startsWith('8210') && digits.length >= 11)) {
+                return val;
+              }
             }
+            
             for (const key in obj) {
               const val = String(obj[key] || '');
               const digits = val.replace(/[^\d]/g, '');
-              if (digits.startsWith('010') && digits.length >= 10) return val;
+              if ((digits.startsWith('010') && digits.length >= 10) || 
+                  (digits.startsWith('8210') && digits.length >= 11)) {
+                return val;
+              }
             }
+
+            // 일반 전화번호 또는 기타 번호 검색
             const phoneKeys = ['phone', 'tel', 'landline', 'office', 'call', 'mobile'];
             for (const key of phoneKeys) {
               const val = String(obj[key] || '');
