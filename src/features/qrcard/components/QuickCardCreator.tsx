@@ -106,10 +106,30 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
             const result = await response.json();
             const extracted = result.data || result;
 
-            const phoneVal = extracted.mobile || 
-                             (extracted.landline?.replace(/[^\d]/g, '').startsWith('010') ? extracted.landline : '') ||
-                             (extracted.phone?.replace(/[^\d]/g, '').startsWith('010') ? extracted.phone : '') ||
-                             '';
+            // 휴대폰 번호(010)를 찾는 더 강력한 로직
+            const findMobileNumber = (obj: any) => {
+              if (!obj) return '';
+              
+              // 1. 명시적인 휴대폰 관련 키 우선 확인
+              const priorityKeys = ['mobile', 'cell', 'phone', 'landline'];
+              for (const key of priorityKeys) {
+                const val = String(obj[key] || '');
+                const digits = val.replace(/[^\d]/g, '');
+                if (digits.startsWith('010') && digits.length >= 10) return val;
+              }
+
+              // 2. 모든 필드를 순회하며 010으로 시작하는 번호 찾기
+              for (const key in obj) {
+                const val = String(obj[key] || '');
+                const digits = val.replace(/[^\d]/g, '');
+                if (digits.startsWith('010') && digits.length >= 10) return val;
+              }
+
+              // 3. 010 번호를 못 찾았다면 mobile 필드 값 그대로 사용 (fallback)
+              return obj.mobile || '';
+            };
+
+            const phoneVal = findMobileNumber(extracted);
 
             setData({
               name: extracted.name || '',

@@ -59,14 +59,14 @@ export async function analyzeBusinessCard(base64Image: string): Promise<Partial<
         messages: [
           {
             role: 'system',
-            content: '당신은 명함 정보를 정확하게 추출하는 AI 전문가입니다. 특히 한국 명함의 특징인 휴대전화(Mobile, M, 010)와 일반전화(Tel, T, Office, 02, 031 등)를 구분하여 추출하는 데 능숙합니다. 항상 JSON 형식으로만 응답해주세요.'
+            content: '당신은 명함 정보를 정확하게 추출하는 AI 전문가입니다. 특히 한국 명합의 "M"(Mobile/010), "T"(Tel/지역번호), "F"(Fax) 라벨을 정확히 인지하여 정보를 추출합니다. 항상 JSON 형식으로만 응답해주세요.'
           },
           {
             role: 'user',
             content: [
               {
                 type: 'text',
-                text: '이 명함 이미지에서 다음 정보를 추출해주세요: name, title, company, mobile, landline, email. **중요: 010으로 시작하는 번호는 무조건 mobile 필드에, 그 외의 지역번호(02, 031 등)로 시작하는 번호는 landline 필드에 넣어주세요.** 한국어 정보가 있으면 한국어로 우선 추출해주세요. JSON으로만 답변하세요.'
+                text: '이 명함 이미지에서 다음 정보를 추출해주세요: name, title, company, mobile, landline, email. **중요: "M" 또는 "Mobile" 옆의 010으로 시작하는 번호는 무조건 mobile 필드에, "T" 또는 "Tel" 옆의 지역번호(02, 031 등)로 시작하는 번호는 landline 필드에 넣어주세요. 만약 "M" 표시가 없더라도 010으로 시작하는 번호는 mobile로 간주하세요.** 한국어 정보가 있으면 한국어로 우선 추출해주세요. JSON으로만 답변하세요.'
               },
               {
                 type: 'image_url',
