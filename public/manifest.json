@@ -1,6 +1,6 @@
 {
   "name": "GoQRCard",
-  "short_name": "GQRC",
+  "short_name": "GoQRCard",
   "description": "Create and manage your digital business cards with GoQRCard.",
   "start_url": "/",
   "display": "standalone",
