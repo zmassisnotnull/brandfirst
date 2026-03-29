@@ -90,10 +90,12 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
     const file = e.target.files?.[0];
     if (!file || !uploadSide) return;
 
-    // 앞면인 경우 크롭 단계 진행
+    // 앞면인 경우 바로 분석 진행 (사용자 요청에 따라 단계 최소화)
     if (uploadSide === 'front') {
-      setSelectedImage(file);
-      setShowCropper(true);
+      const previewUrl = URL.createObjectURL(file);
+      setFrontImage(file);
+      setFrontPreview(previewUrl);
+      processAnalysis(file);
     } else {
       // 뒷면은 크롭 없이 바로 업로드
       const previewUrl = URL.createObjectURL(file);
@@ -334,6 +336,7 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
                       className="text-[10px] text-blue-500 underline"
                       onClick={(e) => {
                         e.stopPropagation();
+                        setUploadSide('front');
                         fileInputRef.current?.click();
                       }}
                     >
@@ -564,7 +567,10 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
           }}
           onGalleryClick={() => {
             setShowCamera(false);
-            fileInputRef.current?.click();
+            setUploadSide('front');
+            setTimeout(() => {
+              fileInputRef.current?.click();
+            }, 100);
           }}
         />
       )}
