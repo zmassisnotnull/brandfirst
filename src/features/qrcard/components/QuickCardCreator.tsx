@@ -540,7 +540,6 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
         ref={fileInputRef} 
         className="hidden" 
         accept="image/*" 
-        capture={isMobile ? "environment" : undefined}
         onChange={handleImageChange} 
       />
 
