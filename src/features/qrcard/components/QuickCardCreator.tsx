@@ -24,6 +24,13 @@ import { getDeviceId } from '@/app/utils/deviceId';
 import { getSupabaseClient } from '../../../../utils/supabase/client';
 import { projectId, publicAnonKey } from '../../../../utils/supabase/info';
 
+const formatKRPhoneNumber = (val: string) => {
+  const digits = val.replace(/[^\d]/g, '');
+  if (digits.length <= 3) return digits;
+  if (digits.length <= 7) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+  return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7, 11)}`;
+};
+
 interface ExtractedData {
   name: string;
   phone: string;
@@ -99,12 +106,14 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
             const result = await response.json();
             const extracted = result.data || result;
 
+            const phoneVal = extracted.mobile || 
+                             (extracted.landline?.replace(/[^\d]/g, '').startsWith('010') ? extracted.landline : '') ||
+                             (extracted.phone?.replace(/[^\d]/g, '').startsWith('010') ? extracted.phone : '') ||
+                             '';
+
             setData({
               name: extracted.name || '',
-              phone: extracted.mobile || 
-                     (extracted.landline?.replace(/[^\d]/g, '').startsWith('010') ? extracted.landline : '') ||
-                     (extracted.phone?.replace(/[^\d]/g, '').startsWith('010') ? extracted.phone : '') ||
-                     '',
+              phone: formatKRPhoneNumber(phoneVal),
               email: extracted.email || ''
             });
             setStep('confirm');
@@ -372,14 +381,7 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
                   <Input 
                     value={data.phone} 
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      const val = e.target.value.replace(/[^\d]/g, '');
-                      let formatted = val;
-                      if (val.length > 3 && val.length <= 7) {
-                        formatted = `${val.slice(0, 3)}-${val.slice(3)}`;
-                      } else if (val.length > 7) {
-                        formatted = `${val.slice(0, 3)}-${val.slice(3, 7)}-${val.slice(7, 11)}`;
-                      }
-                      setData({ ...data, phone: formatted });
+                      setData({ ...data, phone: formatKRPhoneNumber(e.target.value) });
                     }}
                     placeholder="010-1234-5678"
                   />
