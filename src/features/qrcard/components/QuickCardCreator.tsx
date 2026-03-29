@@ -20,6 +20,7 @@ import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/app/components/ui/card';
 import { ImageCropper } from './ImageCropper';
+import { CameraCapture } from './CameraCapture';
 import { digitalCardApi } from '@/app/services/digitalCardApi';
 import { getDeviceId } from '@/app/utils/deviceId';
 import { getSupabaseClient } from '../../../../utils/supabase/client';
@@ -55,6 +56,7 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showCropper, setShowCropper] = useState(false);
+  const [showCamera, setShowCamera] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -78,16 +80,20 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
-  // 크롭 완료 핸들러 (기존 handleImageChange의 로직을 이어받음)
-  const handleCropComplete = async (croppedFile: File) => {
-    setShowCropper(false);
-    setSelectedImage(null);
+  // 카메라 촬영 완료 핸들러 (프레임에 맞춰서 찍었으므로 크롭 단계 건너뜀)
+  const handleCameraCapture = async (file: File) => {
+    setShowCamera(false);
     setUploadSide(null);
 
-    const previewUrl = URL.createObjectURL(croppedFile);
-    setFrontImage(croppedFile);
+    const previewUrl = URL.createObjectURL(file);
+    setFrontImage(file);
     setFrontPreview(previewUrl);
 
+    await processAnalysis(file);
+  };
+
+  // 공통 분석 프로세스 (코드 중복 방지)
+  const processAnalysis = async (file: File) => {
     setStep('analyzing');
     setError(null);
 
@@ -122,34 +128,25 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
           const result = await response.json();
           const extracted = result.data || result;
 
-          // 휴대폰 번호(010) 또는 일반 전화번호를 찾는 더 강력한 로직
           const findPhoneNumber = (obj: any) => {
             if (!obj) return '';
-            
-            // 1. 명시적인 휴대폰(010) 우선 확인
             const mobileKeys = ['mobile', 'cell', 'phone'];
             for (const key of mobileKeys) {
               const val = String(obj[key] || '');
               const digits = val.replace(/[^\d]/g, '');
               if (digits.startsWith('010') && digits.length >= 10) return val;
             }
-
-            // 2. 모든 필드에서 010 번호 찾기
             for (const key in obj) {
               const val = String(obj[key] || '');
               const digits = val.replace(/[^\d]/g, '');
               if (digits.startsWith('010') && digits.length >= 10) return val;
             }
-
-            // 3. 010 번호가 없다면, 일반 전화번호(landline/office/tel) 확인
             const phoneKeys = ['phone', 'tel', 'landline', 'office', 'call', 'mobile'];
             for (const key of phoneKeys) {
               const val = String(obj[key] || '');
               const digits = val.replace(/[^\d]/g, '');
               if (digits.length >= 7) return val;
             }
-
-            // 4. 마지막 수단: 값이 있는 첫 번째 번호 관련 필드
             return obj.mobile || obj.phone || obj.tel || '';
           };
 
@@ -167,12 +164,25 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
           setStep('confirm');
         }
       };
-      reader.readAsDataURL(croppedFile);
+      reader.readAsDataURL(file);
     } catch (err: any) {
       console.error('Outer Analysis error:', err);
       setError('이미지 처리 중 오류가 발생했습니다.');
       setStep('confirm');
     }
+  };
+
+  // 크롭 완료 핸들러
+  const handleCropComplete = async (croppedFile: File) => {
+    setShowCropper(false);
+    setSelectedImage(null);
+    setUploadSide(null);
+
+    const previewUrl = URL.createObjectURL(croppedFile);
+    setFrontImage(croppedFile);
+    setFrontPreview(previewUrl);
+
+    await processAnalysis(croppedFile);
   };
 
   // 최종 저장 핸들러
@@ -259,7 +269,11 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
             className={`border-dashed border-2 transition-colors cursor-pointer ${frontPreview ? 'border-blue-500 bg-blue-50/30' : 'bg-gray-50/50 hover:bg-gray-50'}`} 
             onClick={() => {
               setUploadSide('front');
-              fileInputRef.current?.click();
+              if (isMobile) {
+                setShowCamera(true);
+              } else {
+                fileInputRef.current?.click();
+              }
             }}
           >
             <CardContent className="flex flex-col items-center justify-center py-8 space-y-3">
@@ -277,7 +291,20 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
               )}
               <div className="text-center">
                 <p className="font-semibold text-gray-700 text-sm">앞면 (필수)</p>
-                <p className="text-[10px] text-gray-400 mt-1">정보가 있는 면을 찍어주세요</p>
+                <div className="flex flex-col gap-1 items-center">
+                  <p className="text-[10px] text-gray-400">정보가 있는 면을 찍어주세요</p>
+                  {isMobile && !frontPreview && (
+                    <button 
+                      className="text-[10px] text-blue-500 underline"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        fileInputRef.current?.click();
+                      }}
+                    >
+                      앨범에서 선택하기
+                    </button>
+                  )}
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -488,6 +515,16 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
           onCancel={() => {
             setShowCropper(false);
             setSelectedImage(null);
+            setUploadSide(null);
+          }}
+        />
+      )}
+
+      {showCamera && (
+        <CameraCapture 
+          onCapture={handleCameraCapture}
+          onCancel={() => {
+            setShowCamera(false);
             setUploadSide(null);
           }}
         />
