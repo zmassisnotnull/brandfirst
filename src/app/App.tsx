@@ -9,10 +9,16 @@ import { QRCardNavigation } from './components/QRCardNavigation';
 import { QRCardLandingPage } from './components/QRCardLandingPage';
 import { QRCardPricingPage } from './components/QRCardPricingPage';
 import { QRCardCreditPage } from './components/QRCardCreditPage';
-import { QuickCardCreator } from '@/features/qrcard/components/QuickCardCreator';
-import { CardViewer } from '@/features/qrcard/components/CardViewer';
+import { QuickCardCreator } from '../features/qrcard/components/QuickCardCreator';
+import { ManualDigitization } from '../features/qrcard/components/ManualDigitization';
+import { MyCardView } from '../features/qrcard/components/MyCardView';
+import { CardViewer } from '../features/qrcard/components/CardViewer';
 import { AuthModal } from './components/AuthModal';
 import { ServiceTracker } from './components/ServiceTracker';
+import { QRCardAppShell, QRCardTab } from '../features/qrcard/components/QRCardAppShell';
+import { RecentContacts } from '../features/qrcard/components/RecentContacts';
+import { RecentCards } from '../features/qrcard/components/RecentCards';
+import { WalletView } from '../features/qrcard/components/WalletView';
 import { StyleShowcasePage } from './components/StyleShowcasePage';
 import { HomePage } from './components/HomePage';
 import { ProfileEditModal } from './components/ProfileEditModal';
@@ -90,6 +96,7 @@ export default function App() {
   const [usedServices, setUsedServices] = useState<UsedService[]>([]); // 사용 중인 서비스 추적 (빈 배열로 시작)
   const [pendingService, setPendingService] = useState<any>(null); // 결제 대기 중인 서비스
   const [showServiceModal, setShowServiceModal] = useState(false); // 서비스 선택 모달 표시 여부
+  const [appActiveTab, setAppActiveTab] = useState<QRCardTab>('recent_cards'); // QR Card App Mode 활성 탭
 
   const supabase = getSupabaseClient();
 
@@ -622,7 +629,17 @@ export default function App() {
       case 'qrcard-create':
         return <QuickCardCreator onNavigate={handleNavigate} />;
       case 'qrcard-view':
-        return <CardViewer profileId={profileId} onNavigate={handleNavigate} />;
+        return <CardViewer profileId={profileId || ''} onNavigate={handleNavigate} />;
+      case 'app-recent-contacts':
+        return <RecentContacts onNavigate={handleNavigate} />;
+      case 'app-recent-cards':
+        return <RecentCards onNavigate={handleNavigate} />;
+      case 'app-plus':
+        return <ManualDigitization onNavigate={handleNavigate} />;
+      case 'app-wallet':
+        return <WalletView onNavigate={handleNavigate} />;
+      case 'app-my-card':
+        return <MyCardView onNavigate={handleNavigate} user={user} />;
       case 'public-profile':
         return profileId ? <PublicProfile profileId={profileId} /> : <HomePage onNavigate={handleNavigate} />;
       default:
@@ -633,8 +650,12 @@ export default function App() {
   // QR Card 사이트 페이지인지 확인 (QR Card 전용 Navigation 사용)
   const isQRCardSite = ['qrcard-landing', 'qrcard-digital', 'qrcard-pricing', 'qrcard-plans', 'qrcard-credit', 'qrcard-create', 'qrcard-view'].includes(currentPage);
 
+  // QR Card App 모드인지 확인
+  const isAppMode = ['app-recent-contacts', 'app-recent-cards', 'app-plus', 'app-wallet', 'app-my-card'].includes(currentPage);
+
   // 디버깅용 로그
   console.log('🔍 App.tsx - currentPage:', currentPage);
+  console.log('🔍 App.tsx - isAppMode:', isAppMode);
   console.log('🔍 App.tsx - isQRCardSite:', isQRCardSite);
 
   return (
@@ -681,7 +702,27 @@ export default function App() {
           console.log('✅ 프로필 업데이트 완료:', updatedUser);
         }}
       />
-      {renderPage()}
+      {isAppMode ? (
+        <QRCardAppShell 
+          activeTab={appActiveTab} 
+          onTabChange={(tab: QRCardTab) => {
+            setAppActiveTab(tab);
+            const pageMap: Record<QRCardTab, string> = {
+              'recent_contacts': 'app-recent-contacts',
+              'recent_cards': 'app-recent-cards',
+              'plus': 'app-plus',
+              'wallet': 'app-wallet',
+              'my_card': 'app-my-card'
+            };
+            handleNavigate(pageMap[tab]);
+          }}
+          isLoggedIn={!!user}
+        >
+          {renderPage()}
+        </QRCardAppShell>
+      ) : (
+        renderPage()
+      )}
     </div>
   );
 }

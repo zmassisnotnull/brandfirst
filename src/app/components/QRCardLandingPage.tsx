@@ -29,6 +29,7 @@ import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Footer } from './Footer';
 import { motion } from 'motion/react';
+import { RecentCards } from '../features/qrcard/components/RecentCards';
 
 interface QRCardLandingPageProps {
   onNavigate: (page: string) => void;
@@ -122,6 +123,11 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
                 <Check className="w-4 h-4" />
                 <span>무제한 사용</span>
               </div>
+            </div>
+
+            {/* Recent Cards Section */}
+            <div className="mt-16 max-w-lg mx-auto">
+              <RecentCards onNavigate={onNavigate} />
             </div>
           </motion.div>
         </div>
