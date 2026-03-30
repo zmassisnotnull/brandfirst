@@ -1,5 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { Search, Filter, User as UserIcon, Grid, List as ListIcon, Phone, Mail, Wallet } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { 
+  Plus, 
+  Search, 
+  Filter, 
+  LayoutGrid, 
+  List, 
+  ArrowUpDown, 
+  MoreVertical, 
+  Share2, 
+  Mail, 
+  Phone, 
+  Building2, 
+  User, 
+  Clock, 
+  Star,
+  ChevronRight,
+  ArrowRight,
+  Loader2,
+  X
+} from 'lucide-react';
 import { cardWalletService, WalletContact } from '../../../app/services/cardWalletService';
 import { Button } from '../../../app/components/ui/button';
 import { cn } from '../../../app/components/ui/utils';
@@ -11,171 +30,197 @@ interface WalletViewProps {
 export function WalletView({ onNavigate }: WalletViewProps) {
   const [contacts, setContacts] = useState<WalletContact[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   useEffect(() => {
-    setContacts(cardWalletService.getWallet());
+    loadContacts();
   }, []);
 
-  const filteredContacts = contacts.filter(c => 
-    c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    c.company?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    c.title?.toLowerCase().includes(searchQuery.toLowerCase())
+  const loadContacts = async () => {
+    try {
+      setLoading(true);
+      const data = cardWalletService.getAllContacts();
+      setContacts(data);
+    } catch (err) {
+      console.error('Failed to load contacts:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filteredContacts = contacts.filter(contact => 
+    contact.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (contact.company && contact.company.toLowerCase().includes(searchQuery.toLowerCase())) ||
+    (contact.title && contact.title.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
-  if (contacts.length === 0) {
+  if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center py-24 px-8 text-center space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <div className="w-24 h-24 bg-primary/5 rounded-[2.5rem] flex items-center justify-center transform rotate-6 border border-primary/10">
-          <Wallet className="w-12 h-12 text-primary/40" />
+      <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-6">
+        <div className="relative">
+          <div className="absolute inset-0 bg-primary/10 blur-[40px] animate-pulse" />
+          <Loader2 className="w-12 h-12 text-primary animate-spin relative z-10" />
         </div>
-        <div className="space-y-2">
-          <h3 className="text-2xl font-black text-slate-900 tracking-tight">명함첩이 비어있네요</h3>
-          <p className="text-sm text-slate-500 leading-relaxed font-medium">
-            받은 명함을 보관하고 소중하게 관리하세요.<br />
-            나만의 비즈니스 네트워크가 시작됩니다.
-          </p>
-        </div>
-        <Button 
-          onClick={() => onNavigate('app-plus')}
-          className="mt-6 bg-primary hover:bg-primary/90 text-white rounded-2xl px-10 py-7 font-black shadow-xl shadow-primary/20 active:scale-95 transition-all"
-        >
-          첫 명함 담기
-        </Button>
+        <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] italic">Accessing Business Ledger...</p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
-      {/* Header & Search */}
-      <div className="sticky top-0 bg-background/90 backdrop-blur-xl z-20 pb-4 pt-1">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h2 className="text-3xl font-black text-slate-900 tracking-tighter">명함첩</h2>
-            <p className="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest leading-none">Your Network</p>
-          </div>
-          <div className="flex items-center gap-1.5 bg-slate-100 p-1.5 rounded-2xl border border-slate-200/50">
-            <button 
-              onClick={() => setViewMode('list')}
-              className={cn(
-                "p-2 rounded-xl transition-all",
-                viewMode === 'list' ? 'bg-white shadow-sm text-primary' : 'text-slate-400 shrink-0'
-              )}
-            >
-              <ListIcon className="w-4 h-4 stroke-[2.5px]" />
-            </button>
-            <button 
-              onClick={() => setViewMode('grid')}
-              className={cn(
-                "p-2 rounded-xl transition-all",
-                viewMode === 'grid' ? 'bg-white shadow-sm text-primary' : 'text-slate-400 shrink-0'
-              )}
-            >
-              <Grid className="w-4 h-4 stroke-[2.5px]" />
-            </button>
-          </div>
+    <div className="flex flex-col min-h-screen animate-in fade-in duration-1000">
+      {/* Editorial Header Hub */}
+      <header className="px-1 pt-6 space-y-8 mb-10">
+        <div className="flex items-center justify-between">
+           <div className="space-y-1.5">
+             <h1 className="text-4xl font-editorial font-black text-slate-900 tracking-tighter italic uppercase leading-none px-1">Identity Wallet</h1>
+             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em] opacity-60">Verified Business Ledger 1.3</p>
+           </div>
+           <button 
+             onClick={() => onNavigate('qrcard-digitize')}
+             className="w-16 h-16 bg-slate-900 rounded-[2rem] flex items-center justify-center text-white shadow-2xl shadow-slate-200 active:scale-95 transition-all group"
+           >
+             <Plus className="w-7 h-7 group-hover:rotate-90 transition-transform duration-500" />
+           </button>
         </div>
-        
-        <div className="relative group">
-          <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-            <Search className="w-5 h-5 text-slate-400 group-focus-within:text-primary transition-colors" />
-          </div>
-          <input 
-            type="text" 
-            placeholder="이름, 회사, 키워드 검색"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full h-14 pl-12 pr-4 bg-white border border-slate-200 rounded-[1.25rem] text-sm focus:ring-4 focus:ring-primary/5 focus:border-primary transition-all font-bold placeholder:text-slate-300 shadow-sm"
-          />
-        </div>
-      </div>
 
-      {/* Filter Chips (Feature Mockup for v1.3 aesthetic) */}
-      <div className="flex gap-2 overflow-x-auto -mx-5 px-5 scrollbar-hide pb-2">
-        {['전체', '즐겨찾기', '최근 추가'].map((filter, i) => (
-          <button 
-            key={filter} 
-            className={cn(
-              "px-5 py-2.5 rounded-full text-xs font-black whitespace-nowrap transition-all border",
-              i === 0 ? "bg-slate-900 text-white border-slate-900" : "bg-white text-slate-500 border-slate-200 hover:border-slate-300"
-            )}
-          >
-            {filter}
-          </button>
-        ))}
-      </div>
+        {/* Intelligence Search Bar */}
+        <div className="relative group overflow-hidden rounded-[2.5rem] bg-white shadow-2xl shadow-slate-100 border border-slate-50 transition-all focus-within:shadow-xl">
+           <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none">
+              <Search className="w-5 h-5 text-slate-300 group-focus-within:text-primary transition-colors" />
+           </div>
+           <input 
+             type="text" 
+             placeholder="Search Name, Role, or Organization" 
+             className="w-full h-18 pl-16 pr-8 bg-transparent border-none focus:ring-0 text-slate-900 font-bold placeholder:text-slate-300 transition-all uppercase tracking-tight text-sm italic"
+             value={searchQuery}
+             onChange={(e) => setSearchQuery(e.target.value)}
+           />
+           {searchQuery && (
+             <button 
+               onClick={() => setSearchQuery('')}
+               className="absolute inset-y-0 right-6 flex items-center text-slate-300 hover:text-slate-900"
+             >
+               <X className="w-5 h-5" />
+             </button>
+           )}
+        </div>
 
-      {/* Contacts List/Grid */}
-      {viewMode === 'list' ? (
-        <div className="space-y-3 pb-24">
-          {filteredContacts.map((contact) => (
-            <div 
-              key={contact.id} 
-              className="group flex items-center gap-4 bg-white p-4 rounded-[1.5rem] border border-slate-100/50 shadow-sm hover:border-primary/20 transition-all active:scale-[0.98] cursor-pointer"
-              onClick={() => onNavigate('qrcard-view', { profileId: contact.id })}
-            >
-              <div className="w-14 h-14 rounded-[1.25rem] bg-slate-50 flex-shrink-0 flex items-center justify-center overflow-hidden ring-2 ring-slate-50 group-hover:ring-primary/10">
-                {contact.profile_image ? (
-                  <img src={contact.profile_image} alt={contact.name} className="w-full h-full object-cover" />
-                ) : (
-                  <div className="bg-gradient-to-br from-slate-100 to-slate-50 w-full h-full flex items-center justify-center text-slate-300 font-black text-lg">
-                    {contact.name.charAt(0)}
-                  </div>
-                )}
-              </div>
-              <div className="flex-grow min-w-0 pr-1">
-                <h4 className="font-black text-slate-900 truncate leading-none mb-1.5">{contact.name}</h4>
-                <p className="text-[11px] font-bold text-slate-500 truncate opacity-70">
-                  {contact.title} {contact.company && ` • ${contact.company}`}
-                </p>
-              </div>
-              <div className="flex gap-1.5">
-                {contact.phone && (
-                  <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary active:scale-90 transition-transform">
-                    <Phone className="w-4 h-4 stroke-[2.5px]" />
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
+        {/* Refined Sorting/View Controls */}
+        <div className="flex items-center justify-between px-2 pt-2">
+           <div className="flex items-center gap-6">
+              <button className="flex items-center gap-2.5 text-[10px] font-black text-slate-900 uppercase tracking-[0.2em] group">
+                 <Filter className="w-4 h-4 text-slate-300 group-hover:text-primary transition-colors" />
+                 FILTERS
+              </button>
+              <button className="flex items-center gap-2.5 text-[10px] font-black text-slate-900 uppercase tracking-[0.2em] group">
+                 <ArrowUpDown className="w-4 h-4 text-slate-300 group-hover:text-primary transition-colors" />
+                 SORT
+              </button>
+           </div>
+           <div className="flex items-center bg-secondary/50 p-1.5 rounded-[1.25rem] border border-slate-100">
+             <button 
+               onClick={() => setViewMode('grid')}
+               className={cn(
+                 "p-2.5 rounded-[1rem] transition-all",
+                 viewMode === 'grid' ? "bg-white shadow-md text-slate-900" : "text-slate-300 hover:text-slate-900"
+               )}
+             >
+               <LayoutGrid className="w-4 h-4" />
+             </button>
+             <button 
+               onClick={() => setViewMode('list')}
+               className={cn(
+                 "p-2.5 rounded-[1rem] transition-all",
+                 viewMode === 'list' ? "bg-white shadow-md text-slate-900" : "text-slate-300 hover:text-slate-900"
+               )}
+             >
+               <List className="w-4 h-4" />
+             </button>
+           </div>
         </div>
-      ) : (
-        <div className="grid grid-cols-2 gap-4 pb-24">
-          {filteredContacts.map((contact) => (
-            <div 
-              key={contact.id} 
-              className="group bg-white rounded-[2rem] p-5 shadow-sm border border-slate-100/50 flex flex-col items-center text-center space-y-4 hover:border-primary/20 hover:shadow-md active:scale-95 transition-all cursor-pointer"
-              onClick={() => onNavigate('qrcard-view', { profileId: contact.id })}
-            >
-              <div className="w-20 h-20 rounded-[1.75rem] bg-slate-50 flex items-center justify-center overflow-hidden ring-4 ring-slate-50 group-hover:ring-primary/5">
-                {contact.profile_image ? (
-                  <img src={contact.profile_image} alt={contact.name} className="w-full h-full object-cover" />
-                ) : (
-                  <div className="bg-gradient-to-br from-slate-100 to-slate-50 w-full h-full flex items-center justify-center text-slate-300 font-black text-2xl">
-                    {contact.name.charAt(0)}
-                  </div>
-                )}
-              </div>
-              <div className="w-full overflow-hidden space-y-1">
-                <h4 className="font-black text-slate-900 truncate text-base leading-none">{contact.name}</h4>
-                <p className="text-[10px] font-bold text-slate-400 truncate tracking-tight uppercase opacity-80">
-                  {contact.company || 'Private'}
-                </p>
-              </div>
+      </header>
+
+      {/* Connection Grid/List Area */}
+      <main className="flex-grow space-y-10 pb-24">
+        {filteredContacts.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-20 px-10 text-center space-y-10">
+            <div className="w-32 h-32 bg-secondary rounded-[4rem] flex items-center justify-center transform 3.5:2 rotate-6 opacity-30">
+               <User className="w-16 h-16 text-slate-200" />
             </div>
-          ))}
-        </div>
-      )}
-      
-      {filteredContacts.length === 0 && searchQuery && (
-        <div className="py-24 text-center animate-in fade-in duration-500">
-          <div className="inline-block p-4 bg-slate-50 rounded-full mb-4">
-            <Search className="w-8 h-8 text-slate-200" />
+            <div className="space-y-3">
+              <h3 className="text-2xl font-editorial font-black text-slate-900 italic uppercase">NO CONNECTIONS FOUND</h3>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] leading-relaxed max-w-[200px] mx-auto">
+                Expand your search or add a new identity to the ledger.
+              </p>
+            </div>
           </div>
-          <p className="text-slate-400 text-sm font-bold tracking-tight">찾으시는 결과가 없습니다</p>
+        ) : (
+          <div className={cn(
+            "grid gap-6",
+            viewMode === 'grid' ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1"
+          )}>
+            {filteredContacts.map((contact) => (
+              <div 
+                key={contact.id}
+                onClick={() => onNavigate('qrcard-view', { profileId: contact.id })}
+                className="group relative bg-white hover:bg-slate-50 p-8 rounded-[3.5rem] shadow-sm hover:shadow-2xl hover:shadow-slate-200/50 transition-all border border-transparent hover:border-slate-50 cursor-pointer active:scale-[0.98] flex flex-col justify-between"
+              >
+                <div className="flex items-start justify-between mb-8">
+                   <div className="flex gap-6">
+                      <div className="w-20 h-20 rounded-[2.25rem] bg-secondary flex-shrink-0 flex items-center justify-center overflow-hidden ring-4 ring-white shadow-inner group-hover:scale-105 transition-transform duration-700">
+                        {contact.profile_image ? (
+                          <img src={contact.profile_image} className="w-full h-full object-cover" alt={contact.name} />
+                        ) : (
+                          <div className="text-slate-300 font-editorial font-black text-2xl italic uppercase">{contact.name.charAt(0)}</div>
+                        )}
+                      </div>
+                      <div className="space-y-1 pr-6 pt-1">
+                        <h4 className="font-editorial font-black text-slate-900 truncate text-2xl italic uppercase tracking-tighter leading-none">{contact.name}</h4>
+                        <div className="flex flex-col gap-1">
+                           <span className="text-[10px] font-black text-primary uppercase tracking-[0.15em] opacity-80">{contact.title || 'Verified Professional'}</span>
+                           <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest italic opacity-50">{contact.company || 'Direct Entity Hub'}</p>
+                        </div>
+                      </div>
+                   </div>
+                   <button className="p-3 rounded-2xl bg-secondary text-slate-300 hover:text-slate-950 transition-colors">
+                      <MoreVertical className="w-5 h-5" />
+                   </button>
+                </div>
+
+                <div className="flex items-end justify-between">
+                   <div className="flex gap-4">
+                      {contact.phone && (
+                         <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-300 group-hover:text-slate-900 group-hover:bg-white transition-all shadow-sm">
+                            <Phone className="w-4.5 h-4.5" />
+                         </div>
+                      )}
+                      {contact.email && (
+                         <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-300 group-hover:text-slate-900 group-hover:bg-white transition-all shadow-sm">
+                            <Mail className="w-4.5 h-4.5" />
+                         </div>
+                      )}
+                   </div>
+                   <div className="flex flex-col items-end gap-1 opacity-20 group-hover:opacity-100 transition-opacity">
+                      <p className="text-[8px] font-black text-slate-900 uppercase tracking-widest leading-none">Last Sync</p>
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
+                         {new Date(contact.last_contact_at || Date.now()).toLocaleDateString('ko-KR', { year: '2-digit', month: '2-digit', day: '2-digit' })}
+                      </span>
+                   </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </main>
+
+      {/* Advanced Branding Sync */}
+      <footer className="mt-auto px-1 pt-12 pb-24 text-center opacity-30">
+        <div className="flex flex-col items-center gap-1 grayscale opacity-50">
+          <p className="text-[10px] font-black text-slate-900 tracking-[0.4em] uppercase">Built on G-PLATFORM</p>
+          <p className="text-[8px] font-bold text-slate-500 tracking-[0.2em] uppercase">VERIFIED IDENTITY 1.3 LEDGER</p>
         </div>
-      )}
+      </footer>
     </div>
   );
 }

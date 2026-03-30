@@ -2,44 +2,52 @@
 
 :root {
   --font-size: 16px;
-  --background: #f8fafc;
-  --foreground: #0f172a;
-  --card: #ffffff;
-  --card-foreground: #0f172a;
-  --popover: #ffffff;
-  --popover-foreground: #0f172a;
-  --primary: #0066ff;
-  --primary-foreground: #ffffff;
-  --secondary: #e2e8f0;
-  --secondary-foreground: #0f172a;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: #f1f5f9;
-  --accent-foreground: #0f172a;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #e2e8f0;
-  --input: #ffffff;
-  --input-background: #f1f5f9;
-  --switch-background: #cbd5e1;
+  /* Azure Professional Palette */
+  --background: #F8FAFC;      /* Slate 50 - Foundation */
+  --foreground: #0F172A;      /* Slate 900 - Primary Text */
+  
+  --card: #FFFFFF;            /* White - Elevated Surface */
+  --card-foreground: #1E293B; /* Slate 800 */
+  
+  --popover: #FFFFFF;
+  --popover-foreground: #0F172A;
+  
+  --primary: #0066FF;         /* Executive Blue */
+  --primary-foreground: #FFFFFF;
+  
+  --secondary: #F1F5F9;       /* Slate 100 - Secondary Surface */
+  --secondary-foreground: #334155; /* Slate 700 */
+  
+  --muted: #F8FAFC;           /* Slate 50 */
+  --muted-foreground: #64748B; /* Slate 500 */
+  
+  --accent: #E2E8F0;          /* Slate 200 */
+  --accent-foreground: #0F172A;
+  
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  
+  --border: transparent;      /* Azure Rule: No Borders */
+  --input: #FFFFFF;
+  --input-background: #F1F5F9; /* Slate 100 */
+  --switch-background: #CBD5E1;
+  
+  --font-weight-bold: 700;
+  --font-weight-semibold: 600;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: #0066ff;
-  --chart-1: #0066ff;
-  --chart-2: #3b82f6;
-  --chart-3: #60a5fa;
-  --chart-4: #93c5fd;
-  --chart-5: #bfdbfe;
-  --radius: 1rem;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #0f172a;
-  --sidebar-primary: #0066ff;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f8fafc;
-  --sidebar-accent-foreground: #0f172a;
-  --sidebar-border: #e2e8f0;
-  --sidebar-ring: #0066ff;
+  
+  --ring: rgba(0, 102, 255, 0.2);
+  --radius: 1.25rem;          /* Soft Premium Radius */
+  
+  /* Chart colors for Statistics */
+  --chart-1: #0066FF;
+  --chart-2: #3B82F6;
+  --chart-3: #64748B;
+  --chart-4: #94A3B8;
+  --chart-5: #CBD5E1;
 }
+
 
 .dark {
   --background: oklch(0.145 0 0);

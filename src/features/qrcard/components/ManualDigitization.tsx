@@ -1,27 +1,74 @@
-import React, { useState } from 'react';
-import { Camera, Upload, Sparkles, X, Check, ArrowRight, Loader2, Image as ImageIcon } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { 
+  Camera, 
+  Upload, 
+  Sparkles, 
+  X, 
+  Check, 
+  ArrowRight, 
+  Loader2, 
+  Image as ImageIcon, 
+  QrCode, 
+  User, 
+  ShieldCheck, 
+  Zap,
+  Smartphone,
+  ChevronRight,
+  ArrowUpRight
+} from 'lucide-react';
 import { Button } from '../../../app/components/ui/button';
 import { cn } from '../../../app/components/ui/utils';
 import { CameraCapture } from './CameraCapture';
+import { getSupabaseClient } from '../../../../utils/supabase/client';
+import QRCode from 'qrcode';
 
 interface ManualDigitizationProps {
   onNavigate: (page: string, params?: any) => void;
 }
 
 export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
-  const [mode, setMode] = useState<'idle' | 'camera' | 'processing' | 'review'>('idle');
+  const [mode, setMode] = useState<'portal' | 'camera' | 'processing' | 'review' | 'my-qr'>('portal');
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
-  const [isUploading, setIsUploading] = useState(false);
+  const [userProfile, setUserProfile] = useState<any>(null);
+  const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>('');
+
+  useEffect(() => {
+    const fetchMyProfile = async () => {
+      const supabase = getSupabaseClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('user_id', user.id)
+          .eq('is_primary', true)
+          .maybeSingle();
+        
+        if (data) {
+          setUserProfile(data);
+          const url = `${window.location.origin}?card=${data.id}`;
+          const qrDataUrl = await QRCode.toDataURL(url, {
+            width: 400,
+            margin: 2,
+            color: {
+              dark: '#0f172a',
+              light: '#ffffff'
+            }
+          });
+          setQrCodeDataUrl(qrDataUrl);
+        }
+      }
+    };
+    fetchMyProfile();
+  }, [mode]); // Refresh when entering my-qr
 
   const handleCapture = (file: File) => {
     const reader = new FileReader();
     reader.onload = (e) => {
       setCapturedImage(e.target?.result as string);
       setMode('processing');
-      // Simulate AI extraction
-      setTimeout(() => {
-        setMode('review');
-      }, 2000);
+      // In a real app, this would trigger AI extraction
+      setTimeout(() => setMode('review'), 2500);
     };
     reader.readAsDataURL(file);
   };
@@ -29,198 +76,267 @@ export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
     const reader = new FileReader();
     reader.onload = (event) => {
       setCapturedImage(event.target?.result as string);
       setMode('processing');
-      setTimeout(() => {
-        setMode('review');
-      }, 2000);
+      setTimeout(() => setMode('review'), 2500);
     };
     reader.readAsDataURL(file);
   };
 
   if (mode === 'camera') {
     return (
-      <div className="fixed inset-0 z-50 bg-black flex flex-col">
-        <div className="flex justify-between items-center p-4">
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="text-white hover:bg-white/10"
-            onClick={() => setMode('idle')}
-          >
-            <X className="w-6 h-6" />
-          </Button>
-          <span className="text-white font-medium">명함 스캔</span>
-          <div className="w-10" />
-        </div>
-        
-        <div className="flex-grow flex items-center justify-center relative">
-          <CameraCapture 
-            onCapture={handleCapture}
-            onCancel={() => setMode('idle')}
-            onGalleryClick={() => {/* Gallery Trigger */}}
-          />
-        </div>
-        
-        <div className="p-8 bg-black/50 backdrop-blur-md text-center">
-          <p className="text-white/70 text-sm mb-6">명함을 사각형 프레임 안에 맞춰주세요</p>
-          <div className="flex justify-center">
-            <div className="w-16 h-16 rounded-full border-4 border-white flex items-center justify-center active:scale-95 transition-transform">
-              <div className="w-12 h-12 rounded-full bg-white" />
-            </div>
-          </div>
-        </div>
+      <div className="fixed inset-0 z-[110] animate-in fade-in zoom-in-95 duration-500">
+        <CameraCapture 
+          onCapture={handleCapture}
+          onCancel={() => setMode('portal')}
+          onGalleryClick={() => {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = (e: any) => handleFileUpload(e);
+            input.click();
+          }}
+        />
       </div>
     );
   }
 
   if (mode === 'processing') {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] p-8 text-center space-y-6">
+      <div className="flex flex-col items-center justify-center min-h-[70vh] p-10 text-center space-y-12 animate-in fade-in duration-500">
         <div className="relative">
-          <div className="w-32 h-32 rounded-3xl bg-blue-50 flex items-center justify-center overflow-hidden border border-blue-100">
-            {capturedImage && (
-              <img src={capturedImage} alt="Captured" className="w-full h-full object-cover opacity-50 grayscale" />
-            )}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Loader2 className="w-10 h-10 text-blue-600 animate-spin" />
-            </div>
+          <div className="absolute -inset-10 bg-primary/10 blur-[100px] animate-pulse rounded-full" />
+          <div className="w-48 h-48 rounded-[4rem] bg-white flex items-center justify-center overflow-hidden border border-white shadow-2xl relative z-10 transition-transform duration-1000 rotate-3">
+             {capturedImage ? (
+               <img src={capturedImage} alt="Captured" className="w-full h-full object-cover opacity-20 grayscale" />
+             ) : (
+               <div className="bg-secondary w-full h-full" />
+             )}
+             <div className="absolute inset-0 flex items-center justify-center">
+               <Loader2 className="w-12 h-12 text-primary animate-spin stroke-[2px]" />
+             </div>
           </div>
-          <div className="absolute -bottom-2 -right-2 bg-blue-600 rounded-full p-2 text-white shadow-lg">
-            <Sparkles className="w-4 h-4 animate-pulse" />
+          <div className="absolute -bottom-4 -right-4 bg-primary text-white p-4 rounded-[1.5rem] shadow-xl rotate-12 z-20">
+            <Sparkles className="w-6 h-6 animate-pulse" />
           </div>
         </div>
         
-        <div className="space-y-2">
-          <h2 className="text-xl font-bold text-slate-900">AI 분석 중...</h2>
-          <p className="text-slate-500 text-sm">
-            명함에서 정보를 추출하고 있습니다.<br />
-            잠시만 기다려주세요.
+        <div className="space-y-4">
+          <h2 className="text-3xl font-editorial font-black text-slate-900 tracking-tight italic uppercase">Digitizing Network</h2>
+          <p className="text-slate-400 text-[11px] font-bold tracking-widest uppercase opacity-60 leading-relaxed mx-auto max-w-[200px]">
+            AI performing structural analysis on your physical card.
           </p>
         </div>
-        
-        <div className="w-full max-w-xs bg-slate-100 h-1.5 rounded-full overflow-hidden">
-          <div className="bg-blue-600 h-full w-1/3 animate-[progress_2s_ease-in-out_infinite]" />
+      </div>
+    );
+  }
+
+  if (mode === 'my-qr') {
+    return (
+      <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-10">
+        <header className="flex items-center justify-between px-1">
+          <h2 className="text-2xl font-editorial font-extrabold text-slate-900 tracking-tight leading-none italic uppercase">Your Identity</h2>
+          <button onClick={() => setMode('portal')} className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-slate-400 active:scale-90 transition-all"><X className="w-5 h-5" /></button>
+        </header>
+
+        <div className="bg-white rounded-[4rem] p-12 shadow-2xl shadow-slate-200 flex flex-col items-center space-y-12 border border-slate-50 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-2 bg-primary" />
+          
+          <div className="text-center space-y-3">
+            <h3 className="text-3xl font-editorial font-extrabold text-slate-900 italic uppercase leading-none">{userProfile?.name || 'Your Name'}</h3>
+            <div className="inline-flex items-center gap-2 px-4 py-1 bg-primary/5 rounded-full">
+               <span className="text-[10px] font-black text-primary uppercase tracking-widest leading-none">{userProfile?.title || 'Identity Hub Owner'}</span>
+            </div>
+          </div>
+
+          <div className="relative group">
+            <div className="absolute -inset-10 bg-primary/5 blur-[80px] opacity-100 group-hover:scale-110 transition-all duration-1000" />
+            <div className="bg-white p-8 rounded-[3.5rem] shadow-inner relative z-10 transition-transform duration-700 group-hover:scale-105 border border-slate-100">
+               {qrCodeDataUrl ? (
+                 <img src={qrCodeDataUrl} alt="Identity QR" className="w-56 h-56 filter contrast-[1.05]" />
+               ) : (
+                 <div className="w-56 h-56 flex items-center justify-center">
+                    <Loader2 className="w-10 h-10 text-primary/20 animate-spin" />
+                 </div>
+               )}
+            </div>
+          </div>
+
+          <div className="w-full bg-slate-900 p-8 rounded-[2.5rem] flex items-center justify-between text-white shadow-xl">
+            <div className="flex items-center gap-5">
+              <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center border border-white/10 backdrop-blur-xl">
+                <ShieldCheck className="w-7 h-7 text-white" />
+              </div>
+              <div className="space-y-1">
+                <p className="text-[10px] font-black text-white/40 uppercase tracking-widest">Protocol 1.3</p>
+                <p className="text-sm font-bold italic uppercase tracking-tight">Verified Access</p>
+              </div>
+            </div>
+            <ArrowRight className="w-6 h-6 text-white/30" />
+          </div>
         </div>
+
+        <p className="text-center text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] opacity-40 leading-relaxed px-12">
+          Handoff your digital presence by allowing others to scan this high-fidelity signature.
+        </p>
       </div>
     );
   }
 
   if (mode === 'review') {
     return (
-      <div className="p-6 space-y-6 max-w-lg mx-auto">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-bold text-slate-900">정보 확인</h2>
-          <Button variant="ghost" size="sm" onClick={() => setMode('idle')} className="text-slate-400">
-            취소
-          </Button>
+      <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="flex items-center justify-between px-1">
+          <h2 className="text-2xl font-editorial font-extrabold text-slate-900 tracking-tight leading-none italic uppercase">Identity Validation</h2>
+          <button onClick={() => setMode('portal')} className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-slate-400 active:scale-90 transition-all"><X className="w-5 h-5" /></button>
         </div>
 
-        <div className="bg-white rounded-3xl p-1 shadow-sm border border-slate-100 overflow-hidden">
-          <div className="aspect-[1.6/1] bg-slate-100 relative overflow-hidden">
-             {capturedImage && <img src={capturedImage} className="w-full h-full object-cover" alt="Captured Card" />}
-             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+        <div className="bg-white rounded-[3.5rem] p-2 shadow-2xl shadow-slate-100 overflow-hidden group">
+          <div className="aspect-[1.6/1] bg-secondary relative overflow-hidden rounded-[3rem]">
+             {capturedImage && <img src={capturedImage} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="Captured Card" />}
+             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+             <div className="absolute bottom-6 left-8 text-white space-y-1">
+                <span className="text-[10px] font-black tracking-[0.3em] uppercase opacity-60">Authentication Source</span>
+                <p className="text-base font-editorial font-bold italic uppercase">Original Physical Capture</p>
+             </div>
           </div>
         </div>
 
-        <div className="space-y-4">
-          <div className="grid grid-cols-1 gap-3">
-             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 focus-within:border-blue-500 transition-colors">
-               <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">성함</label>
-               <input type="text" defaultValue="홍길동" className="w-full bg-transparent border-none p-0 focus:outline-none text-slate-900 font-bold" />
-             </div>
-             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 focus-within:border-blue-500 transition-colors">
-               <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">직함</label>
-               <input type="text" defaultValue="대표이사 / CEO" className="w-full bg-transparent border-none p-0 focus:outline-none text-slate-900 font-bold" />
-             </div>
-             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 focus-within:border-blue-500 transition-colors">
-               <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">회사명</label>
-               <input type="text" defaultValue="(주) 브랜드퍼스트" className="w-full bg-transparent border-none p-0 focus:outline-none text-slate-900 font-bold" />
-             </div>
-             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 focus-within:border-blue-500 transition-colors">
-               <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">연락처</label>
-               <input type="text" defaultValue="010-1234-5678" className="w-full bg-transparent border-none p-0 focus:outline-none text-slate-900 font-bold" />
-             </div>
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 gap-4">
+             {[
+               { label: 'Identified Name', value: 'Digitized Profile' },
+               { label: 'Role / Designation', value: 'Market Analyst' },
+               { label: 'Organization', value: 'Identity Corp' },
+               { label: 'Contact Channel', value: 'Verified Mobile' },
+             ].map((field, i) => (
+               <div key={i} className="group p-6 bg-secondary rounded-[2rem] focus-within:bg-white focus-within:ring-2 focus-within:ring-primary/10 transition-all shadow-inner relative">
+                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2 opacity-50 group-hover:text-primary transition-colors">{field.label}</label>
+                 <input 
+                   type="text" 
+                   defaultValue={field.value} 
+                   className="w-full bg-transparent border-none p-0 focus:outline-none text-slate-900 font-bold text-lg italic uppercase tracking-tight placeholder:text-slate-300" 
+                 />
+                 <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-10 transition-opacity">
+                    <Sparkles className="w-10 h-10" />
+                 </div>
+               </div>
+             ))}
           </div>
           
           <Button 
-            className="w-full h-14 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg shadow-lg shadow-blue-200"
+            className="w-full h-20 rounded-[2.25rem] bg-primary hover:bg-slate-900 text-white font-black text-lg shadow-2xl shadow-primary/20 active:scale-95 transition-all text-[12px] tracking-[0.2em] italic uppercase"
             onClick={() => onNavigate('app-wallet')}
           >
-            기기에 저장하기
+            Finalize Transformation
+            <ArrowRight className="w-5 h-5 ml-4 opacity-50" />
           </Button>
-          
-          <p className="text-center text-xs text-slate-400">
-            저장된 정보는 연락처 목록에서 언제든 수정할 수 있습니다.
-          </p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="p-6 space-y-8 max-w-lg mx-auto">
-      <div className="space-y-2">
-        <h1 className="text-2xl font-bold text-slate-900 leading-tight">
-          새로운 인연을<br />
-          간편하게 등록하세요
+    <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-1000 ease-out pb-10">
+      <header className="px-1 pt-6 space-y-4">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/5 rounded-full">
+          <Zap className="w-3.5 h-3.5 text-primary" />
+          <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Quick Add Portal</span>
+        </div>
+        <h1 className="text-4xl font-editorial font-extrabold text-slate-900 leading-[0.9] tracking-tighter italic uppercase">
+          Expand Your<br /><span className="text-primary not-italic">Identity realm</span>
         </h1>
-        <p className="text-slate-500 text-sm">
-          상대의 명함을 스캔하거나 이미지를 업로드하면<br />
-          AI가 자동으로 정보를 추출합니다.
+        <p className="text-slate-400 text-xs font-bold opacity-60 leading-relaxed max-w-[280px] uppercase tracking-wide">
+          Protocol for converting physical presence into verified digital equity.
         </p>
-      </div>
+      </header>
 
-      <div className="grid grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 gap-8">
+        {/* Primary Action: AI Scan */}
         <button 
           onClick={() => setMode('camera')}
-          className="group relative flex flex-col items-center justify-center p-8 bg-blue-600 rounded-[2.5rem] text-white shadow-xl shadow-blue-200 active:scale-[0.98] transition-all overflow-hidden"
+          className="group relative flex flex-col items-start justify-end p-10 aspect-[1.1/1] bg-slate-950 rounded-[4rem] text-white shadow-2xl shadow-slate-300 active:scale-[0.98] transition-all overflow-hidden"
         >
-          <div className="absolute top-0 right-0 p-8 opacity-10 scale-150 rotate-12">
-            <Camera className="w-24 h-24" />
+          <div className="absolute -top-10 -right-10 opacity-10 group-hover:rotate-12 group-hover:scale-110 transition-all duration-1000">
+            <Camera className="w-72 h-72" strokeWidth={1} />
           </div>
-          <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-4 backdrop-blur-sm">
-            <Camera className="w-8 h-8 text-white" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+          
+          <div className="relative z-10 w-full space-y-10">
+             <div className="w-20 h-20 bg-white/10 rounded-[2.25rem] flex items-center justify-center backdrop-blur-3xl border border-white/20 group-hover:bg-primary group-hover:border-primary transition-all duration-700 rotate-6 group-hover:rotate-0">
+               <Sparkles className="w-10 h-10 text-white" />
+             </div>
+             <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                   <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30">External Matrix</span>
+                   <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+                </div>
+                <h3 className="text-3xl font-editorial font-black leading-none italic uppercase tracking-tighter">AI Network Scan</h3>
+                <p className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] leading-relaxed">Multimodal OCR • 1.3 Signature Analysis</p>
+             </div>
           </div>
-          <span className="text-lg font-bold">실시간 명함 스캔</span>
-          <span className="text-xs text-white/70 mt-1">카메라로 명함을 비춰주세요</span>
         </button>
 
-        <div className="grid grid-cols-2 gap-4">
-          <label className="flex flex-col items-center justify-center p-6 bg-white rounded-[2rem] border border-slate-100 shadow-sm active:scale-[0.98] cursor-pointer transition-all hover:bg-slate-50">
+        {/* Secondary Action: My QR */}
+        <button 
+          onClick={() => setMode('my-qr')}
+          className="group relative flex flex-col items-start justify-end p-10 aspect-[1.8/1] bg-white rounded-[4rem] text-slate-900 shadow-2xl shadow-slate-100 border border-slate-50 active:scale-[0.98] transition-all overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 opacity-[0.02] group-hover:-rotate-12 group-hover:scale-110 transition-all duration-1000 grayscale">
+            <QrCode className="w-80 h-80" strokeWidth={1} />
+          </div>
+          
+          <div className="relative z-10 w-full flex items-end justify-between">
+             <div className="space-y-3">
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-300 italic">Self Presence</span>
+                <h3 className="text-2xl font-editorial font-black leading-none italic uppercase tracking-tighter">Identity Broadcast</h3>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Personal QR • Encrypted Handoff</p>
+             </div>
+             <div className="w-16 h-16 bg-slate-900 rounded-[1.85rem] flex items-center justify-center text-white group-hover:bg-primary transition-all shadow-xl shadow-slate-200">
+               <ArrowUpRight className="w-7 h-7" />
+             </div>
+          </div>
+        </button>
+
+        {/* Gallery & Manual - Grouped */}
+        <div className="grid grid-cols-2 gap-6 pb-4">
+          <label className="group flex flex-col items-center justify-center p-10 bg-white rounded-[3rem] shadow-sm active:scale-[0.95] cursor-pointer transition-all hover:shadow-xl border border-slate-50 relative overflow-hidden">
+            <div className="absolute inset-0 bg-primary/[0.01] opacity-0 group-hover:opacity-100 transition-opacity" />
             <input type="file" className="hidden" accept="image/*" onChange={handleFileUpload} />
-            <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center mb-3">
-              <ImageIcon className="w-6 h-6 text-slate-400" />
+            <div className="w-16 h-16 bg-secondary rounded-[2rem] flex items-center justify-center mb-6 shadow-inner group-hover:bg-primary group-hover:text-white transition-all">
+              <ImageIcon className="w-7 h-7 opacity-20 group-hover:opacity-100" />
             </div>
-            <span className="text-sm font-bold text-slate-900">사진 업로드</span>
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] group-hover:text-slate-900 transition-colors relative z-10">Archive</span>
           </label>
 
           <button 
-            className="flex flex-col items-center justify-center p-6 bg-white rounded-[2rem] border border-slate-100 shadow-sm active:scale-[0.98] transition-all hover:bg-slate-50"
-            onClick={() => {/* Manual Input */}}
+            className="group flex flex-col items-center justify-center p-10 bg-white rounded-[3rem] shadow-sm active:scale-[0.95] transition-all hover:shadow-xl border border-slate-50 relative overflow-hidden"
+            onClick={() => onNavigate('qrcard-create')}
           >
-            <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center mb-3">
-              <Sparkles className="w-6 h-6 text-slate-400" />
+            <div className="absolute inset-0 bg-primary/[0.01] opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="w-16 h-16 bg-secondary rounded-[2rem] flex items-center justify-center mb-6 shadow-inner group-hover:bg-primary group-hover:text-white transition-all">
+              <User className="w-7 h-7 opacity-20 group-hover:opacity-100" />
             </div>
-            <span className="text-sm font-bold text-slate-900">직접 입력</span>
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] group-hover:text-slate-900 transition-colors relative z-10">Manual</span>
           </button>
         </div>
       </div>
 
-      <div className="pt-4">
-        <div className="bg-slate-50 rounded-3xl p-5 border border-slate-100 flex gap-4 items-center">
-          <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm flex-shrink-0">
-            <Check className="w-5 h-5 text-green-500" />
+      <div className="bg-slate-950 p-10 rounded-[4rem] text-white flex items-center justify-between shadow-2xl shadow-slate-900/20 relative overflow-hidden">
+        <div className="absolute bottom-0 right-0 w-32 h-32 bg-primary/10 blur-[60px] rounded-full" />
+        <div className="flex items-center gap-8 relative z-10">
+          <div className="w-18 h-18 bg-white/5 rounded-[2rem] flex items-center justify-center border border-white/5 backdrop-blur-2xl">
+            <ShieldCheck className="w-8 h-8 text-primary" />
           </div>
           <div>
-            <h4 className="text-xs font-bold text-slate-900">강력한 AI 추출 엔진</h4>
-            <p className="text-[10px] text-slate-400 mt-0.5 leading-relaxed">
-              업로드된 명함 이미지는 AI 분석 후 안전하게 기기에 저장됩니다.
-            </p>
+            <h4 className="text-[11px] font-black text-white/50 uppercase tracking-[0.3em] italic">GoQR Security Vault</h4>
+            <p className="text-sm font-bold text-slate-300 mt-1 uppercase tracking-tighter">Encrypted Identity Standard</p>
           </div>
+        </div>
+        <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center opacity-20 group-hover:opacity-100 transition-opacity">
+           <span className="text-[8px] font-black">V1.3</span>
         </div>
       </div>
     </div>

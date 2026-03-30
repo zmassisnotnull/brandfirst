@@ -1,11 +1,21 @@
-/* Google Fonts - Noto Sans KR */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+/* Manrope for Headlines */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&display=swap');
 
-/* Montserrat for logo - Black (900) for "Brand", Medium (500) for "first.ai" */
+/* Inter for Body and UI Control */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Montserrat for logo fallback */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;900&display=swap');
 
 body {
-  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, .font-editorial {
+  font-family: 'Manrope', sans-serif;
+  letter-spacing: -0.02em;
 }
 
 /* Logo specific fonts */
@@ -19,13 +29,11 @@ body {
   font-weight: 500;
 }
 
-/* Brand font rendering optimization (안정성 개선) */
+/* Brand font rendering optimization */
 .brand-logo-text {
-  font-family: var(--brand-font-family), system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  font-family: 'Montserrat', 'Manrope', system-ui;
   font-kerning: normal;
-  /* 폰트 피처 설정 최소화로 크로스브라우저 일관성 확보 */
   font-feature-settings: "kern" 1, "liga" 0;
-  /* 렌더링 안정성 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

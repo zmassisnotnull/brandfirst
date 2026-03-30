@@ -1,345 +1,290 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Phone, 
-  MessageSquare, 
   Mail, 
   Download, 
+  MapPin, 
+  Globe, 
   Share2, 
-  ExternalLink, 
+  Loader2, 
   ArrowLeft,
-  Loader2,
-  AlertCircle,
+  MessageSquare,
   Building2,
-  User as UserIcon,
-  QrCode,
-  Check,
-  ArrowRight,
-  PlusCircle,
   Smartphone,
-  Sparkles
+  ChevronRight,
+  ArrowRight
 } from 'lucide-react';
-import { Button } from '../../../app/components/ui/button';
-import { Card, CardContent } from '../../../app/components/ui/card';
-import { digitalCardApi } from '../../../app/services/digitalCardApi';
-import { downloadVCard } from '../../../app/utils/vcard';
-import { cardWalletService } from '../../../app/services/cardWalletService';
-import { usePWAInstall } from '../../../app/hooks/usePWAInstall';
+import { Button } from '@/app/components/ui/button';
+import { Card, CardContent } from '@/app/components/ui/card';
+import { digitalCardApi } from '@/app/services/digitalCardApi';
+import { usePWAInstall as usePWA } from '@/app/hooks/usePWAInstall';
 import QRCode from 'qrcode';
-import { cn } from '../../../app/components/ui/utils';
+import { cn } from '@/app/components/ui/utils';
 
 interface CardViewerProps {
-  profileId: string;
-  onNavigate: (page: string) => void;
+  id: string;
+  onNavigate: (page: string, params?: { id?: string; profileId?: string }) => void;
 }
 
-export function CardViewer({ profileId, onNavigate }: CardViewerProps) {
-  const [loading, setLoading] = useState(true);
+export function CardViewer({ id, onNavigate }: CardViewerProps) {
   const [profile, setProfile] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>('');
+  const { isInstallable, install } = usePWA();
   const [showConversion, setShowConversion] = useState(false);
-  const { isInstallable, install } = usePWAInstall();
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        setLoading(true);
-        const { data: profileData, error } = await digitalCardApi.getProfile(profileId);
-        if (error) throw new Error(error);
-        
-        setProfile(profileData);
-        
-        // QR 코드 생성 (디지털 명함 URL 기반)
-        const cardUrl = `${window.location.origin}/?card=${profileId}`;
-        const qrData = await QRCode.toDataURL(cardUrl, {
+    loadProfile();
+    // Show conversion CTA after 3 seconds for anonymous viewers
+    const timer = setTimeout(() => setShowConversion(true), 3000);
+    return () => clearTimeout(timer);
+  }, [id]);
+
+  const loadProfile = async () => {
+    try {
+      setLoading(true);
+      const data = await digitalCardApi.getProfile(id);
+      setProfile(data);
+      if (data) {
+        const url = `${window.location.origin}?card=${id}`;
+        const qrDataUrl = await QRCode.toDataURL(url, {
           width: 400,
           margin: 2,
           color: {
-            dark: '#0066FF',
+            dark: '#0f172a',
             light: '#ffffff'
           }
         });
-        setQrCodeDataUrl(qrData);
-
-        // 조회수 증가 API 호출
-        await digitalCardApi.logView(profileId);
-
-        // 최근 본 명함에 추가 (로컬 스토리지)
-        const recentCards = JSON.parse(localStorage.getItem('recent_viewed_cards') || '[]');
-        const updatedRecent = [profileId, ...recentCards.filter((id: string) => id !== profileId)].slice(0, 5);
-        localStorage.setItem('recent_viewed_cards', JSON.stringify(updatedRecent));
-
-      } catch (err: any) {
-        console.error('Fetch profile error:', err);
-        setError('명함을 찾을 수 없거나 불러오는데 실패했습니다.');
-      } finally {
-        setLoading(false);
+        setQrCodeDataUrl(qrDataUrl);
       }
-    };
-
-    if (profileId) fetchProfile();
-  }, [profileId]);
-
-  const handleActionClick = (action: () => void, type?: 'call' | 'message' | 'email') => {
-    action();
-    if (type && profile) {
-      cardWalletService.logInteraction(profile.id, type);
+    } catch (err) {
+      console.error('Failed to load profile:', err);
+    } finally {
+      setLoading(false);
     }
-    // 액션 수행 후 전환 UX 노출 (약간의 지연 후)
-    setTimeout(() => setShowConversion(true), 1500);
   };
 
   const handleSaveContact = () => {
     if (!profile) return;
+    const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:${profile.name}
+ORG:${profile.company || ''}
+TITLE:${profile.title || ''}
+TEL;TYPE=CELL:${profile.phone}
+EMAIL:${profile.email}
+END:VCARD`;
     
-    downloadVCard({
-      name: profile.name,
-      title: profile.title,
-      company: profile.company,
-      phone: profile.phone,
-      email: profile.email,
-      website: profile.website || '',
-      address: profile.location || '',
-      photo: qrCodeDataUrl || '', // QR 이미지를 주소록 사진으로 저장
-      cardUrl: `${window.location.origin}/?card=${profileId}`
-    });
-    
-    // Save to Wallet (v1.3)
-    cardWalletService.saveToWallet(profile);
-    
-    setTimeout(() => setShowConversion(true), 2000);
+    const blob = new Blob([vcard], { type: 'text/vcard' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `${profile.name}.vcf`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
-  const handleShare = async () => {
-    const profileUrl = `${window.location.origin}/?card=${profileId}`;
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: `${profile.name}의 디지털 명함`,
-          text: `${profile.company} ${profile.name}`,
-          url: profileUrl,
-        });
-      } catch (err) {
-        console.log('Share cancelled');
-      }
-    } else {
-      await navigator.clipboard.writeText(profileUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
+  const handleActionClick = (action: () => void, label: string) => {
+    // Tracking could be added here
+    action();
   };
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[80vh] space-y-6">
+      <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-6">
         <div className="relative">
-          <div className="w-16 h-16 border-4 border-primary/10 border-t-primary rounded-full animate-spin" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Sparkles className="w-6 h-6 text-primary/40" />
-          </div>
+          <div className="absolute inset-0 bg-primary/10 blur-[40px] animate-pulse" />
+          <Loader2 className="w-12 h-12 text-primary animate-spin relative z-10" />
         </div>
-        <p className="text-slate-400 font-black uppercase tracking-widest text-[10px]">Loading Identity...</p>
+        <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] italic">Accessing Identity Hub...</p>
       </div>
     );
   }
 
-  if (error || !profile) {
+  if (!profile) {
     return (
-      <div className="flex flex-col min-h-screen bg-slate-50 p-8 pt-20 text-center space-y-6">
-        <div className="w-20 h-20 bg-red-50 rounded-[2rem] flex items-center justify-center mx-auto transform rotate-12">
-          <AlertCircle className="w-10 h-10 text-red-500" />
+      <div className="flex flex-col items-center justify-center min-h-[60vh] px-8 text-center space-y-8">
+        <div className="w-20 h-20 bg-slate-50 rounded-[2rem] flex items-center justify-center">
+          <Smartphone className="w-8 h-8 text-slate-200" />
         </div>
-        <div className="space-y-2">
-          <h2 className="text-2xl font-black text-slate-900 tracking-tight">{error || '명함을 찾을 수 없습니다'}</h2>
-          <p className="text-sm text-slate-500 font-medium leading-relaxed">잘못된 접근이거나 삭제된 명함일 수 있습니다.</p>
+        <div className="space-y-3">
+          <h2 className="text-2xl font-editorial font-black text-slate-900 italic">IDENTITY OBSOLETE</h2>
+          <p className="text-sm text-slate-400 font-bold leading-relaxed px-4">This profile may have been decommissioned or is currently unavailable.</p>
         </div>
         <Button 
           variant="outline" 
-          onClick={() => onNavigate('qrcard-landing')} 
-          className="rounded-2xl border-slate-200 text-slate-600 font-bold px-8"
+          className="rounded-2xl h-14 px-8 font-black text-[10px] tracking-widest uppercase italic"
+          onClick={() => onNavigate('recent_cards')}
         >
-          <ArrowLeft className="w-4 h-4 mr-2" /> 홈으로 이동
+          Return to Hub
         </Button>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F8FAFC] pb-32 animate-in fade-in duration-700">
-      {/* Floating Header */}
-      <div className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between pointer-events-none">
-        <Button 
-          variant="ghost" 
-          size="icon"
-          onClick={() => onNavigate('qrcard-landing')}
-          className="w-11 h-11 bg-white/80 backdrop-blur-md rounded-2xl shadow-sm border border-white/50 text-slate-900 pointer-events-auto active:scale-90 transition-all"
-        >
-          <ArrowLeft className="w-5 h-5 stroke-[2.5px]" />
-        </Button>
-        <button 
-          onClick={handleShare}
-          className="w-11 h-11 bg-white/80 backdrop-blur-md rounded-2xl shadow-sm border border-white/50 text-slate-900 flex items-center justify-center pointer-events-auto active:scale-90 transition-all"
-        >
-          {copied ? <Check className="w-5 h-5 text-green-500" /> : <Share2 className="w-5 h-5 stroke-[2.5px]" />}
-        </button>
-      </div>
+    <div className="flex flex-col min-h-screen bg-slate-50 animate-in fade-in duration-1000">
+      {/* Visual Identity Section */}
+      <div className="bg-white rounded-b-[4rem] shadow-2xl shadow-slate-200 border-b border-slate-100 p-8 pt-4 space-y-10">
+        <header className="flex items-center justify-between">
+           <button 
+             onClick={() => onNavigate('recent_cards')}
+             className="w-12 h-12 bg-secondary/50 rounded-2xl flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors active:scale-90"
+           >
+             <ArrowLeft className="w-5 h-5 stroke-[2.5px]" />
+           </button>
+           <button className="w-12 h-12 bg-secondary/50 rounded-2xl flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors active:scale-90">
+             <Share2 className="w-5 h-5 stroke-[2.5px]" />
+           </button>
+        </header>
 
-      {/* Profile Cover / Hero Section */}
-      <div className={cn(
-        "h-[220px] bg-gradient-to-br transition-all relative overflow-hidden",
-        profile.theme_color || 'from-[#0066FF] to-[#0044BB]'
-      )}>
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_20%_30%,_rgba(255,255,255,1),_transparent)]" />
-        <div className="absolute inset-0 opacity-30 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
-      </div>
-
-      {/* Main Content Card Area */}
-      <div className="px-6 -mt-32 space-y-8 relative z-10 w-full max-w-md mx-auto">
-        {/* The Card */}
-        <section className="bg-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-white/50 overflow-hidden">
-          {/* Card Image Display */}
-          {profile.profile_image ? (
-            <div className="aspect-[1.6/1] w-full bg-slate-950 flex items-center justify-center overflow-hidden border-b border-slate-100">
-              <img 
-                src={profile.profile_image} 
-                alt="Business Card" 
-                className="w-full h-full object-contain"
-              />
-            </div>
-          ) : (
-            <div className="p-8 pt-12 text-center border-b border-slate-50 bg-slate-50/30">
-               <div className="w-24 h-24 mx-auto bg-white rounded-[2rem] shadow-sm flex items-center justify-center mb-4 ring-8 ring-slate-100/30">
-                  <UserIcon className="w-10 h-10 text-slate-300" />
-               </div>
-            </div>
-          )}
-          
-          <div className="p-8 pb-10 space-y-8">
-            <div className="text-center space-y-2">
-              <h1 className="text-3xl font-black text-slate-900 tracking-tighter leading-tight">{profile.name}</h1>
-              <div className="flex flex-col items-center gap-1">
-                <span className="text-sm font-black text-primary bg-primary/10 px-3 py-1 rounded-full uppercase tracking-widest">{profile.title}</span>
-                <p className="text-xs font-bold text-slate-400 flex items-center gap-1.5 mt-2">
-                  <Building2 className="w-3.5 h-3.5" /> {profile.company || 'Private Professional'}
-                </p>
+        <section className="space-y-10">
+          {/* Identity Presentation */}
+          <div className="space-y-8">
+            <div className="flex flex-col items-center text-center space-y-6">
+              <div className="relative group">
+                <div className="absolute -inset-4 bg-primary/5 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                <div className="w-32 h-32 rounded-[3.5rem] bg-secondary overflow-hidden ring-4 ring-white shadow-2xl relative z-10 transition-transform duration-700 group-hover:scale-105">
+                  {profile.profile_image ? (
+                    <img src={profile.profile_image} alt={profile.name} className="w-full h-full object-contain" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-slate-300">
+                      <Building2 className="w-12 h-12" />
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="space-y-2">
+                <h1 className="text-4xl font-editorial font-extrabold text-slate-900 tracking-tight leading-none italic uppercase">{profile.name}</h1>
+                <div className="flex flex-col items-center gap-2">
+                  <span className="text-[11px] font-bold text-primary bg-primary/5 px-4 py-1.5 rounded-full uppercase tracking-widest">{profile.title}</span>
+                  <p className="text-xs font-bold text-slate-400 flex items-center gap-2 opacity-60">
+                     {profile.company || 'Private Portfolio'}
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* Quick Actions Grid */}
+            {/* Premium Action Grid */}
             <div className="grid grid-cols-2 gap-4">
-              <Button 
+              <button
                 onClick={() => handleActionClick(() => window.location.href = `tel:${profile.phone}`, 'call')}
-                className="h-16 bg-primary hover:bg-black text-white rounded-3xl gap-3 text-lg font-black shadow-xl shadow-primary/20 active:scale-95 transition-all"
+                className="group h-16 bg-primary hover:bg-slate-900 text-white rounded-[1.5rem] gap-3 text-base font-bold shadow-xl shadow-primary/20 active:scale-95 transition-all flex items-center justify-center"
               >
-                <Phone className="w-5 h-5 fill-current" /> 전화기
-              </Button>
-              <Button 
+                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center ring-2 ring-white/10">
+                  <Phone className="w-4 h-4 fill-current group-hover:rotate-12 transition-transform" />
+                </div>
+                <span>CALL NOW</span>
+              </button>
+              <button 
                 onClick={() => handleActionClick(() => window.location.href = `sms:${profile.phone}`, 'message')}
-                className="h-16 bg-slate-900 hover:bg-black text-white rounded-3xl gap-3 text-lg font-black shadow-xl shadow-slate-200 active:scale-95 transition-all"
+                className="group h-16 bg-slate-900 hover:bg-black text-white rounded-[1.5rem] gap-3 text-base font-bold shadow-xl shadow-slate-200 active:scale-95 transition-all flex items-center justify-center"
               >
-                <MessageSquare className="w-5 h-5 fill-current" /> 메시지
-              </Button>
+                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center ring-2 ring-white/10">
+                  <MessageSquare className="w-4 h-4 fill-current group-hover:-translate-y-0.5 transition-transform" />
+                </div>
+                <span>TEXT</span>
+              </button>
             </div>
           </div>
         </section>
 
-        {/* Transition UX / Branding Hook */}
+        {/* Dynamic Ad / CTA Slot */}
         {showConversion && (
-          <div className="bg-slate-900 p-6 rounded-[2rem] shadow-2xl text-white space-y-5 animate-in fade-in slide-in-from-bottom-4 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-4 opacity-10">
-              <Sparkles className="w-16 h-16 text-white transform rotate-12" />
+          <div className="bg-slate-950 p-8 rounded-[3rem] shadow-2xl text-white space-y-6 animate-in fade-in slide-in-from-bottom-8 duration-700 relative overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(0,102,255,0.1),_transparent)]" />
+            <div className="space-y-2 relative z-10">
+              <h3 className="font-editorial font-extrabold text-2xl tracking-tight leading-tight italic">ELEVATE YOUR NETWORK</h3>
+              <p className="text-slate-500 text-[11px] font-bold tracking-[0.05em] leading-relaxed uppercase">Update anytime, track interactions, and stay connected.</p>
             </div>
-            <div className="space-y-1 relative z-10">
-              <h3 className="font-black text-xl tracking-tight leading-tight">종이 명함의 한계를 넘으세요</h3>
-              <p className="text-slate-400 text-xs font-bold font-medium leading-relaxed">언제든 정보를 수정하고, 상대방의 소통을 기록합니다.</p>
-            </div>
-            <Button 
-              className="w-full bg-white text-slate-900 hover:bg-primary hover:text-white font-black h-14 rounded-2xl text-md shadow-lg transition-all group-hover:scale-[1.02]"
+            <Button
+              className="w-full bg-primary hover:bg-primary/90 text-white font-bold h-16 rounded-[1.5rem] text-sm shadow-lg transition-all active:scale-95 relative z-10"
               onClick={() => onNavigate('qrcard-create')}
             >
-              내 디지털 명함 만들기
-              <ArrowRight className="w-4 h-4 ml-2" />
+              CREATE YOUR DIGITAL IDENTITY
+              <ArrowRight className="w-4 h-4 ml-3 opacity-50" />
             </Button>
           </div>
         )}
 
-        {/* Detailed Info Section */}
-        <section className="space-y-4">
-          <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100/50 space-y-6">
-            <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Contact Details</h3>
-            
-            <div className="grid gap-5">
+        {/* Contact Intelligence Hub */}
+        <section className="space-y-6">
+          <div className="bg-white p-10 rounded-[3rem] shadow-sm border border-slate-50 space-y-8">
+            <h3 className="text-[10px] font-black text-slate-300 uppercase tracking-[0.25em] italic">Contact Intelligence</h3>
+
+            <div className="space-y-6">
               {profile.phone && (
-                <div className="flex items-center gap-4 group cursor-pointer" onClick={() => window.location.href = `tel:${profile.phone}`}>
-                  <div className="w-11 h-11 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
-                    <Smartphone className="w-5 h-5 stroke-[2.5px]" />
+                <div className="flex items-center gap-5 group cursor-pointer" onClick={() => window.location.href = `tel:${profile.phone}`}>
+                  <div className="w-14 h-14 rounded-[1.25rem] bg-secondary flex items-center justify-center text-slate-400 group-hover:text-primary transition-all shadow-inner">
+                    <Smartphone className="w-6 h-6 stroke-[2.2px]" />
                   </div>
                   <div>
-                    <p className="text-[10px] text-slate-400 font-black uppercase tracking-tighter mb-0.5">Mobile</p>
-                    <span className="text-slate-900 font-extrabold tracking-tight">{profile.phone}</span>
+                    <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest mb-1">Mobile Access</p>
+                    <span className="text-slate-900 font-bold tracking-tight text-base italic">{profile.phone}</span>
                   </div>
                 </div>
               )}
               {profile.email && (
-                <div className="flex items-center gap-4 group cursor-pointer" onClick={() => window.location.href = `mailto:${profile.email}`}>
-                  <div className="w-11 h-11 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
-                    <Mail className="w-5 h-5 stroke-[2.5px]" />
+                <div className="flex items-center gap-5 group cursor-pointer" onClick={() => window.location.href = `mailto:${profile.email}`}>
+                  <div className="w-14 h-14 rounded-[1.25rem] bg-secondary flex items-center justify-center text-slate-400 group-hover:text-primary transition-all shadow-inner">
+                    <Mail className="w-6 h-6 stroke-[2.2px]" />
                   </div>
                   <div>
-                    <p className="text-[10px] text-slate-400 font-black uppercase tracking-tighter mb-0.5">Email</p>
-                    <span className="text-slate-900 font-extrabold tracking-tight truncate">{profile.email}</span>
+                    <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest mb-1">Electronic Mail</p>
+                    <span className="text-slate-900 font-bold tracking-tight text-base italic truncate max-w-[200px] block">{profile.email}</span>
                   </div>
                 </div>
               )}
             </div>
-            
-            <Button 
-              variant="outline"
-              className="w-full h-14 border-slate-200 hover:border-primary/30 hover:bg-primary/5 text-slate-900 font-black rounded-2xl gap-3 shadow-none active:scale-95 transition-all pt-1"
+
+            <button
+              className="w-full h-16 bg-secondary hover:bg-primary/5 text-slate-900 hover:text-primary font-bold rounded-[1.5rem] flex items-center justify-center gap-3 transition-all active:scale-95"
               onClick={handleSaveContact}
             >
-              <Download className="w-5 h-5 stroke-[2.5px]" /> 주소록에 스마트 저장
-            </Button>
+              <Download className="w-5.5 h-5.5 opacity-30 group-hover:opacity-100" />
+              <span>GENERATE VCARD</span>
+            </button>
           </div>
 
-          {/* QR Share Section */}
-          <div className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100/50 flex flex-col items-center gap-8 border-dashed border-2">
-            <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2">QR Connect</h3>
-            <div className="relative group p-6 bg-white rounded-[2rem] border border-slate-100 shadow-inner">
-              <div className="absolute inset-0 bg-primary/5 rounded-[2rem] scale-95 opacity-0 group-hover:scale-110 group-hover:opacity-100 transition-all duration-500" />
-              {qrCodeDataUrl ? (
-                <img src={qrCodeDataUrl} alt="QR Code" className="w-44 h-44 relative z-10 transition-transform group-hover:scale-105" />
-              ) : (
-                <div className="w-44 h-44 bg-slate-50 rounded-2xl flex items-center justify-center">
-                  <QrCode className="w-10 h-10 text-slate-200" />
-                </div>
-              )}
+          {/* Presentation QR Hub */}
+          <div className="bg-white rounded-[3.5rem] p-12 text-center space-y-10 border border-slate-50 shadow-sm">
+            <div className="space-y-2">
+              <h3 className="text-lg font-editorial font-black text-slate-900 tracking-tight italic">PRESENT QR</h3>
+              <p className="text-[10px] text-slate-400 font-bold tracking-widest uppercase opacity-60 px-8">Save this identity directly to your business wallet</p>
             </div>
-            <p className="text-[11px] text-slate-400 text-center leading-relaxed font-bold tracking-tight px-4">
-              QR 코드를 스캔하여 <br/>상대방의 명함첩에 바로 담으세요.
-            </p>
+
+            <div className="relative group mx-auto inline-block">
+              <div className="absolute -inset-10 bg-primary/5 blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+              <div className="bg-white p-10 rounded-[3rem] shadow-inner relative z-10 transition-transform duration-700 group-hover:scale-105 border border-slate-50">
+                 {qrCodeDataUrl ? (
+                   <img src={qrCodeDataUrl} alt="Identity QR" className="w-52 h-52 filter contrast-[1.05]" />
+                 ) : (
+                   <div className="w-52 h-52 flex items-center justify-center">
+                     <Loader2 className="w-10 h-10 text-primary/20 animate-spin" />
+                   </div>
+                 )}
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Status / Retention Note */}
-        <footer className="text-center p-8 space-y-4">
-          <p className="text-[10px] text-slate-400 leading-relaxed font-bold tracking-tight opacity-50">
-            © 2026 GoQRCard. All Rights Reserved. <br/>
-            이 데이터는 {profile.user_id ? '안전하게 영구 보관' : '임시 보관'} 중입니다.
-          </p>
+        {/* Footer Editorial Branding */}
+        <footer className="text-center p-12 pt-4 space-y-6">
+          <div className="flex flex-col items-center gap-1 opacity-20 filter grayscale">
+            <p className="text-[10px] font-black text-slate-900 tracking-[0.4em] uppercase">Built on GoQRCard Platform</p>
+            <p className="text-[8px] font-bold text-slate-500 tracking-widest">VERIFIED IDENTITY 1.3</p>
+          </div>
           {isInstallable && (
-            <Button 
-              variant="ghost" 
-              className="text-[11px] font-black text-primary underline underline-offset-4 decoration-2"
+            <button
+              className="text-[10px] font-black text-primary underline underline-offset-8 decoration-[3px] decoration-primary/20 hover:decoration-primary/60 transition-all uppercase tracking-widest"
               onClick={install}
             >
-              앱으로 간편하게 사용하기
-            </Button>
+              Instantiate Application
+            </button>
           )}
         </footer>
       </div>
     </div>
   );
 }
-

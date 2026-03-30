@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-fixed": "#001849",
+              "surface-dim": "#d6dade",
+              "on-primary-container": "#f8f7ff",
+              "outline": "#727687",
+              "inverse-primary": "#b3c5ff",
+              "primary-fixed": "#dae1ff",
+              "surface-container": "#eaeef2",
+              "on-error": "#ffffff",
+              "on-surface-variant": "#424656",
+              "surface": "#f6fafe",
+              "on-background": "#171c1f",
+              "on-secondary-container": "#294487",
+              "on-tertiary": "#ffffff",
+              "surface-container-highest": "#dfe3e7",
+              "on-tertiary-fixed-variant": "#832600",
+              "on-primary": "#ffffff",
+              "primary-container": "#0066ff",
+              "error-container": "#ffdad6",
+              "surface-tint": "#0054d6",
+              "on-secondary": "#ffffff",
+              "inverse-on-surface": "#edf1f5",
+              "surface-container-high": "#e4e9ed",
+              "on-primary-fixed": "#001849",
+              "outline-variant": "#c2c6d8",
+              "inverse-surface": "#2c3134",
+              "secondary-container": "#9bb4fe",
+              "secondary": "#425ca0",
+              "surface-bright": "#f6fafe",
+              "on-tertiary-fixed": "#390c00",
+              "on-tertiary-container": "#fff6f4",
+              "tertiary-container": "#cc4204",
+              "primary-fixed-dim": "#b3c5ff",
+              "on-surface": "#171c1f",
+              "on-primary-fixed-variant": "#003fa4",
+              "tertiary-fixed": "#ffdbd0",
+              "on-error-container": "#93000a",
+              "tertiary": "#a33200",
+              "surface-container-low": "#f0f4f8",
+              "primary": "#0050cb",
+              "secondary-fixed": "#dae1ff",
+              "background": "#f6fafe",
+              "surface-container-lowest": "#ffffff",
+              "surface-variant": "#dfe3e7",
+              "tertiary-fixed-dim": "#ffb59d",
+              "on-secondary-fixed-variant": "#284386",
+              "secondary-fixed-dim": "#b3c5ff",
+              "error": "#ba1a1a"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1.0rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<nav class="fixed top-0 w-full z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,80,203,0.06)] flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+<span class="font-headline font-extrabold text-xl text-blue-700 tracking-tighter">GoQRCard</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-blue-50/50 transition-colors active:scale-95 duration-200 text-slate-500">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</nav>
+<main class="pt-24 px-6 max-w-[780px] mx-auto">
+<header class="mb-8">
+<div class="flex items-end justify-between mb-2">
+<h1 class="font-headline font-extrabold text-[2.75rem] leading-none tracking-tight text-on-surface">최근 명함</h1>
+<span class="bg-primary-container/10 text-primary font-semibold px-4 py-1.5 rounded-full text-xs">최근 1주일</span>
+</div>
+<p class="text-on-surface-variant text-sm font-medium">새로운 비즈니스 연결을 확인해보세요.</p>
+</header>
+<section class="mb-10 overflow-hidden -mx-6">
+<div class="flex gap-5 overflow-x-auto px-6 hide-scrollbar snap-x snap-mandatory">
+<div class="snap-start min-w-[300px] w-[85%] aspect-[3.5/2] relative rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(0,80,203,0.12)] bg-surface-container-lowest group">
+<img class="w-full h-full object-cover" data-alt="Modern minimalist business card design with abstract blue fluid shapes on a crisp white background, professional studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw5gItj4Nrb2YAXtfm0lmRbQvnOXbBFHr_oTM-47tywIikTrkE3wiIwNcB2MCw6iXBF19b0YZhw-ZoIGS2ujx8mheXcktTwtaYykwRB7VhlVEcvYPlSZNckR24HwRhYn1yJ0V4PD03W6av1zObaj9K2iS-jI74nvMn9gxr6hN3U5R47C4pdUUz1UXy4bftbdUv95WPq7owL6klkjIn9NZHqlEPzxmQ1JxFzlGJ9NhvSYhNEHdUnWDL30-3SaKcicXAjdHFsclCDggy"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+<div class="text-white">
+<p class="text-xs font-medium opacity-80">UX Designer</p>
+<h3 class="text-lg font-bold">김지수 팀장</h3>
+</div>
+<div class="flex gap-2">
+<span class="flex items-center gap-1 bg-white/20 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] text-white">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">visibility</span>
+                                방문 1.2k
+                            </span>
+</div>
+</div>
+<div class="absolute top-4 right-4 flex gap-2">
+<button class="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm">call</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm">chat_bubble</span>
+</button>
+</div>
+</div>
+<div class="snap-start min-w-[300px] w-[85%] aspect-[3.5/2] relative rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(0,80,203,0.08)] bg-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="Premium dark navy business card with metallic silver accents and geometric patterns, elegant architectural aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChBwDZuI99Akzae7dEZ9698b97WIi6xsDXUZ_q1IIFzb3aTUIR7mth-pB9bHH8PKVEeFIcnc6jM0JCCjvMIrUTmzDwu5MbAGAKjHDNe1F07a3BrmQTWr2x1ZuEDlKg26nj99nWL2CVuslO1DpAPgrQEuby8WaGjw8r2xFYfUjgE7036vevq8DLzwYsJJhZxbjC8aENl9NQ8x0eq7SOCF8OVe66Ux8wX_2bMFSBvhvWSaMKyqB7GKGUjgeBwIQTV3PqnKGF7nGOp9BL"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+<div class="text-white">
+<p class="text-xs font-medium opacity-80">Software Engineer</p>
+<h3 class="text-lg font-bold">박준서 대표</h3>
+</div>
+<div class="flex gap-2">
+<span class="flex items-center gap-1 bg-white/20 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] text-white">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">visibility</span>
+                                방문 840
+                            </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="space-y-8">
+<div>
+<h2 class="font-headline font-bold text-lg mb-4 text-on-surface flex items-center gap-2">
+                    어제 <span class="w-1 h-1 rounded-full bg-primary/30"></span>
+</h2>
+<div class="space-y-3">
+<div class="bg-surface-container-low p-4 rounded-xl flex items-center justify-between group active:scale-98 transition-all">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a business woman in a white blazer, soft natural lighting, office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM-98r616ijf9EZoOpCdkL8fw6yKfNSi-9pUKBgip3lr-bki1jYIsffYsgotdKe3tZjWKHJmcTRUwPZhV_xVcibENHe5UcqGUHJEQdQOvd69CFJfuaYAUIFa2GpDuNl0d2DiB1LaJhTKloD7zaO52NKN8XM4VKgGjbRsM_aTFXXr5E8q1k7YQOCrkBbxPx5cUNqAMM4QHEaRDeVCNgYPiI5Qds7t4SRAMOzcySeN5_lHOFRbAvCOo7bwBVnxcSY6Gj7Cn7LslgbnT5"/>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface">이민정 선임</h4>
+<p class="text-xs text-on-surface-variant">글로벌 마케팅팀</p>
+<div class="flex gap-2 mt-1">
+<span class="text-[10px] text-primary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[12px]">bookmark</span> 저장 86
+                                    </span>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2.5 rounded-xl bg-white text-primary-container shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-xl">call</span>
+</button>
+<button class="p-2.5 rounded-xl bg-white text-primary-container shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-xl">chat_bubble</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div>
+<h2 class="font-headline font-bold text-lg mb-4 text-on-surface flex items-center gap-2">
+                    이번 주 <span class="w-1 h-1 rounded-full bg-primary/30"></span>
+</h2>
+<div class="grid grid-cols-1 gap-3">
+<div class="bg-surface-container-low p-4 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-xl overflow-hidden bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">corporate_fare</span>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface">현대 테크니컬즈</h4>
+<p class="text-xs text-on-surface-variant">공식 기업 명함</p>
+<div class="flex gap-2 mt-1">
+<span class="text-[10px] text-on-surface-variant/70 flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">visibility</span> 방문 3.4k
+                                    </span>
+</div>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl text-outline hover:bg-white transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of a young male professional smiling, warm sunset lighting, soft bokeh" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlg9bEJTS6PDUtDiilSdfi194kuyvm4T6my864zXT_D97fKP7m-ufvpa-lkvX_BC8cWIJw3yT6r-oSlGzeVnMc1sCVdMX5UrDSZRHAwHRPifVjKsPb6JGYUEZMHCOEXbugjY8NVqFNxUaMJF4oY6DJdyBWhOoqhTjl1mtXVc1IYtCrdk4OU8OCYMZcpxvcAUJQphwFDrf5i0Ej-0Ojxdrg44ZvhhQCluzyqOGZHVoxy6NoSpORjwPNtzUmTYW7xyPO-TG1877DjmUU"/>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface">최현우 매니저</h4>
+<p class="text-xs text-on-surface-variant">인사 관리부</p>
+<div class="flex gap-2 mt-1">
+<span class="text-[10px] text-primary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[12px]">bookmark</span> 저장 42
+                                    </span>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2.5 rounded-xl bg-white text-primary-container shadow-sm">
+<span class="material-symbols-outlined text-xl">call</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<div class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-t-[24px] z-50 shadow-[0_-8px_24px_rgba(0,80,203,0.04)] border-t border-blue-100/10">
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-blue-600 transition-all active:scale-90 duration-300">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-['Inter'] text-[11px] font-medium leading-tight">홈</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-blue-600 dark:bg-blue-500 text-white rounded-2xl px-5 py-2 scale-105 active:scale-90 duration-300">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">style</span>
+<span class="font-['Inter'] text-[11px] font-medium leading-tight">최근 카드</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-blue-600 transition-all active:scale-90 duration-300">
+<span class="material-symbols-outlined mb-1">group</span>
+<span class="font-['Inter'] text-[11px] font-medium leading-tight">네트워킹</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-blue-600 transition-all active:scale-90 duration-300">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="font-['Inter'] text-[11px] font-medium leading-tight">설정</span>
+</div>
+</div>
+</body></html>
