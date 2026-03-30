@@ -29,7 +29,7 @@ import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Footer } from './Footer';
 import { motion } from 'motion/react';
-import { RecentCards } from '../features/qrcard/components/RecentCards';
+import { RecentCards } from '../../features/qrcard/components/RecentCards';
 
 interface QRCardLandingPageProps {
   onNavigate: (page: string) => void;
