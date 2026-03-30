@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent } from '../../../app/components/ui/button';
+import { Card, CardContent } from '../../../app/components/ui/card';
 import { cardWalletService, WalletContact } from '../../../app/services/cardWalletService';
 import { Calendar, ChevronRight, Share2, MoreHorizontal, Layout, User, Building2, Smartphone, ArrowRight } from 'lucide-react';
 import { cn } from '../../../app/components/ui/utils';
@@ -26,16 +26,16 @@ export function RecentCards({ onNavigate }: RecentCardsProps) {
           </div>
         </div>
         <div className="space-y-4">
-          <h3 className="text-3xl font-editorial font-black text-slate-900 tracking-tighter italic uppercase leading-none px-4">IDENTITY ARCHIVE</h3>
+          <h3 className="text-3xl font-editorial font-black text-slate-900 tracking-tighter italic uppercase leading-none px-4">최근 명함</h3>
           <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest leading-relaxed max-w-[220px] mx-auto opacity-60">
-            A curated portfolio of your recent professional connections.
+            최근에 확인한 비즈니스 프로필이 여기에 보관됩니다.
           </p>
         </div>
         <button 
           onClick={() => onNavigate('app-wallet')}
           className="rounded-[1.5rem] border border-slate-100 text-slate-900 font-black px-10 h-16 hover:bg-slate-50 active:scale-95 transition-all text-[10px] tracking-[0.2em] uppercase italic bg-white shadow-sm"
         >
-          View Business Wallet
+          명함첩 보기
         </button>
       </div>
     );
@@ -47,14 +47,14 @@ export function RecentCards({ onNavigate }: RecentCardsProps) {
       <section className="space-y-8">
         <div className="flex items-center justify-between px-1">
            <div className="space-y-1">
-              <h2 className="text-2xl font-editorial font-black text-slate-900 tracking-tight italic uppercase leading-none">Prime Gallery</h2>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest opacity-60">Prioritized Identity Hubs</p>
+              <h2 className="text-2xl font-editorial font-black text-slate-900 tracking-tight italic uppercase leading-none">주요 갤러리</h2>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest opacity-60">최근 확인한 주요 프로필</p>
            </div>
            <button 
              onClick={() => onNavigate('app-wallet')}
              className="text-[10px] font-black text-primary uppercase tracking-widest flex items-center gap-2 group"
            >
-             ALL CARDS
+             전체 보기
              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
            </button>
         </div>
@@ -90,7 +90,7 @@ export function RecentCards({ onNavigate }: RecentCardsProps) {
                        {card.company || 'Private Entity'}
                     </p>
                     <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest pl-[1.2rem]">
-                       SYNC {new Date(card.created_at || Date.now()).toLocaleDateString('ko-KR', { year: '2-digit', month: '2-digit', day: '2-digit' })}
+                       SYNC {new Date(card.saved_at || Date.now()).toLocaleDateString('ko-KR', { year: '2-digit', month: '2-digit', day: '2-digit' })}
                     </p>
                  </div>
                  <div className="w-12 h-12 bg-slate-900 rounded-[1.25rem] flex items-center justify-center text-white group-hover:bg-primary transition-all shadow-lg shadow-slate-200">
@@ -106,7 +106,7 @@ export function RecentCards({ onNavigate }: RecentCardsProps) {
       <section className="space-y-10 pb-16">
         <div className="flex items-center gap-4">
            <div className="h-px bg-slate-100 flex-grow" />
-           <span className="text-[10px] font-black text-slate-300 uppercase tracking-[0.4em] italic leading-none">Chronicle Library</span>
+           <span className="text-[10px] font-black text-slate-300 uppercase tracking-[0.4em] italic leading-none">기록 보관소</span>
            <div className="h-px bg-slate-100 flex-grow" />
         </div>
 
@@ -115,7 +115,7 @@ export function RecentCards({ onNavigate }: RecentCardsProps) {
            <div className="space-y-4">
              <div className="flex items-center gap-3 px-1">
                 <Calendar className="w-4 h-4 text-slate-300 stroke-[2px]" />
-                <h3 className="text-[11px] font-black text-slate-900 uppercase tracking-widest">Recent Conversions</h3>
+                <h3 className="text-[11px] font-black text-slate-900 uppercase tracking-widest">최근 추가됨</h3>
              </div>
              
              <div className="grid grid-cols-1 gap-5">
@@ -140,7 +140,7 @@ export function RecentCards({ onNavigate }: RecentCardsProps) {
 
                     <div className="flex items-center gap-4">
                        <div className="text-right hidden sm:block">
-                          <p className="text-[9px] font-black text-slate-950 uppercase tracking-tighter italic">AUTHENTICATED</p>
+                          <p className="text-[9px] font-black text-slate-950 uppercase tracking-tighter italic">인증됨</p>
                           <p className="text-[8px] font-bold text-slate-300 uppercase tracking-widest">G-PLATFORM 1.3</p>
                        </div>
                        <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-slate-300 group-hover:bg-primary/5 group-hover:text-primary transition-all">

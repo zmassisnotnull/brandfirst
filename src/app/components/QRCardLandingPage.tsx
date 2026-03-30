@@ -389,7 +389,7 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
                         김철수
                       </h1>
                       <p className="text-white/90 text-center font-medium">
-                        Software Engineer
+                        소프트웨어 엔지니어
                       </p>
                       <p className="text-white/80 text-center text-sm mt-1">
                         개발자
@@ -462,7 +462,7 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
                       </button>
 
                       <p className="text-xs text-gray-500">
-                        Powered by{' '}
+                        BrandFirst.ai 제공{' '}
                         <span className="inline-flex items-center text-sm bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                           <span className="logo-brand">Brand</span><span className="logo-first">First.ai</span>
                         </span>
@@ -525,7 +525,7 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
                         김철수
                       </h1>
                       <p className="text-white/90 text-center font-medium">
-                        Software Engineer
+                        소프트웨어 엔지니어
                       </p>
                       <p className="text-white/80 text-center text-sm mt-1">
                         개발자
@@ -631,7 +631,7 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
                       </button>
 
                       <p className="text-xs text-gray-500">
-                        Powered by{' '}
+                        BrandFirst.ai 제공{' '}
                         <span className="inline-flex items-center text-sm bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                           <span className="logo-brand">Brand</span><span className="logo-first">First.ai</span>
                         </span>
@@ -694,7 +694,7 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
                         김철수
                       </h1>
                       <p className="text-white/90 text-center font-medium">
-                        Weekend Photographer
+                        주말 사진작가
                       </p>
                       <p className="text-white/80 text-center text-sm mt-1">
                         사진작가
@@ -806,7 +806,7 @@ export function QRCardLandingPage({ onNavigate, user, onOpenAuthModal }: QRCardL
                       </button>
 
                       <p className="text-xs text-gray-500">
-                        Powered by{' '}
+                        BrandFirst.ai 제공{' '}
                         <span className="inline-flex items-center text-sm bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                           <span className="logo-brand">Brand</span><span className="logo-first">First.ai</span>
                         </span>

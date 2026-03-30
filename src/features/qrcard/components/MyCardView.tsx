@@ -45,7 +45,7 @@ export function MyCardView({ onNavigate, user }: MyCardViewProps) {
     try {
       setLoading(true);
       if (!user) return;
-      const data = await digitalCardApi.getUserProfile(user.id);
+      const data = await digitalCardApi.getProfile(user.id);
       setProfile(data);
       
       if (data) {
@@ -82,7 +82,7 @@ export function MyCardView({ onNavigate, user }: MyCardViewProps) {
           <div className="absolute inset-0 bg-primary/10 blur-[40px] animate-pulse" />
           <Loader2 className="w-12 h-12 text-primary animate-spin relative z-10" />
         </div>
-        <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] italic">Accessing Personal Hub...</p>
+        <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] italic">내 프로필 로드 중...</p>
       </div>
     );
   }
@@ -94,16 +94,16 @@ export function MyCardView({ onNavigate, user }: MyCardViewProps) {
            <Smartphone className="w-10 h-10 text-slate-300" />
         </div>
         <div className="space-y-4">
-          <h2 className="text-3xl font-editorial font-black text-slate-900 tracking-tighter italic uppercase leading-none">Identity Inactive</h2>
+          <h2 className="text-3xl font-editorial font-black text-slate-900 tracking-tighter italic uppercase leading-none">기능 비활성화</h2>
           <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] leading-relaxed max-w-[220px] mx-auto opacity-70">
-             Your unique digital signature has not been instantiated yet.
+             디지털 명함 정보가 아직 생성되지 않았습니다.
           </p>
         </div>
         <Button 
           onClick={() => onNavigate('qrcard-create')}
           className="rounded-[2rem] bg-primary hover:bg-slate-900 text-white font-black px-12 h-20 shadow-2xl shadow-primary/20 transition-all text-xs tracking-[0.3em] uppercase italic"
         >
-          GENERATE HUB
+          명함 만들기
         </Button>
       </div>
     );
@@ -116,7 +116,7 @@ export function MyCardView({ onNavigate, user }: MyCardViewProps) {
         <header className="flex items-center justify-between">
            <div className="flex items-center gap-3 bg-secondary/50 px-5 py-2.5 rounded-full border border-slate-100">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-[10px] font-black text-slate-900 uppercase tracking-widest italic">Live Status</span>
+              <span className="text-[10px] font-black text-slate-900 uppercase tracking-widest italic">활성 상태</span>
            </div>
            <div className="flex gap-4">
               <button className="w-12 h-12 bg-secondary/50 rounded-2xl flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all shadow-sm">
@@ -146,10 +146,10 @@ export function MyCardView({ onNavigate, user }: MyCardViewProps) {
            <div className="space-y-3">
               <h1 className="text-4xl font-editorial font-black text-slate-900 italic uppercase tracking-tighter leading-none">{profile.name}</h1>
               <div className="flex flex-col items-center gap-2">
-                 <span className="text-[11px] font-black text-primary bg-primary/5 px-5 py-1.5 rounded-full uppercase tracking-[0.2em]">{profile.title || 'Professional Hub'}</span>
+                 <span className="text-[11px] font-black text-primary bg-primary/5 px-5 py-1.5 rounded-full uppercase tracking-[0.2em]">{profile.title || '비즈니스 전문가'}</span>
                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none flex items-center gap-2 opacity-60 italic">
                    <Building2 className="w-3 h-3" />
-                   {profile.company || 'Direct Portfolio'}
+                   {profile.company || '개인 포트폴리오'}
                  </p>
               </div>
            </div>
@@ -160,11 +160,11 @@ export function MyCardView({ onNavigate, user }: MyCardViewProps) {
                 className="h-18 bg-slate-900 hover:bg-black text-white rounded-[1.75rem] gap-4 text-xs font-black shadow-xl transition-all active:scale-95 flex items-center justify-center tracking-[0.25em] italic uppercase"
               >
                 {copied ? <Check className="w-5 h-5 text-green-400" /> : <Copy className="w-5 h-5 opacity-40" />}
-                {copied ? 'COPIED' : 'TRANSFER'}
+                {copied ? '복사됨' : '링크 복사'}
               </button>
               <button className="h-18 bg-white border border-slate-100 hover:bg-slate-50 text-slate-900 rounded-[1.75rem] gap-4 text-xs font-black shadow-sm transition-all active:scale-95 flex items-center justify-center tracking-[0.25em] italic uppercase">
                 <Share2 className="w-5 h-5 text-primary opacity-40" />
-                BROADCAST
+                명함 공유
               </button>
            </div>
         </div>
@@ -177,8 +177,8 @@ export function MyCardView({ onNavigate, user }: MyCardViewProps) {
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 blur-[100px] rounded-full group-hover:scale-110 transition-transform duration-1000" />
           
           <div className="space-y-3 relative z-10">
-            <h3 className="text-[12px] font-black text-white tracking-[0.4em] uppercase opacity-40 italic">Signature Scan</h3>
-            <p className="text-2xl font-editorial font-black text-white italic uppercase tracking-tighter">Your high-fidelity QR</p>
+            <h3 className="text-[12px] font-black text-white tracking-[0.4em] uppercase opacity-40 italic">명함 스캔</h3>
+            <p className="text-2xl font-editorial font-black text-white italic uppercase tracking-tighter">내 디지털 명함 QR</p>
           </div>
 
           <div className="relative group mx-auto inline-block p-10 bg-white rounded-[4rem] shadow-2xl relative z-10 transition-transform duration-700 hover:scale-105 border border-white/10">
@@ -194,31 +194,31 @@ export function MyCardView({ onNavigate, user }: MyCardViewProps) {
           <div className="flex flex-col items-center gap-4 relative z-10">
              <div className="flex items-center gap-4 bg-white/5 px-6 py-3 rounded-full border border-white/5 backdrop-blur-3xl">
                 <ShieldCheck className="w-4 h-4 text-primary" />
-                <span className="text-[10px] font-black text-white/50 uppercase tracking-[0.3em]">Encrypted Standard 1.3</span>
+                <span className="text-[10px] font-black text-white/50 uppercase tracking-[0.3em]">보안 표준 v1.3</span>
              </div>
              <p className="text-[9px] text-white/30 font-bold uppercase tracking-widest leading-relaxed max-w-[200px]">
-               Allow others to scan this high-density matrix to synchronize your professional profile.
+               상대방이 이 QR 코드를 스캔하면 내 프로필 정보를 공유할 수 있습니다.
              </p>
           </div>
         </div>
 
         {/* Intelligence Statistics Hub */}
         <div className="bg-white rounded-[4rem] p-10 space-y-10 border border-slate-50 shadow-sm">
-           <h3 className="text-[11px] font-black text-slate-300 uppercase tracking-[0.25em] italic px-2">Access Intelligence</h3>
+           <h3 className="text-[11px] font-black text-slate-300 uppercase tracking-[0.25em] italic px-2">데이터 통계</h3>
            
            <div className="grid grid-cols-2 gap-6">
               <div className="p-8 bg-secondary/50 rounded-[2.5rem] border border-slate-50 space-y-3 shadow-inner">
                  <Users className="w-6 h-6 text-primary opacity-30" />
                  <div className="space-y-1">
                     <p className="text-3xl font-editorial font-black text-slate-900 italic tracking-tighter leading-none">248</p>
-                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest opacity-60">Total Syncs</p>
+                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest opacity-60">누적 공유</p>
                  </div>
               </div>
               <div className="p-8 bg-secondary/50 rounded-[2.5rem] border border-slate-50 space-y-3 shadow-inner">
                  <BarChart3 className="w-6 h-6 text-primary opacity-30" />
                  <div className="space-y-1">
                     <p className="text-3xl font-editorial font-black text-slate-900 italic tracking-tighter leading-none">+12%</p>
-                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest opacity-60">Growth Index</p>
+                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest opacity-60">성장 지표</p>
                  </div>
               </div>
            </div>
@@ -227,7 +227,7 @@ export function MyCardView({ onNavigate, user }: MyCardViewProps) {
              variant="ghost"
              className="w-full h-18 bg-secondary hover:bg-slate-900 hover:text-white rounded-[1.75rem] text-[10px] font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-4 italic"
            >
-             ANALYTICS LEDGER
+             상세 분석 보기
              <ArrowUpRight className="w-4 h-4 opacity-40 shrink-0" />
            </Button>
         </div>
@@ -236,10 +236,10 @@ export function MyCardView({ onNavigate, user }: MyCardViewProps) {
       {/* Advanced Footer Context */}
       <footer className="text-center p-14 pt-0 space-y-6 pb-24 opacity-30 hover:opacity-100 transition-opacity">
         <div className="flex flex-col items-center gap-1.5 grayscale opacity-50">
-          <p className="text-[9px] font-black text-slate-900 tracking-[0.4em] uppercase">Built on G-PLATFORM</p>
+          <p className="text-[9px] font-black text-slate-900 tracking-[0.4em] uppercase">G-PLATFORM 제공</p>
           <div className="flex items-center gap-4">
              <span className="w-1 h-1 bg-slate-300 rounded-full" />
-             <p className="text-[8px] font-bold text-slate-500 tracking-[0.2em] uppercase leading-none">VERIFIED SIGNATURE ACTIVE</p>
+             <p className="text-[8px] font-bold text-slate-500 tracking-[0.2em] uppercase leading-none">인증된 서명 활성</p>
              <span className="w-1 h-1 bg-slate-300 rounded-full" />
           </div>
         </div>

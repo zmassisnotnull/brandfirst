@@ -40,7 +40,7 @@ export function WalletView({ onNavigate }: WalletViewProps) {
   const loadContacts = async () => {
     try {
       setLoading(true);
-      const data = cardWalletService.getAllContacts();
+      const data = cardWalletService.getWallet();
       setContacts(data);
     } catch (err) {
       console.error('Failed to load contacts:', err);
@@ -62,7 +62,7 @@ export function WalletView({ onNavigate }: WalletViewProps) {
           <div className="absolute inset-0 bg-primary/10 blur-[40px] animate-pulse" />
           <Loader2 className="w-12 h-12 text-primary animate-spin relative z-10" />
         </div>
-        <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] italic">Accessing Business Ledger...</p>
+        <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] italic">명함첩에 접속 중...</p>
       </div>
     );
   }
@@ -74,7 +74,7 @@ export function WalletView({ onNavigate }: WalletViewProps) {
         <div className="flex items-center justify-between">
            <div className="space-y-1.5">
              <h1 className="text-4xl font-editorial font-black text-slate-900 tracking-tighter italic uppercase leading-none px-1">Identity Wallet</h1>
-             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em] opacity-60">Verified Business Ledger 1.3</p>
+             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em] opacity-60">인증된 비즈니스 명함첩 v1.3</p>
            </div>
            <button 
              onClick={() => onNavigate('qrcard-digitize')}
@@ -91,7 +91,7 @@ export function WalletView({ onNavigate }: WalletViewProps) {
            </div>
            <input 
              type="text" 
-             placeholder="Search Name, Role, or Organization" 
+             placeholder="이름, 직명 또는 회사 검색" 
              className="w-full h-18 pl-16 pr-8 bg-transparent border-none focus:ring-0 text-slate-900 font-bold placeholder:text-slate-300 transition-all uppercase tracking-tight text-sm italic"
              value={searchQuery}
              onChange={(e) => setSearchQuery(e.target.value)}
@@ -111,11 +111,11 @@ export function WalletView({ onNavigate }: WalletViewProps) {
            <div className="flex items-center gap-6">
               <button className="flex items-center gap-2.5 text-[10px] font-black text-slate-900 uppercase tracking-[0.2em] group">
                  <Filter className="w-4 h-4 text-slate-300 group-hover:text-primary transition-colors" />
-                 FILTERS
+                 필터
               </button>
               <button className="flex items-center gap-2.5 text-[10px] font-black text-slate-900 uppercase tracking-[0.2em] group">
                  <ArrowUpDown className="w-4 h-4 text-slate-300 group-hover:text-primary transition-colors" />
-                 SORT
+                 정렬
               </button>
            </div>
            <div className="flex items-center bg-secondary/50 p-1.5 rounded-[1.25rem] border border-slate-100">
@@ -149,9 +149,9 @@ export function WalletView({ onNavigate }: WalletViewProps) {
                <User className="w-16 h-16 text-slate-200" />
             </div>
             <div className="space-y-3">
-              <h3 className="text-2xl font-editorial font-black text-slate-900 italic uppercase">NO CONNECTIONS FOUND</h3>
+              <h3 className="text-2xl font-editorial font-black text-slate-900 italic uppercase">명함을 찾을 수 없습니다</h3>
               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] leading-relaxed max-w-[200px] mx-auto">
-                Expand your search or add a new identity to the ledger.
+                검색어를 확인하거나 새로운 명함을 추가해 보세요.
               </p>
             </div>
           </div>
@@ -178,8 +178,8 @@ export function WalletView({ onNavigate }: WalletViewProps) {
                       <div className="space-y-1 pr-6 pt-1">
                         <h4 className="font-editorial font-black text-slate-900 truncate text-2xl italic uppercase tracking-tighter leading-none">{contact.name}</h4>
                         <div className="flex flex-col gap-1">
-                           <span className="text-[10px] font-black text-primary uppercase tracking-[0.15em] opacity-80">{contact.title || 'Verified Professional'}</span>
-                           <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest italic opacity-50">{contact.company || 'Direct Entity Hub'}</p>
+                           <span className="text-[10px] font-black text-primary uppercase tracking-[0.15em] opacity-80">{contact.title || '전문가'}</span>
+                           <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest italic opacity-50">{contact.company || '소속 정보 없음'}</p>
                         </div>
                       </div>
                    </div>
@@ -202,7 +202,7 @@ export function WalletView({ onNavigate }: WalletViewProps) {
                       )}
                    </div>
                    <div className="flex flex-col items-end gap-1 opacity-20 group-hover:opacity-100 transition-opacity">
-                      <p className="text-[8px] font-black text-slate-900 uppercase tracking-widest leading-none">Last Sync</p>
+                      <p className="text-[8px] font-black text-slate-900 uppercase tracking-widest leading-none">동기화</p>
                       <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
                          {new Date(contact.last_contact_at || Date.now()).toLocaleDateString('ko-KR', { year: '2-digit', month: '2-digit', day: '2-digit' })}
                       </span>
@@ -217,8 +217,8 @@ export function WalletView({ onNavigate }: WalletViewProps) {
       {/* Advanced Branding Sync */}
       <footer className="mt-auto px-1 pt-12 pb-24 text-center opacity-30">
         <div className="flex flex-col items-center gap-1 grayscale opacity-50">
-          <p className="text-[10px] font-black text-slate-900 tracking-[0.4em] uppercase">Built on G-PLATFORM</p>
-          <p className="text-[8px] font-bold text-slate-500 tracking-[0.2em] uppercase">VERIFIED IDENTITY 1.3 LEDGER</p>
+          <p className="text-[10px] font-black text-slate-900 tracking-[0.4em] uppercase">G-PLATFORM 제공</p>
+          <p className="text-[8px] font-bold text-slate-500 tracking-[0.2em] uppercase">인증된 프로필 v1.3</p>
         </div>
       </footer>
     </div>

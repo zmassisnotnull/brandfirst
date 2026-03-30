@@ -79,7 +79,7 @@ export function Footer() {
         <div className="border-t border-gray-200 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
           <p className="text-gray-500">
             © 2026 DOB LABS INC. All rights reserved.
-            Powered by{' '}
+            BrandFirst.ai 제공{' '}
             <span className="inline-flex items-center text-sm bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               <span className="logo-brand">Brand</span><span className="logo-first">First.ai</span>
             </span>

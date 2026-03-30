@@ -227,13 +227,13 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
         <header className="text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/5 rounded-full">
             <Sparkles className="w-3.5 h-3.5 text-primary" />
-            <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Instant Digitization</span>
+            <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">빠른 명함 변환</span>
           </div>
           <h1 className="text-4xl font-editorial font-extrabold text-slate-900 tracking-tight leading-none italic text-nowrap">
-            10-SECOND IDENTITY
+            10초 만에 만드는 디지털 명함
           </h1>
           <p className="text-slate-400 text-[11px] font-bold tracking-widest uppercase opacity-60">
-            One photo is all it takes. No registration required.
+            사진 한 장이면 충분합니다. 회원가입 없이 바로 시작하세요.
           </p>
         </header>
 
@@ -267,9 +267,9 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
                 </div>
               )}
               <div className="text-center space-y-2">
-                <h3 className="text-lg font-editorial font-black text-slate-900 tracking-tight italic">PRIMARY IDENTITY</h3>
+                <h3 className="text-lg font-editorial font-black text-slate-900 tracking-tight italic">대표 정보 (앞면)</h3>
                 <p className="text-[10px] text-slate-400 font-bold tracking-[0.1em] uppercase opacity-70">
-                  {frontPreview ? "Identity processing complete" : "Scan the front of your card"}
+                  {frontPreview ? "정보 분석 완료" : "명함 앞면을 스캔해 주세요"}
                 </p>
                 {isMobile && !frontPreview && (
                   <button 
@@ -280,7 +280,7 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
                       fileInputRef.current?.click();
                     }}
                   >
-                    SELECT FROM GALLERY
+                    갤러리에서 선택
                   </button>
                 )}
               </div>
@@ -310,9 +310,9 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
                 )}
               </div>
               <div className="flex-1 space-y-1">
-                <h4 className="text-sm font-editorial font-bold text-slate-900 italic">SUPPLEMENTAL BRANDING</h4>
+                <h4 className="text-sm font-editorial font-bold text-slate-900 italic">추가 정보 (뒷면)</h4>
                 <p className="text-[10px] text-slate-400 font-bold tracking-tight uppercase opacity-60">
-                   Back of card or additional logos (optional)
+                   명함 뒷면 또는 로고 (선택 사항)
                 </p>
               </div>
             </div>
@@ -328,10 +328,10 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
               </div>
             </div>
             <div className="text-center space-y-3">
-              <h2 className="text-2xl font-editorial font-extrabold text-slate-900 tracking-tight leading-none italic uppercase">Authenticating Identity</h2>
+              <h2 className="text-2xl font-editorial font-extrabold text-slate-900 tracking-tight leading-none italic uppercase">정보 인증 중</h2>
               <div className="flex items-center gap-3 text-slate-400 text-[10px] font-bold tracking-[0.2em] justify-center uppercase">
                 <Loader2 className="w-4 h-4 animate-spin" />
-                Analyzing structure...
+                명함 구조 분석 중...
               </div>
             </div>
           </div>
@@ -348,7 +348,7 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
                     activeTab === 'front' ? "bg-white text-slate-900 shadow-sm italic" : "text-slate-400"
                   )}
                 >
-                  Front
+                  앞면
                 </button>
                 <button 
                   onClick={() => setActiveTab('back')}
@@ -357,7 +357,7 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
                     activeTab === 'back' ? "bg-white text-slate-900 shadow-sm italic" : "text-slate-400"
                   )}
                 >
-                  Back {!backPreview && '(Empty)'}
+                  뒷면 {!backPreview && '(비어 있음)'}
                 </button>
               </div>
               <div className="bg-white p-4 rounded-[3.5rem] shadow-2xl shadow-slate-300 border border-white overflow-hidden aspect-[1.5/1]">
@@ -370,13 +370,13 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
             </div>
             <div className="bg-white rounded-[4rem] p-12 shadow-sm border border-slate-50 space-y-12">
               <div className="space-y-1.5 text-center">
-                <h3 className="text-xl font-editorial font-black text-slate-900 italic">VERIFY INTELLIGENCE</h3>
-                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest opacity-60">Ensure all extracted data is correct</p>
+                <h3 className="text-xl font-editorial font-black text-slate-900 italic">정보 확인 및 수정</h3>
+                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest opacity-60">추출된 정보가 정확한지 확인해 주세요</p>
               </div>
               <div className="space-y-10">
                 <div className="space-y-8">
                   <div className="space-y-3">
-                    <label className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em] px-2 italic">Legal Name</label>
+                    <label className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em] px-2 italic">성명</label>
                     <div className="relative group/field">
                       <UserIcon className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-200 group-focus-within/field:text-primary transition-colors" />
                       <Input 
@@ -387,7 +387,7 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
                     </div>
                   </div>
                   <div className="space-y-3">
-                    <label className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em] px-2 italic">Direct Mobile</label>
+                    <label className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em] px-2 italic">전화번호</label>
                     <div className="relative group/field">
                       <Phone className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-200 group-focus-within/field:text-primary transition-colors" />
                       <Input 
@@ -398,7 +398,7 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
                     </div>
                   </div>
                   <div className="space-y-3">
-                    <label className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em] px-2 italic">Electronic Address</label>
+                    <label className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em] px-2 italic">이메일 주소</label>
                     <div className="relative group/field">
                       <Mail className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-200 group-focus-within/field:text-primary transition-colors" />
                       <Input 
@@ -422,19 +422,19 @@ export function QuickCardCreator({ onNavigate }: { onNavigate: (page: string, pa
                 >
                   {isSaving ? (
                     <div className="flex items-center gap-3">
-                      <Loader2 className="w-6 h-6 animate-spin" />
-                      <span>Materializing Identity...</span>
+                      <Loader2 className="6 h-6 animate-spin" />
+                      <span>디지털 명함 생성 중...</span>
                     </div>
                   ) : (
                     <div className="flex items-center gap-3">
-                      <span>FINALIZE IDENTITY</span>
+                      <span>명함 생성 완료</span>
                       <ArrowRight className="w-6 h-6 opacity-30" />
                     </div>
                   )}
                 </Button>
                 <p className="text-[9px] text-slate-300 font-bold text-center uppercase tracking-widest px-8 leading-relaxed opacity-60">
-                  Data is processed under v1.3 encryption protocols. <br/>
-                  Anonymous identities are retained for 90 days.
+                  모든 데이터는 v1.3 보안 프로토콜에 따라 처리됩니다. <br/>
+                  익명 프로필은 90일 동안 보관됩니다.
                 </p>
               </div>
             </div>

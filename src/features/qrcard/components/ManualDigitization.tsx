@@ -44,9 +44,10 @@ export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
           .eq('is_primary', true)
           .maybeSingle();
         
-        if (data) {
-          setUserProfile(data);
-          const url = `${window.location.origin}?card=${data.id}`;
+        const profileData = data as any;
+        if (profileData) {
+          setUserProfile(profileData);
+          const url = `${window.location.origin}?card=${profileData.id}`;
           const qrDataUrl = await QRCode.toDataURL(url, {
             width: 400,
             margin: 2,
@@ -124,9 +125,9 @@ export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
         </div>
         
         <div className="space-y-4">
-          <h2 className="text-3xl font-editorial font-black text-slate-900 tracking-tight italic uppercase">Digitizing Network</h2>
+          <h2 className="text-3xl font-editorial font-black text-slate-900 tracking-tight italic uppercase">명함 분석 중</h2>
           <p className="text-slate-400 text-[11px] font-bold tracking-widest uppercase opacity-60 leading-relaxed mx-auto max-w-[200px]">
-            AI performing structural analysis on your physical card.
+            AI가 명함의 정보를 분석하고 있습니다.
           </p>
         </div>
       </div>
@@ -137,7 +138,7 @@ export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
     return (
       <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-10">
         <header className="flex items-center justify-between px-1">
-          <h2 className="text-2xl font-editorial font-extrabold text-slate-900 tracking-tight leading-none italic uppercase">Your Identity</h2>
+          <h2 className="text-2xl font-editorial font-extrabold text-slate-900 tracking-tight leading-none italic uppercase">내 디지털 명함</h2>
           <button onClick={() => setMode('portal')} className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-slate-400 active:scale-90 transition-all"><X className="w-5 h-5" /></button>
         </header>
 
@@ -147,7 +148,7 @@ export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
           <div className="text-center space-y-3">
             <h3 className="text-3xl font-editorial font-extrabold text-slate-900 italic uppercase leading-none">{userProfile?.name || 'Your Name'}</h3>
             <div className="inline-flex items-center gap-2 px-4 py-1 bg-primary/5 rounded-full">
-               <span className="text-[10px] font-black text-primary uppercase tracking-widest leading-none">{userProfile?.title || 'Identity Hub Owner'}</span>
+               <span className="text-[10px] font-black text-primary uppercase tracking-widest leading-none">{userProfile?.title || '디지털 명함 소유자'}</span>
             </div>
           </div>
 
@@ -170,8 +171,8 @@ export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
                 <ShieldCheck className="w-7 h-7 text-white" />
               </div>
               <div className="space-y-1">
-                <p className="text-[10px] font-black text-white/40 uppercase tracking-widest">Protocol 1.3</p>
-                <p className="text-sm font-bold italic uppercase tracking-tight">Verified Access</p>
+                <p className="text-[10px] font-black text-white/40 uppercase tracking-widest">프로토콜 v1.3</p>
+                <p className="text-sm font-bold italic uppercase tracking-tight">인증된 접근</p>
               </div>
             </div>
             <ArrowRight className="w-6 h-6 text-white/30" />
@@ -179,7 +180,7 @@ export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
         </div>
 
         <p className="text-center text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] opacity-40 leading-relaxed px-12">
-          Handoff your digital presence by allowing others to scan this high-fidelity signature.
+          상대방이 이 QR 코드를 스캔하면 내 디지털 명함 정보를 공유할 수 있습니다.
         </p>
       </div>
     );
@@ -189,7 +190,7 @@ export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
     return (
       <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
         <div className="flex items-center justify-between px-1">
-          <h2 className="text-2xl font-editorial font-extrabold text-slate-900 tracking-tight leading-none italic uppercase">Identity Validation</h2>
+          <h2 className="text-2xl font-editorial font-extrabold text-slate-900 tracking-tight leading-none italic uppercase">정보 확인</h2>
           <button onClick={() => setMode('portal')} className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-slate-400 active:scale-90 transition-all"><X className="w-5 h-5" /></button>
         </div>
 
@@ -198,8 +199,8 @@ export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
              {capturedImage && <img src={capturedImage} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="Captured Card" />}
              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
              <div className="absolute bottom-6 left-8 text-white space-y-1">
-                <span className="text-[10px] font-black tracking-[0.3em] uppercase opacity-60">Authentication Source</span>
-                <p className="text-base font-editorial font-bold italic uppercase">Original Physical Capture</p>
+                <span className="text-[10px] font-black tracking-[0.3em] uppercase opacity-60">인증 출처</span>
+                <p className="text-base font-editorial font-bold italic uppercase">원본 명함 캡처</p>
              </div>
           </div>
         </div>
@@ -207,10 +208,10 @@ export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
         <div className="space-y-6">
           <div className="grid grid-cols-1 gap-4">
              {[
-               { label: 'Identified Name', value: 'Digitized Profile' },
-               { label: 'Role / Designation', value: 'Market Analyst' },
-               { label: 'Organization', value: 'Identity Corp' },
-               { label: 'Contact Channel', value: 'Verified Mobile' },
+               { label: '성명', value: '변환된 프로필' },
+               { label: '직책', value: '전문가' },
+               { label: '회사/직단', value: '소속 정보' },
+               { label: '연락 채널', value: '인증된 연락처' },
              ].map((field, i) => (
                <div key={i} className="group p-6 bg-secondary rounded-[2rem] focus-within:bg-white focus-within:ring-2 focus-within:ring-primary/10 transition-all shadow-inner relative">
                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2 opacity-50 group-hover:text-primary transition-colors">{field.label}</label>
@@ -230,7 +231,7 @@ export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
             className="w-full h-20 rounded-[2.25rem] bg-primary hover:bg-slate-900 text-white font-black text-lg shadow-2xl shadow-primary/20 active:scale-95 transition-all text-[12px] tracking-[0.2em] italic uppercase"
             onClick={() => onNavigate('app-wallet')}
           >
-            Finalize Transformation
+            명함 저장하기
             <ArrowRight className="w-5 h-5 ml-4 opacity-50" />
           </Button>
         </div>
@@ -243,13 +244,13 @@ export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
       <header className="px-1 pt-6 space-y-4">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/5 rounded-full">
           <Zap className="w-3.5 h-3.5 text-primary" />
-          <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Quick Add Portal</span>
+          <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">빠른 추가</span>
         </div>
         <h1 className="text-4xl font-editorial font-extrabold text-slate-900 leading-[0.9] tracking-tighter italic uppercase">
-          Expand Your<br /><span className="text-primary not-italic">Identity realm</span>
+          새로운 인맥<br /><span className="text-primary not-italic">구축하기</span>
         </h1>
         <p className="text-slate-400 text-xs font-bold opacity-60 leading-relaxed max-w-[280px] uppercase tracking-wide">
-          Protocol for converting physical presence into verified digital equity.
+          오프라인의 만남을 디지털 자산으로 변환하는 프로토콜
         </p>
       </header>
 
@@ -270,11 +271,11 @@ export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
              </div>
              <div className="space-y-3">
                 <div className="flex items-center gap-2">
-                   <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30">External Matrix</span>
+                   <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30">외부 매트릭스</span>
                    <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
                 </div>
-                <h3 className="text-3xl font-editorial font-black leading-none italic uppercase tracking-tighter">AI Network Scan</h3>
-                <p className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] leading-relaxed">Multimodal OCR • 1.3 Signature Analysis</p>
+                <h3 className="text-3xl font-editorial font-black leading-none italic uppercase tracking-tighter">AI 명함 스캔</h3>
+                <p className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] leading-relaxed">AI OCR • v1.3 분석 기술</p>
              </div>
           </div>
         </button>
@@ -290,9 +291,9 @@ export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
           
           <div className="relative z-10 w-full flex items-end justify-between">
              <div className="space-y-3">
-                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-300 italic">Self Presence</span>
-                <h3 className="text-2xl font-editorial font-black leading-none italic uppercase tracking-tighter">Identity Broadcast</h3>
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Personal QR • Encrypted Handoff</p>
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-300 italic">내 정보</span>
+                <h3 className="text-2xl font-editorial font-black leading-none italic uppercase tracking-tighter">내 QR 명함</h3>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">디지털 명함 정보 공유</p>
              </div>
              <div className="w-16 h-16 bg-slate-900 rounded-[1.85rem] flex items-center justify-center text-white group-hover:bg-primary transition-all shadow-xl shadow-slate-200">
                <ArrowUpRight className="w-7 h-7" />
@@ -308,7 +309,7 @@ export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
             <div className="w-16 h-16 bg-secondary rounded-[2rem] flex items-center justify-center mb-6 shadow-inner group-hover:bg-primary group-hover:text-white transition-all">
               <ImageIcon className="w-7 h-7 opacity-20 group-hover:opacity-100" />
             </div>
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] group-hover:text-slate-900 transition-colors relative z-10">Archive</span>
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] group-hover:text-slate-900 transition-colors relative z-10">갤러리</span>
           </label>
 
           <button 
@@ -319,7 +320,7 @@ export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
             <div className="w-16 h-16 bg-secondary rounded-[2rem] flex items-center justify-center mb-6 shadow-inner group-hover:bg-primary group-hover:text-white transition-all">
               <User className="w-7 h-7 opacity-20 group-hover:opacity-100" />
             </div>
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] group-hover:text-slate-900 transition-colors relative z-10">Manual</span>
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] group-hover:text-slate-900 transition-colors relative z-10">직접 입력</span>
           </button>
         </div>
       </div>
@@ -331,8 +332,8 @@ export function ManualDigitization({ onNavigate }: ManualDigitizationProps) {
             <ShieldCheck className="w-8 h-8 text-primary" />
           </div>
           <div>
-            <h4 className="text-[11px] font-black text-white/50 uppercase tracking-[0.3em] italic">GoQR Security Vault</h4>
-            <p className="text-sm font-bold text-slate-300 mt-1 uppercase tracking-tighter">Encrypted Identity Standard</p>
+            <h4 className="text-[11px] font-black text-white/50 uppercase tracking-[0.3em] italic">GoQR 보안 금고</h4>
+            <p className="text-sm font-bold text-slate-300 mt-1 uppercase tracking-tighter">암호화된 신원 표준</p>
           </div>
         </div>
         <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center opacity-20 group-hover:opacity-100 transition-opacity">

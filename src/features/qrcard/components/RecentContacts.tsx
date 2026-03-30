@@ -30,9 +30,9 @@ export function RecentContacts({ onNavigate }: RecentContactsProps) {
           </div>
         </div>
         <div className="space-y-4">
-          <h3 className="text-3xl font-editorial font-black text-slate-900 tracking-tighter italic uppercase leading-none px-4">IDENTITY CONNECTIONS</h3>
+          <h3 className="text-3xl font-editorial font-black text-slate-900 tracking-tighter italic uppercase leading-none px-4">최근 연락</h3>
           <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest leading-relaxed max-w-[220px] mx-auto opacity-60">
-            Your recent network interactions will materialize here in real-time.
+            최근 활동 내역이 여기에 실시간으로 표시됩니다.
           </p>
         </div>
         <Button 
@@ -40,7 +40,7 @@ export function RecentContacts({ onNavigate }: RecentContactsProps) {
           onClick={() => onNavigate('app-wallet')}
           className="mt-4 rounded-[1.5rem] border-slate-200 text-slate-900 font-black px-10 h-16 hover:bg-slate-50 active:scale-95 transition-all text-[10px] tracking-[0.2em] uppercase italic"
         >
-          Initialize Wallet
+          명함첩으로 이동
         </Button>
       </div>
     );
@@ -53,12 +53,12 @@ export function RecentContacts({ onNavigate }: RecentContactsProps) {
         <section className="space-y-8">
           <div className="flex items-center justify-between px-1">
              <div className="space-y-1">
-                <h2 className="text-2xl font-editorial font-black text-slate-900 tracking-tight italic uppercase">Active Matrix</h2>
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest opacity-60">Today's direct connections</p>
+                <h2 className="text-2xl font-editorial font-black text-slate-900 tracking-tight italic uppercase">최근 활동</h2>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest opacity-60">오늘의 주요 연락</p>
              </div>
              <div className="flex items-center gap-2 bg-primary/5 px-4 py-2 rounded-full border border-primary/5">
                 <div className="w-1.5 h-1.5 bg-primary rounded-full animate-ping" />
-                <span className="text-[10px] font-black text-primary tracking-widest uppercase">Live</span>
+                <span className="text-[10px] font-black text-primary tracking-widest uppercase">실시간</span>
              </div>
           </div>
           
@@ -100,8 +100,8 @@ export function RecentContacts({ onNavigate }: RecentContactsProps) {
       <section className="space-y-10 pb-16">
         <div className="flex items-center justify-between px-1">
           <div className="space-y-1">
-             <h2 className="text-xl font-editorial font-black text-slate-900 tracking-tight italic uppercase">Interaction History</h2>
-             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest opacity-60">All platform verified contacts</p>
+             <h2 className="text-xl font-editorial font-black text-slate-900 tracking-tight italic uppercase">연락 기록</h2>
+             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest opacity-60">인증된 모든 연락 내역</p>
           </div>
           <span className="text-[10px] font-black text-slate-900 tracking-[0.25em] uppercase py-2 px-5 bg-secondary rounded-full border border-slate-100 shadow-sm">
             IDX {contacts.length}
@@ -132,7 +132,7 @@ export function RecentContacts({ onNavigate }: RecentContactsProps) {
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <p className="text-[11px] text-primary font-black uppercase tracking-widest">{contact.title || 'Professional'}</p>
+                  <p className="text-[11px] text-primary font-black uppercase tracking-widest">{contact.title || '전문가'}</p>
                   {contact.company && (
                     <>
                       <span className="w-1 h-1 bg-slate-200 rounded-full"></span>

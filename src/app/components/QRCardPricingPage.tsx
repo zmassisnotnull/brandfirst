@@ -100,7 +100,7 @@ export function QRCardPricingPage({
         '응급 지원 (24시간 내 응답)',
         '광고 제거',
         '고객 관리 시스템 통합',
-        '대시안 분석 도구',
+        '데이터 분석 도구',
       ],
       limitations: [],
       bestFor: [
@@ -353,7 +353,7 @@ export function QRCardPricingPage({
                     )}
                   </Button>
                   <p className="text-xs text-gray-500 text-center mx-[0px] mt-[30px] mb-[0px]">
-                    Powered by{' '}
+                    BrandFirst.ai 제공{' '}
                     <span className="inline-flex items-center text-sm bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                       <span className="logo-brand">Brand</span><span className="logo-first">First.ai</span>
                     </span>

@@ -97,7 +97,7 @@ END:VCARD`;
           <div className="absolute inset-0 bg-primary/10 blur-[40px] animate-pulse" />
           <Loader2 className="w-12 h-12 text-primary animate-spin relative z-10" />
         </div>
-        <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] italic">Accessing Identity Hub...</p>
+        <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] italic">프로필 로드 중...</p>
       </div>
     );
   }
@@ -109,15 +109,15 @@ END:VCARD`;
           <Smartphone className="w-8 h-8 text-slate-200" />
         </div>
         <div className="space-y-3">
-          <h2 className="text-2xl font-editorial font-black text-slate-900 italic">IDENTITY OBSOLETE</h2>
-          <p className="text-sm text-slate-400 font-bold leading-relaxed px-4">This profile may have been decommissioned or is currently unavailable.</p>
+          <h2 className="text-2xl font-editorial font-black text-slate-900 italic uppercase">비활성화된 프로필</h2>
+          <p className="text-sm text-slate-400 font-bold leading-relaxed px-4">이 프로필은 삭제되었거나 현재 사용할 수 없습니다.</p>
         </div>
         <Button 
           variant="outline" 
           className="rounded-2xl h-14 px-8 font-black text-[10px] tracking-widest uppercase italic"
           onClick={() => onNavigate('recent_cards')}
         >
-          Return to Hub
+          홈으로 돌아가기
         </Button>
       </div>
     );
@@ -175,7 +175,7 @@ END:VCARD`;
                 <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center ring-2 ring-white/10">
                   <Phone className="w-4 h-4 fill-current group-hover:rotate-12 transition-transform" />
                 </div>
-                <span>CALL NOW</span>
+                <span>전화하기</span>
               </button>
               <button 
                 onClick={() => handleActionClick(() => window.location.href = `sms:${profile.phone}`, 'message')}
@@ -184,7 +184,7 @@ END:VCARD`;
                 <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center ring-2 ring-white/10">
                   <MessageSquare className="w-4 h-4 fill-current group-hover:-translate-y-0.5 transition-transform" />
                 </div>
-                <span>TEXT</span>
+                <span>문자하기</span>
               </button>
             </div>
           </div>
@@ -195,14 +195,14 @@ END:VCARD`;
           <div className="bg-slate-950 p-8 rounded-[3rem] shadow-2xl text-white space-y-6 animate-in fade-in slide-in-from-bottom-8 duration-700 relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(0,102,255,0.1),_transparent)]" />
             <div className="space-y-2 relative z-10">
-              <h3 className="font-editorial font-extrabold text-2xl tracking-tight leading-tight italic">ELEVATE YOUR NETWORK</h3>
-              <p className="text-slate-500 text-[11px] font-bold tracking-[0.05em] leading-relaxed uppercase">Update anytime, track interactions, and stay connected.</p>
+              <h3 className="font-editorial font-extrabold text-2xl tracking-tight leading-tight italic uppercase">나만의 디지털 명함 만들기</h3>
+              <p className="text-slate-500 text-[11px] font-bold tracking-[0.05em] leading-relaxed uppercase">언제 어디서나 간편하게 정보를 업데이트하고 인맥을 관리하세요.</p>
             </div>
             <Button
               className="w-full bg-primary hover:bg-primary/90 text-white font-bold h-16 rounded-[1.5rem] text-sm shadow-lg transition-all active:scale-95 relative z-10"
               onClick={() => onNavigate('qrcard-create')}
             >
-              CREATE YOUR DIGITAL IDENTITY
+              내 디지털 명함 만들기
               <ArrowRight className="w-4 h-4 ml-3 opacity-50" />
             </Button>
           </div>
@@ -211,7 +211,7 @@ END:VCARD`;
         {/* Contact Intelligence Hub */}
         <section className="space-y-6">
           <div className="bg-white p-10 rounded-[3rem] shadow-sm border border-slate-50 space-y-8">
-            <h3 className="text-[10px] font-black text-slate-300 uppercase tracking-[0.25em] italic">Contact Intelligence</h3>
+            <h3 className="text-[10px] font-black text-slate-300 uppercase tracking-[0.25em] italic">연락처 상세</h3>
 
             <div className="space-y-6">
               {profile.phone && (
@@ -220,7 +220,7 @@ END:VCARD`;
                     <Smartphone className="w-6 h-6 stroke-[2.2px]" />
                   </div>
                   <div>
-                    <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest mb-1">Mobile Access</p>
+                    <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest mb-1">휴대전화</p>
                     <span className="text-slate-900 font-bold tracking-tight text-base italic">{profile.phone}</span>
                   </div>
                 </div>
@@ -231,7 +231,7 @@ END:VCARD`;
                     <Mail className="w-6 h-6 stroke-[2.2px]" />
                   </div>
                   <div>
-                    <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest mb-1">Electronic Mail</p>
+                    <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest mb-1">이메일</p>
                     <span className="text-slate-900 font-bold tracking-tight text-base italic truncate max-w-[200px] block">{profile.email}</span>
                   </div>
                 </div>
@@ -243,15 +243,15 @@ END:VCARD`;
               onClick={handleSaveContact}
             >
               <Download className="w-5.5 h-5.5 opacity-30 group-hover:opacity-100" />
-              <span>GENERATE VCARD</span>
+              <span>연락처 저장</span>
             </button>
           </div>
 
           {/* Presentation QR Hub */}
           <div className="bg-white rounded-[3.5rem] p-12 text-center space-y-10 border border-slate-50 shadow-sm">
             <div className="space-y-2">
-              <h3 className="text-lg font-editorial font-black text-slate-900 tracking-tight italic">PRESENT QR</h3>
-              <p className="text-[10px] text-slate-400 font-bold tracking-widest uppercase opacity-60 px-8">Save this identity directly to your business wallet</p>
+              <h3 className="text-lg font-editorial font-black text-slate-900 tracking-tight italic uppercase">QR 공유</h3>
+              <p className="text-[10px] text-slate-400 font-bold tracking-widest uppercase opacity-60 px-8">상대방의 명함첩에 내 정보를 바로 저장하세요</p>
             </div>
 
             <div className="relative group mx-auto inline-block">
@@ -272,15 +272,15 @@ END:VCARD`;
         {/* Footer Editorial Branding */}
         <footer className="text-center p-12 pt-4 space-y-6">
           <div className="flex flex-col items-center gap-1 opacity-20 filter grayscale">
-            <p className="text-[10px] font-black text-slate-900 tracking-[0.4em] uppercase">Built on GoQRCard Platform</p>
-            <p className="text-[8px] font-bold text-slate-500 tracking-widest">VERIFIED IDENTITY 1.3</p>
+            <p className="text-[10px] font-black text-slate-900 tracking-[0.4em] uppercase">GoQRCard 플랫폼 제공</p>
+            <p className="text-[8px] font-bold text-slate-500 tracking-widest uppercase">인증된 프로필 v1.3</p>
           </div>
           {isInstallable && (
             <button
               className="text-[10px] font-black text-primary underline underline-offset-8 decoration-[3px] decoration-primary/20 hover:decoration-primary/60 transition-all uppercase tracking-widest"
               onClick={install}
             >
-              Instantiate Application
+              앱 설치하기
             </button>
           )}
         </footer>

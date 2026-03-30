@@ -35,7 +35,7 @@ export const QRCardAppShell: React.FC<QRCardAppShellProps> = ({
           </div>
           <div>
             <span className="font-editorial font-extrabold text-xl tracking-tighter text-slate-900 block leading-none">GO QR CARD</span>
-            <span className="text-[10px] font-bold text-primary uppercase tracking-[0.25em] leading-none mt-1.5 opacity-80">Premium Networking</span>
+            <span className="text-[10px] font-bold text-primary uppercase tracking-[0.25em] leading-none mt-1.5 opacity-80">프리미엄 네트워킹</span>
           </div>
         </div>
         
